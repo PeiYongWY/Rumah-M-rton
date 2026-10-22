@@ -13,8 +13,8 @@ EYEBROW = "Rumah Márton<br>Mártonhegy, Budapest"
 
 # ============================== CONTENT ==============================
 COVER = dict(lede="A thoughtful home of quiet luxury, nestled in Mártonhegy, Budapest.",
-             facts=[("Collection", "Three residences, one per floor"), ("Address", "Mártonvölgyi út, Budapest XII"),
-                    ("Status", "Building permit granted"), ("Completion", "Planned for Q3 2028")],
+             facts=[("Address", "Mártonvölgyi út, Budapest XII"),
+                    ("Status", "Building permit granted<br>Condominium establishment registered"), ("Completion", "Planned for Q3 2028")],
              image=B.IMG + "hero-living-night.png")
 INTRO = dict(title="Thoughtful spaces. Tactile materials. Timeless presence.", body=[
     "Tucked into the tranquil hills of Mártonhegy, one of Budapest’s most sought-after enclaves, Rumah Márton is a rare collection of three exclusive residences, each conceived as a private villa. With one residence per floor, direct lift access, sun-filled interiors and expansive terraces that open to private gardens or rooftop views, each with provision for an outdoor kitchen, every home invites a new way of apartment living, where the seclusion of a villa meets the refinement of a curated retreat.",
@@ -27,8 +27,7 @@ LOCATION = dict(title="An elevated life in Budapest’s most distinguished, yet 
 MAP_NAMES = {"Te British International School (BISB)": "The British International School (BISB)", "Hegyvidek Shopping Centre": "Hegyvidék Shopping Centre",
              "Mom Park": "MOM Park", "Margit Sziget": "Margaret Island", "Andrassy Ut": "Andrássy út", "Martonhegy": "Rumah Márton"}
 POINTS = [("A single residence per floor.", "A rare trio of two apartments and one villa-style penthouse."),
-          ("Conceived by an award-winning team with a thoughtful approach to design and uncompromising attention to detail.", ""),
-          ("Private gardens, rooftop terraces and outdoor kitchens.", ""),
+                ("Private gardens, rooftop terraces and outdoor kitchens.", ""),
           ("Unfolding to panoramic views of Castle Hill and the Citadella.", ""),
           ("Private basement parking. Dedicated storage.", ""),
           ("Understated sophistication. Quiet luxury.", ""),
@@ -124,6 +123,52 @@ CSS = B.CSS + """
 .cl2 figure{margin:0}
 .cl2 figure img{width:100%;height:auto;display:block}
 .cl2 .small{margin-top:auto}
+.cl3 .c{padding:17mm 14mm 13mm 15mm}
+.cl3 h2{font-size:28pt;margin:6mm 0 6mm}
+.cl3 h3{font-size:6.8pt;letter-spacing:.2em;text-transform:uppercase;color:#77736D;font-weight:400;margin:5mm 0 1.6mm}
+.cl3 .c:first-child p{font-size:9.2pt;line-height:1.6;margin:0 0 3mm;max-width:112mm}
+.cl3 .links{margin-top:5mm;gap:2.6mm}
+.cl3 .addr{margin-top:auto;padding-top:8mm}
+.cl3 .c:first-child p.addr{font-size:12pt;line-height:1.5;margin:0}\n.cl3 .c:first-child p.done{margin:5mm 0 0;font-size:7.2pt}
+.cl3 .quiet{list-style:none;margin:3mm 0 0;padding:0;display:grid;gap:1.8mm}
+.cl3 .quiet a{font-family:'Newsreader',serif;font-size:10pt;color:#6E6A64;text-decoration:none}
+.cl3 .quiet a span{font-size:.8em}
+.cl4{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto 1fr;background:linear-gradient(90deg,#FAFAF8 50%,#F2EEE7 50%)}
+.cl4 .a{padding:0 14mm 0 15mm}
+.cl4 .b{padding:0 14mm 0 15mm}
+.cl4 > .a:first-child{padding-top:17mm}
+.cl4 h2{font-size:28pt;margin:6mm 0 6mm}
+.cl4 h3{font-size:6.8pt;letter-spacing:.2em;text-transform:uppercase;color:#77736D;font-weight:400;margin:5mm 0 1.6mm}
+.cl4 h3.first{margin-top:0}
+.cl4 .a p{font-size:9.2pt;line-height:1.6;margin:0 0 3mm;max-width:112mm}
+.cl4 .links{list-style:none;margin:5mm 0 0;padding:0;display:grid;gap:2.6mm}
+.cl4 .b h3.first{margin-top:5mm}
+.cl4 .links a{font-size:7.6pt;letter-spacing:.2em;text-transform:uppercase;color:#1D1C1A;text-decoration:none;border-bottom:.25mm solid #1D1C1A;padding-bottom:.8mm}
+.cl4 .links a span{letter-spacing:0}
+.cl4 .quiet{list-style:none;margin:0;padding:0;display:grid;gap:1.8mm}
+.cl4 .quiet.top{margin-top:4.4mm;gap:2.6mm}
+.cl4 .quiet a{font-family:'Newsreader',serif;font-size:10pt;color:#6E6A64;text-decoration:none}
+.cl4 .quiet a span{font-size:.8em}
+.cl4 .foot{align-self:end;padding-bottom:13mm}
+.cl4 .mail a{font-family:'Newsreader',serif;font-size:15pt;color:#1D1C1A;text-decoration:none;border-bottom:.25mm solid #1D1C1A}
+.cl4 .a p.mail{margin:0 0 2mm}
+.cl4 .a p.form{margin:0 0 4mm;font-size:8.4pt}
+.cl4 .form a{color:#4A4743;text-decoration:none;border-bottom:.2mm solid #B9B4AC}
+.cl4 .a p.meta{font-size:6.6pt;letter-spacing:.14em;text-transform:uppercase;color:#8C877F;margin:0}
+.cl4 .small{font-size:6.6pt;line-height:1.5;color:#8C877F;margin:0}
+.fin{display:flex;flex-direction:column;align-items:center;text-align:center;padding:20mm 40mm 11mm}
+.fin h2{font-style:italic;font-size:30pt;line-height:1.12;max-width:190mm;margin:9mm 0 8mm}
+.fin .txt{max-width:132mm}
+.fin .txt p{font-size:9pt;line-height:1.6;margin:0 0 2.6mm;color:#3E3B37}
+.fin .mail{margin:6mm 0 1.5mm}
+.fin .mail a{font-family:'Newsreader',serif;font-size:17pt;color:#1D1C1A;text-decoration:none;border-bottom:.25mm solid #1D1C1A}
+.fin .ad{font-size:7pt;letter-spacing:.16em;text-transform:uppercase;color:#77736D;margin:2mm 0 7mm}
+.fin .prim{display:flex;gap:8mm;justify-content:center}
+.fin .prim a{font-size:7.4pt;letter-spacing:.2em;text-transform:uppercase;color:#1D1C1A;text-decoration:none;border-bottom:.25mm solid #1D1C1A;padding-bottom:.8mm}
+.fin .prim a span{letter-spacing:0}
+.fin .sec{margin:6mm 0 0;font-size:6.8pt;color:#8C877F;max-width:200mm;line-height:1.7}
+.fin .sec a{color:#8C877F;text-decoration:none}
+.fin .fine{margin-top:auto;font-size:6.2pt;color:#A39E96;max-width:200mm}
 .closing .press{list-style:none;margin:2mm 0 0;padding:0;display:grid;gap:1.6mm}
 .closing .press a{font-family:'Newsreader',serif;font-size:9.2pt;color:#6E6A64;color:#1D1C1A;text-decoration:none}
 .closing .press a span{font-size:.8em}
@@ -150,13 +195,13 @@ def text_page(d, facts=None):
     return f'<div class="page text"><div class="h"><p class="eyebrow">{EYEBROW}</p><h1>{d["title"]}</h1>{fx}</div><div class="b">{body}</div></div>'
 
 def cover(doc):
-    info = doc[31].get_image_info(xrefs=True)[0]; img, _ = img_bytes(doc, info["xref"])
+    info = doc[2].get_image_info(xrefs=True)[0]; img, _ = img_bytes(doc, info["xref"])
     return f'''<div class="page cover"><div class="l"><p class="eyebrow">{EYEBROW}</p><h1>Rumah Márton</h1><p class="lede">{COVER["lede"]}</p></div>
 <div class="r"><img src="{B.data_uri(img,"image/jpeg")}"></div></div>'''
 
 def points():
     li = "".join(f'<li><p class="lead">{a}</p>{f"<p class=det>{b}</p>" if b else ""}</li>' for a, b in POINTS)
-    return f'<div class="page pts"><p class="eyebrow">{EYEBROW}</p><h2 style="margin:5mm 0 2mm">A more considered way of living</h2><ol>{li}</ol></div>'
+    return f'<div class="page pts"><p class="eyebrow">{EYEBROW}</p><h2 style="margin:5mm 0 1.5mm;font-size:26pt">A curated way of living</h2><p class="det" style="font-size:9pt;max-width:120mm;margin:0 0 3mm">Conceived by an award-winning team with a thoughtful approach to design and uncompromising attention to detail.</p><ol>{li}</ol></div>'
 
 def mappage(doc):
     return f'''<div class="page map">{B.map_block(234)}<p class="cap">The neighbourhood · approximate travel times</p></div>'''
@@ -173,16 +218,26 @@ def spec(i):
     note = f'<p class="note">{SPEC_NOTE}</p>' if i == 1 else ""
     return f'<div class="page spec"><div class="top"><p class="eyebrow">{EYEBROW}</p><h2>Specification</h2></div>{cols}{note}</div>'
 
+SECONDARY = [("Explore WY Design", "https://www.wy-design.com/"), ("Meet Pei Yong — Read the Interview", "https://roadster.hu/peiyee-yong-interju")] + PRESS
+PRIMARY = [l for l in LINKS if l[0] not in ("Explore WY Design", "Meet Pei Yong — Read the Interview")]
+
 def closing(doc):
-    left = "".join(f"<p>{t}</p>" for t in CLOSING)
-    links = "".join(f'<li><a href="{u}">{t} <span>↗</span></a></li>' for t, u in LINKS + PRESS)
-    info = doc[2].get_image_info(xrefs=True)[0]; img, _ = img_bytes(doc, info["xref"])
-    return f'''<div class="page closing cl2"><div class="c"><p class="eyebrow">{EYEBROW}</p><h2 style="font-size:26pt;margin:5mm 0 5mm">Be in touch</h2>{left}
-<h3 class="bh">{B.BESPOKE[0]}</h3><p>{B.BESPOKE[1]}</p>
-<ul class="links">{links}</ul></div>
-<div class="c ph"><figure><img src="{B.data_uri(img,"image/jpeg")}"><p class="cap">Rumah Márton</p></figure>
-<p class="addr">Rumah Márton<br>Mártonvölgyi út, District XII, Budapest<br><a href="mailto:pei@wy-design.com">pei@wy-design.com</a></p>
-<p class="done">Planned completion — Q3 2028</p><p class="small">{B.SMALL_PRINT}</p></div></div>'''
+    info = doc[31].get_image_info(xrefs=True)[0]; img, _ = img_bytes(doc, info["xref"])
+    photo = f'<div class="page vis"><div class="frame"><img src="{B.data_uri(img,"image/jpeg")}"></div></div>'
+    paras = "".join(f"<p>{t}</p>" for t in CLOSING)
+    li = lambda L: "".join(f'<li><a href="{u}">{t} <span>↗</span></a></li>' for t, u in L)
+    form = B.SITE.rstrip("/") + "/en/#enquire"
+    # one grid for both columns, so the right-hand links start level with the residence links
+    return photo + f'''<div class="page cl4">
+<div class="a"><p class="eyebrow">{EYEBROW}</p><h2>Get in touch</h2>{paras}<h3>{B.BESPOKE[0]}</h3><p>{B.BESPOKE[1]}</p></div>
+<div class="b"></div>
+<div class="a"><ul class="links">{li(PRIMARY)}</ul></div>
+<div class="b"><ul class="quiet top">{li(SECONDARY[:2])}</ul><h3>Selected recognition</h3><ul class="quiet">{li(PRESS)}</ul></div>
+<div class="a foot"><p class="mail"><a href="mailto:pei@wy-design.com">pei@wy-design.com</a></p>
+<p class="form"><a href="{form}">Or send us a message online ↗</a></p>
+<p class="meta">Mártonvölgyi út, Budapest XII · Completion Q3 2028</p></div>
+<div class="b foot"><p class="small">{B.SMALL_PRINT}</p></div>
+</div>'''
 
 def main():
     doc = fitz.open(SRC); html = []
