@@ -719,3 +719,8 @@ figure.rise.pre img { transform: scale(1.08) }
 .fp-l { position: absolute; transform: translate(-50%, -50%); font-size: 10.5px; letter-spacing: .03em; color: #4A4743; pointer-events: none; font-family: 'Albert Sans', sans-serif }
 .fp-zoom.is-zoomed .fp-l { font-size: 13px }
 @media (max-width: 860px) { .fp-l { font-size: 8.5px } }
+
+/* Chinese: editorial serif for display, no faux italics, gentler tracking */
+html[lang^="zh"] { --display: "Newsreader", "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", serif; --sans: "Albert Sans", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif }
+html[lang^="zh"] .hero .line, html[lang^="zh"] .enq-invite { font-style: normal }
+html[lang^="zh"] .label { letter-spacing: .14em }

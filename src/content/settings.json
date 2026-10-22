@@ -21,7 +21,7 @@
       "label": "中文",
       "locale": "zh_CN",
       "htmlLang": "zh-Hans",
-      "enabled": false
+      "enabled": true
     }
   ],
   "defaultLanguage": "en",

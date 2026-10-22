@@ -165,7 +165,7 @@
       },
       {
         "h": "Hol tároljuk az adatokat",
-        "p": "A weboldal tárhelyszolgáltatója a Netlify. Az érdeklődéseket és ismertetőkéréseket a Web3Forms űrlapszolgáltatás továbbítja e-mail-címünkre. Adatait nem értékesítjük, és csak a Rumah Márton értékesítésében közvetlenül érintettekkel osztjuk meg. Az adatokat a lakások értékesítésének idejére és azt követően legfeljebb két évig őrizzük meg."
+        "p": "A weboldal tárhelyszolgáltatója a Cloudflare. Az érdeklődéseket és ismertetőkéréseket a Web3Forms űrlapszolgáltatás továbbítja e-mail-címünkre. Adatait nem értékesítjük, és csak a Rumah Márton értékesítésében közvetlenül érintettekkel osztjuk meg. Az adatokat a lakások értékesítésének idejére és azt követően legfeljebb két évig őrizzük meg."
       },
       {
         "h": "Az Ön jogai",

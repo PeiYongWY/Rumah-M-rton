@@ -1,231 +1,250 @@
 {
-  "_status": "NOT TRANSLATED - English placeholder. Translate after the English copy is approved; then set enabled: true in settings.json.",
+  "_status": "zh-draft-for-native-review",
   "meta": {
-    "title": "Rumah Márton · New-build apartments and penthouse for sale in Mártonhegy, Budapest XII",
-    "description": "Three newly built luxury residences in Mártonhegy, Budapest's 12th district: two apartments and a villa-style penthouse, one per floor, with private gardens, rooftop terraces and views of Castle Hill. By WY Design.",
-    "privacyTitle": "Privacy policy · Rumah Márton",
-    "thanksTitle": "Thank you · Rumah Márton"
+    "title": "Rumah Márton · 布达佩斯第十二区 Mártonhegy 高端全新公寓出售",
+    "description": "布达佩斯第十二区（Hegyvidék）Mártonhegy 高端全新公寓出售：花园住宅与带屋顶露台的顶层公寓，一层一户，远眺城堡山与西塔德拉要塞。预计2028年第三季度竣工。WY Design 设计开发。",
+    "privacyTitle": "隐私政策 · Rumah Márton",
+    "thanksTitle": "感谢您的垂询 · Rumah Márton"
   },
   "nav": {
-    "skip": "Skip to content",
-    "residences": "Residences",
-    "brochure": "Brochure",
-    "enquire": "Enquire",
-    "language": "Language",
-    "home": "Rumah Márton, home"
+    "skip": "跳至正文",
+    "residences": "住宅",
+    "enquire": "垂询",
+    "language": "语言",
+    "home": "Rumah Márton 首页"
   },
   "hero": {
     "title": "Rumah Márton",
-    "line": "A rare perspective on living.",
-    "alt": "The Penthouse living room at night, with Budapest and the lit Citadella beyond the glass"
+    "line": "稀缺地段，限量珍藏。",
+    "alt": "夜色中的顶层公寓客厅，玻璃窗外是布达佩斯与灯火中的西塔德拉要塞"
   },
   "intro": {
-    "label": "New-build residences in Mártonhegy, Budapest XII",
+    "label": "布达佩斯第十二区 Mártonhegy 全新住宅",
     "headline": [
-      "Thoughtful spaces.",
-      "Tactile materials.",
-      "Timeless presence."
+      "匠心空间。",
+      "质感材料。",
+      "隽永气度。"
     ],
     "body": [
-      "Tucked into the tranquil hills of Mártonhegy, one of Budapest's most sought-after residential enclaves, Rumah Márton presents a rare opportunity to own a newly built home in this coveted neighbourhood.",
-      "An exclusive collection of just three residences, each conceived with the privacy, quality and character of a private villa. With one residence per floor, direct lift access, sun-filled interiors and expansive terraces opening onto private gardens or panoramic rooftop views — each with an outdoor kitchen — every home offers a different perspective on apartment living."
-    ],
-    "closing": "Where the privacy, quality and character of a private villa meet the ease of apartment living."
+      "Rumah Márton 隐于 Mártonhegy 静谧的山丘之间。这里是布达佩斯最受青睐的住宅区之一，在此拥有一处全新住宅的机会实属难得。",
+      "整个项目仅有三套住宅，每一套都以私人别墅的私密、品质与个性为构想。一层一户，室内阳光充沛；宽敞的露台通向私家花园或全景屋顶，并预留户外厨房。每一处居所都兼具私人别墅的空间、品质与私密，以及公寓生活的便利。"
+    ]
   },
   "points": {
-    "label": "The collection",
-    "heading": "Three residences in the hills of Buda",
-    "imageAlt": "The south façade of Rumah Márton in lime plaster and stone, with planted balconies, set among pines",
+    "label": "项目亮点",
+    "heading": "布达佩斯第十二区 Mártonhegy 高端全新公寓",
+    "imageAlt": "从花园望向 Rumah Márton：石灰抹面的外立面与绿植阳台掩映在松林之间",
     "items": [
       {
-        "lead": "One residence per floor.",
-        "detail": "An exclusive collection of two apartments and one villa-style penthouse, each with direct lift access."
+        "lead": "一层一户。",
+        "detail": "电梯直达入户，私属门厅，起居空间向户外延伸。"
       },
       {
-        "lead": "Sun-filled interiors. Private gardens. Rooftop terraces. Outdoor kitchens.",
+        "lead": "私家花园。宽敞露台。预留户外厨房。",
         "detail": ""
       },
       {
-        "lead": "Panoramic views towards Castle Hill and the Citadella.",
+        "lead": "全景远眺城堡山与西塔德拉要塞。",
         "detail": ""
       },
       {
-        "lead": "Understated sophistication. Quiet luxury. Villa-level quality and craftsmanship.",
+        "lead": "地下私家停车。专属储藏间。",
         "detail": ""
       },
       {
-        "lead": "A rare opportunity to own a newly built residence in the coveted hills of Mártonhegy.",
-        "detail": ""
+        "lead": "低调雅致。静奢之美。",
+        "detail": "考究的比例、精选的材料与卓越的工艺。"
       },
       {
-        "lead": "Crafted with care.",
-        "detail": "By an award-winning design team"
+        "lead": "匠心营造。",
+        "detail": "由屡获殊荣的设计团队打造"
       }
-    ],
-    "enquire": "Enquire privately"
-  },
-  "brochure": {
-    "link": "View project brochure",
-    "note": "Plans, visualisations and specification · PDF, 5 MB · opens in a new tab",
-    "filmLabel": "Rumah Márton, architectural film",
-    "play": "Play film",
-    "pause": "Pause film",
-    "soundOn": "Sound on",
-    "soundOff": "Sound off"
+    ]
   },
   "residences": {
-    "label": "Residences",
-    "heading": "Three residences. Three distinct expressions.",
-    "note": "Areas are approximate and taken from the design drawings. Prices on request.",
-    "interior": "Interior",
-    "exterior": "Exterior",
-    "bedrooms": "Bedrooms",
-    "tbc": "To be confirmed",
-    "available": "Available",
-    "sold": "Sold",
-    "floorPlan": "Floor plan",
-    "floorPlanPdf": "PDF, opens in a new tab",
-    "enquire": "Enquire",
+    "label": "住宅",
+    "heading": "在售住宅：花园住宅与顶层公寓",
+    "interior": "室内",
+    "outdoor": "户外",
+    "bedrooms": "卧室",
+    "available": "在售",
+    "sold": "已售",
+    "floorPlan": "查看平面图",
+    "tour": "360° 虚拟导览",
+    "details": "索取更多资料",
+    "newTab": "在新标签页中打开",
+    "pricing": "面积为约数。价格与房源情况欢迎垂询。",
     "items": [
       {
-        "name": "Residence 01 — Apartment",
-        "sub": "The Garden Residence · ground floor",
-        "alt": "The Garden Residence terrace and outdoor kitchen, opening to the private garden",
+        "name": "花园住宅",
+        "floor": "首层",
+        "alt": "花园住宅的露台、客厅与户外厨房，向花园敞开",
         "interior": "86 m²",
-        "exterior": "61 m² terraces · 232 m² private garden",
-        "bedrooms": "2 and a study"
+        "outdoor": "61 m² 露台 · 232 m² 私家花园",
+        "bedrooms": "2间及1间书房",
+        "interest": "Garden Residence"
       },
       {
-        "name": "Residence 02 — Apartment",
-        "sub": "The First Floor Residence",
-        "alt": "The First Floor Residence outdoor kitchen and dining terrace",
-        "interior": "110 m²",
-        "exterior": "46 m² terraces and balcony · 361 m² garden",
-        "bedrooms": "3"
+        "name": "二层住宅",
+        "floor": "二层",
+        "alt": "二层住宅的户外厨房与露台餐区"
       },
       {
-        "name": "Residence 03 — Penthouse",
-        "sub": "Top floor and private roof terrace",
-        "alt": "The Penthouse rooftop terrace at night, with an outdoor kitchen and fire, Budapest's lights below",
+        "name": "顶层公寓",
+        "floor": "顶层",
+        "alt": "顶层公寓客厅，宽大的窗户望向布达佩斯与西塔德拉要塞",
         "interior": "100 m²",
-        "exterior": "21 m² balconies · 39 m² rooftop terrace",
-        "bedrooms": "2, or 3 with the study"
+        "outdoor": "21 m² 阳台 · 39 m² 屋顶露台",
+        "bedrooms": "3",
+        "interest": "Penthouse"
       }
     ],
-    "brochure": "Download residence brochure",
-    "tour": "Explore 360° virtual tour"
+    "brochure": "下载住宅手册"
   },
   "enquiry": {
-    "label": "Private enquiry",
-    "heading": "A rare address. A limited collection.",
-    "body": "Only three private residences in one of Budapest's most desirable hillside neighbourhoods. Request detailed floor plans or arrange a private presentation.",
-    "name": "Name",
-    "email": "Email",
-    "phone": "Phone (optional)",
-    "interest": "Residence of interest (optional)",
-    "interestNone": "No preference",
+    "heading": "Rumah Márton",
+    "name": "姓名",
+    "email": "电子邮箱",
+    "phone": "电话（选填）",
+    "interest": "意向住宅（选填）",
+    "interestNone": "暂无偏好",
     "interestOptions": [
-      "Residence 01 — Apartment",
-      "Residence 03 — Penthouse",
-      "The collection"
+      "花园住宅",
+      "顶层公寓"
     ],
-    "message": "Message",
-    "viewing": "I would like to arrange a private viewing.",
-    "consentBefore": "We will use your details only to reply to you. See our ",
-    "consentLink": "privacy policy",
-    "consentAfter": ".",
-    "send": "Send",
-    "sending": "Sending…",
-    "errName": "Please add your name.",
-    "errEmail": "Please check your email address.",
-    "errConsent": "Please confirm the privacy statement so we can reply.",
-    "success": "Thank you. Your enquiry has been received, and we will be in touch personally.",
-    "error": "Your enquiry could not be sent just now. Please try again, or write to us directly at",
-    "prefill": "I would like to know more about the {r}.",
-    "emailPh": "Your email",
-    "messagePh": "Your message",
-    "text": "Whether you have a question, would like to explore a residence, or arrange a private presentation, we'd be delighted to hear from you.",
-    "writeBefore": "Or simply write to us at ",
-    "writeAfter": "."
+    "message": "留言",
+    "viewing": "我希望预约私人介绍。",
+    "consentBefore": "您的信息仅用于回复您。详见我们的",
+    "consentLink": "隐私政策",
+    "consentAfter": "。",
+    "send": "发送",
+    "sending": "发送中…",
+    "errName": "请填写您的姓名。",
+    "errEmail": "请检查您的电子邮箱地址。",
+    "errConsent": "请确认隐私声明，以便我们回复您。",
+    "success": "谢谢。我们已收到您的垂询，将亲自与您联系。",
+    "error": "您的垂询暂时无法发送。请稍后再试，或直接发送邮件至",
+    "line": "WY Design 限量住宅作品。",
+    "invite": "我们期待亲自为您介绍 Rumah Márton。",
+    "text": "无论您有任何疑问、希望进一步了解某套住宅，或预约私人介绍，我们都乐于听到您的声音。",
+    "writeBefore": "或直接发送邮件至 ",
+    "writeAfter": "。",
+    "prefill": "我想进一步了解{r}。",
+    "emailPh": "您的电子邮箱",
+    "messagePh": "您的留言"
   },
   "footer": {
-    "line": "A limited-edition residential collection by WY Design.",
-    "contact": "Contact",
-    "privacy": "Privacy policy",
-    "credit": "Architecture and development by",
-    "disclaimer": "Images are visualisations. Areas and details are indicative and confirmed in the sale contract."
+    "line": "WY Design 限量住宅作品。",
+    "contact": "联系",
+    "privacy": "隐私政策",
+    "credit": "建筑设计与开发：",
+    "disclaimer": "图片均为效果图。面积及细节仅供参考，以买卖合同为准。"
   },
   "cookies": {
-    "text": "We would like to use cookies to measure visits and the performance of our adverts. Nothing is set unless you accept.",
-    "accept": "Accept",
-    "decline": "Decline",
-    "settings": "Cookie settings"
+    "text": "我们希望使用 Cookie 来统计访问量并衡量广告效果。除非您选择接受，否则不会设置任何 Cookie。",
+    "accept": "接受",
+    "decline": "拒绝",
+    "settings": "Cookie 设置"
   },
   "privacy": {
-    "label": "Privacy policy",
-    "heading": "How we use your details",
+    "label": "隐私政策",
+    "heading": "我们如何使用您的信息",
     "draft": "",
     "sections": [
       {
-        "h": "Who we are",
-        "p": "WY Design Kft., Harmat utca 208, Budapest, Hungary, is responsible for the information collected on this website. You can contact us at pei@wy-design.com."
+        "h": "我们是谁",
+        "p": "WY Design Kft.（匈牙利布达佩斯 Harmat utca 208）负责本网站所收集的信息。您可通过 pei@wy-design.com 与我们联系。"
       },
       {
-        "h": "What we collect, and why",
-        "p": "When you send an enquiry we receive your email address, your message, the residence you asked about if any, and how you found the site (for example the name of an advert). When you request a brochure we receive your email address and which brochure you opened. We use these details only to reply to you personally and to follow up on your interest in Rumah Márton. We do not add you to a mailing list or send automated marketing emails. The legal basis is your request and our legitimate interest in answering it."
+        "h": "我们收集哪些信息及原因",
+        "p": "当您发送垂询时，我们会收到您的电子邮箱地址、留言、您所询问的住宅（如有），以及您是如何找到本网站的（例如广告名称）。当您索取手册时，我们会收到您的电子邮箱地址以及您打开的手册。这些信息仅用于亲自回复您，并跟进您对 Rumah Márton 的兴趣。我们不会将您加入邮件列表，也不会发送自动营销邮件。法律依据为您的请求以及我们回复该请求的正当利益。"
       },
       {
-        "h": "Cookies and measurement",
-        "p": "With your permission, the site may use Google Analytics, Google Ads and Meta to measure visits and the performance of our adverts. Nothing is loaded unless you choose Accept, and you can change your choice at any time with the Cookie settings link at the foot of the page."
+        "h": "Cookie 与访问统计",
+        "p": "经您许可，本网站可能使用 Google Analytics、Google Ads 和 Meta 来统计访问量并衡量广告效果。除非您选择“接受”，否则不会加载任何相关内容；您可随时通过页面底部的“Cookie 设置”链接更改选择。"
       },
       {
-        "h": "Where your details are kept",
-        "p": "The website is hosted by Netlify. Enquiries and brochure requests are delivered to our email by the form service Web3Forms. We do not sell your details, and we share them only with those directly involved in the sale of Rumah Márton. We keep them while the residences are for sale and for up to two years afterwards."
+        "h": "您的信息存放在哪里",
+        "p": "本网站由 Cloudflare 托管。垂询与手册请求通过表单服务 Web3Forms 发送至我们的邮箱。我们不会出售您的信息，仅与直接参与 Rumah Márton 销售的人员共享。我们会在住宅销售期间及其后最多两年内保存这些信息。"
       },
       {
-        "h": "Your rights",
-        "p": "You can ask us at any time to see, correct or delete your details, or to stop contacting you, by writing to pei@wy-design.com. You may also contact the Hungarian data protection authority (NAIH)."
+        "h": "您的权利",
+        "p": "您可随时发送邮件至 pei@wy-design.com，要求查看、更正或删除您的信息，或要求我们停止与您联系。您也可以联系匈牙利数据保护机构（NAIH）。"
       }
     ],
-    "updated": "Last updated October 2026.",
-    "backLink": "Back to Rumah Márton"
+    "updated": "最后更新：2026年10月。",
+    "backLink": "返回 Rumah Márton"
   },
   "thanks": {
-    "label": "Private enquiry",
-    "back": "Return to Rumah Márton"
+    "label": "私人垂询",
+    "back": "返回 Rumah Márton"
+  },
+  "status": {
+    "label": "项目进展",
+    "items": [
+      "已获建筑许可",
+      "公寓产权分割已正式登记",
+      "计划竣工时间 — 2028年第三季度"
+    ]
+  },
+  "film": {
+    "label": "Rumah Márton 建筑影片",
+    "pause": "暂停影片",
+    "play": "播放影片",
+    "soundOn": "开启声音",
+    "soundOff": "关闭声音"
+  },
+  "explore": {
+    "heading": "了解更多",
+    "wy": "探索 WY Design",
+    "pei": "认识 Pei Yong — 阅读专访",
+    "pressTitle": "WY Design 部分荣誉",
+    "links": {
+      "designboom": "Designboom",
+      "edge": "EDGE International Award",
+      "bigsee-architecture": "BIG SEE Architecture Award",
+      "bigsee-interior": "BIG SEE Interior Award"
+    }
+  },
+  "brochure": {
+    "link": "查看项目手册"
+  },
+  "rooftop": {
+    "alt": "夜晚的顶层公寓屋顶露台，户外厨房与火炉，脚下是布达佩斯的灯火",
+    "caption": "顶层公寓屋顶露台"
   },
   "considered": {
-    "phrase": "A more considered way of living.",
-    "dayAlt": "A bedroom in the morning light, oak wardrobes and a tall window onto the trees",
-    "nightAlt": "A bedroom at night, softly lit plaster walls and a door open to the garden"
+    "phrase": "更从容的生活方式。",
+    "dayAlt": "晨光中的卧室，橡木衣柜与面向树林的高窗",
+    "nightAlt": "夜晚的卧室，柔和灯光映照抹灰墙面，房门通向花园"
   },
   "living": {
-    "alt": "Living and dining space with full-height windows towards the city and the hills"
+    "alt": "起居与餐厅空间，落地窗面向城市与山丘"
   },
   "gate": {
-    "resTitle": "Discover the Residence",
-    "resLead": "Explore the floor plans, architectural details and specifications in our residence brochure.",
-    "resGo": "View Residence Brochure",
-    "projTitle": "Discover Rumah Márton",
-    "projLead": "Explore the architecture, the residences and the specifications in our project brochure.",
-    "projGo": "View Project Brochure",
-    "ph": "Your email address",
-    "note": "We value personal conversations and do not send automated marketing emails. Your email address will be handled in accordance with our ",
-    "noteLink": "Privacy Policy",
-    "noteAfter": ".",
-    "close": "Close",
-    "err": "Please check your email address."
+    "resTitle": "探索住宅",
+    "resLead": "在住宅手册中了解平面图、建筑细节与规格。",
+    "resGo": "查看住宅手册",
+    "projTitle": "探索 Rumah Márton",
+    "projLead": "在项目手册中了解建筑、住宅与规格。",
+    "projGo": "查看项目手册",
+    "ph": "您的电子邮箱地址",
+    "note": "我们重视面对面的交流，不会发送自动营销邮件。您的电子邮箱地址将依照我们的",
+    "noteLink": "隐私政策",
+    "noteAfter": "进行处理。",
+    "close": "关闭",
+    "err": "请检查您的电子邮箱地址。"
   },
   "plan": {
-    "available": "Available",
-    "zoomIn": "Zoom in",
-    "zoomOut": "Zoom out",
-    "rooms": "Room areas",
-    "brochure": "Download residence brochure",
-    "tour": "Explore the 360° virtual tour",
-    "enquire": "Enquire about this residence",
-    "pdf": "Floor plan (PDF)",
-    "close": "Close",
-    "hint": "Tap or click the plan to zoom"
+    "available": "在售",
+    "zoomIn": "放大",
+    "zoomOut": "缩小",
+    "rooms": "房间面积",
+    "brochure": "下载住宅手册",
+    "tour": "360° 虚拟导览",
+    "enquire": "垂询此住宅",
+    "pdf": "平面图（PDF）",
+    "close": "关闭",
+    "hint": "点击平面图即可放大"
   }
 }
