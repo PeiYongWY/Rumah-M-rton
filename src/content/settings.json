@@ -37,7 +37,7 @@
   },
   "analytics": {
     "_note": "Paste IDs when the accounts exist. Nothing loads until a visitor accepts cookies (Google Consent Mode v2).",
-    "ga4": "",
+    "ga4": "G-PTYCM3F63Y",
     "googleAds": "",
     "googleAdsLeadLabel": "",
     "googleAdsViewingLabel": "",
