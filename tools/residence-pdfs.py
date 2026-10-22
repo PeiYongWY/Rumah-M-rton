@@ -140,6 +140,14 @@ h2{font-family:'Newsreader',serif;font-weight:300;font-size:22pt;line-height:1.0
 .vis .frame{display:flex;flex-direction:column;align-items:center;max-width:100%}
 .vis img{display:block;max-width:261mm;max-height:166mm;width:auto;height:auto}
 .vis .cap{margin:5mm 0 0}
+.tag{position:absolute;transform:translate(-50%,-50%);background:rgba(241,227,218,.94);padding:.8mm 1.6mm;text-align:center;white-space:nowrap;font-size:5.6pt;line-height:1.3;letter-spacing:.06em;color:#1D1C1A}
+.tag b{display:block;font-weight:400;text-transform:uppercase;letter-spacing:.14em;font-size:5pt}
+.tag.home{background:#1D1C1A;color:#FAFAF8}
+.loc{display:grid;grid-template-columns:82mm 1fr}
+.loc .l{padding:17mm 8mm 14mm 15mm;display:flex;flex-direction:column}
+.loc .l p{font-size:9.4pt;line-height:1.65;margin:0 0 3.6mm}
+.loc .l h2{margin:8mm 0 6mm}
+.loc .r{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12mm 12mm 12mm 4mm}
 /* closing */
 .closing .bespoke{font-family:'Newsreader',serif;font-size:9.2pt;line-height:1.45;margin:0;max-width:100mm;color:#6E6A64}
 .closing{display:grid;grid-template-columns:1fr 1fr}
@@ -193,7 +201,13 @@ def plan_image(pno):
     import numpy as np
     ink = np.asarray(im).astype(int).sum(axis=2) < 735
     cols = np.where(ink.sum(axis=0) >= 6)[0]; rows = np.where(ink.sum(axis=1) >= 6)[0]   # ignore stray specks
-    xs, ys = cols, rows
+    def main_run(idx, gap=40):   # the largest continuous stretch of drawing, ignoring stray lines far away
+        runs, cur = [], [idx[0], idx[0]]
+        for v in idx[1:]:
+            if v - cur[1] <= gap: cur[1] = v
+            else: runs.append(cur); cur = [v, v]
+        runs.append(cur); r = max(runs, key=lambda r: r[1] - r[0]); return np.array(r)
+    xs, ys = main_run(cols), main_run(rows)
     m = 10
     x0, y0, x1, y1 = xs.min() - m, ys.min() - m, xs.max() + m, ys.max() + m
     crop = im.crop((x0, y0, x1, y1))
@@ -269,7 +283,34 @@ def visual_page(u, pno, sub):
     cap = u["name"] + (f" · {sub}" if sub else "")
     return f'''<div class="page vis"><div class="frame"><img src="{data_uri(buf.getvalue(),'image/jpeg')}"><p class="cap">{cap}</p></div></div>'''
 
+MAP_PAGE = 6   # brochure page with the neighbourhood map
+MAP_NAMES = {"Te British International School (BISB)": "The British International School (BISB)", "Hegyvidek Shopping Centre": "Hegyvidék Shopping Centre",
+             "Mom Park": "MOM Park", "Margit Sziget": "Margaret Island", "Andrassy Ut": "Andrássy út", "Martonhegy": "Rumah Márton"}
+LOCATION_SHORT = dict(title="Mártonhegy, Budapest XII", body=[
+    "Rumah Márton lies in Hegyvidék, District XII — one of Budapest’s oldest and most prestigious neighbourhoods, known for its villas, forested hills and timeless elegance.",
+    "Set on a quiet one-way street on the slopes of Mártonhegy, the house looks out towards Castle Hill and the Citadella. Normafa and the Buda Hills are moments away, with international schools, Villa Bagatelle, MOM Park and the city centre all within easy reach."])
+
+def map_block(width_mm):
+    d = fitz.open(BRO); p = d[MAP_PAGE - 1]; info = p.get_image_info(xrefs=True)[0]; x0, y0, x1, y1 = info["bbox"]
+    pix = fitz.Pixmap(d, info["xref"]); pix = fitz.Pixmap(fitz.csRGB, pix) if pix.n > 3 else pix
+    im = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB"); buf = io.BytesIO(); im.save(buf, "JPEG", quality=90)
+    lines = [(l["bbox"], "".join(s["text"] for s in l["spans"]).strip()) for b in p.get_text("dict")["blocks"] for l in b.get("lines", [])]
+    lines = [x for x in lines if x[1]]; used, tags = set(), []
+    for bb, t in lines:
+        if t.startswith("("): continue
+        tm = next(((j, tt) for j, (b2, tt) in enumerate(lines) if tt.startswith("(") and j not in used and abs(b2[1] - bb[3]) < 4 and abs((b2[0] + b2[2]) / 2 - (bb[0] + bb[2]) / 2) < 30), None)
+        if tm: used.add(tm[0])
+        name = MAP_NAMES.get(t, t); cx = ((bb[0] + bb[2]) / 2 - x0) / (x1 - x0) * 100; cy = (bb[1] - y0) / (y1 - y0) * 100 + 2
+        tags.append(f'<span class="{"tag home" if name == "Rumah Márton" else "tag"}" style="left:{cx:.1f}%;top:{cy:.1f}%"><b>{name}</b>{tm[1].strip("()") if tm else ""}</span>')
+    return f'<div class="mb" style="width:{width_mm}mm;position:relative"><img src="{data_uri(buf.getvalue(),"image/jpeg")}" style="width:100%;display:block">{"".join(tags)}</div>'
+
+def location_page():
+    body = "".join(f"<p>{x}</p>" for x in LOCATION_SHORT["body"])
+    return f'''<div class="page loc"><div class="l"><p class="eyebrow">Rumah Márton<br>Mártonhegy, Budapest</p><h2>{LOCATION_SHORT["title"]}</h2>{body}</div>
+<div class="r">{map_block(178)}<p class="cap">The neighbourhood · approximate travel times</p></div></div>'''
+
 def render(html, path):
+    html = html.replace("Rumah Márton", "Rumah&nbsp;Márton")   # the name never breaks across lines
     doc = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>{html}</body></html>'
     with sync_playwright() as pw:
         b = pw.chromium.launch(); pg = b.new_page(); pg.set_content(doc, wait_until="load"); pg.wait_for_timeout(400)
@@ -277,7 +318,7 @@ def render(html, path):
 
 def build(u):
     tmp = OUT / f"_{u['key']}"; tmp.mkdir(exist_ok=True)
-    render(cover_page(u), tmp / "cover.pdf")
+    render(cover_page(u) + location_page(), tmp / "cover.pdf")
     plan_pdfs = []
     for p in u["plans"]:
         html, png = plan_page(u, p)
