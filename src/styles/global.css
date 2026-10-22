@@ -724,3 +724,6 @@ figure.rise.pre img { transform: scale(1.08) }
 html[lang^="zh"] { --display: "Newsreader", "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", serif; --sans: "Albert Sans", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif }
 html[lang^="zh"] .hero .line, html[lang^="zh"] .enq-invite { font-style: normal }
 html[lang^="zh"] .label { letter-spacing: .14em }
+
+/* keep arrows as plain text glyphs, never emoji (iOS) */
+body { font-variant-emoji: text }
