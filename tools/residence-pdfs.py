@@ -11,13 +11,17 @@ from PIL import Image, ImageFilter
 from playwright.sync_api import sync_playwright
 
 HERE = pathlib.Path(__file__).parent
-BRO = "/home/claude/rm/public/downloads/rumah-marton-brochure.pdf"   # the full October brochure
+BRO = "/home/claude/work/bro/src.pdf"   # the original October brochure (page numbers below refer to it)
 IMG = "/home/claude/rm/src/assets/images/"
 FONTS = "/home/claude/fonts/"
 OUT = HERE / "out"; (OUT / "plans").mkdir(parents=True, exist_ok=True)
 SITE = "https://rumahmarton.com/"   # the live website address — must match the domain you buy
 NUDGE = {}   # (brochure page, room number): (x, y) shift as a share of the drawing
 NORTH = 30   # degrees clockwise from "up" on the plans and site diagram (same orientation)
+LANG = "en"; SUF = ""   # set by build_lang.py: "hu"/"zh" and "-hu"/"-zh"
+T = {}                   # translated interface strings (empty = English)
+def t(k, en): return T.get(k, en)
+EYE = "Rumah Márton<br>Mártonhegy, Budapest"
 
 # ============================== CONTENT ==============================
 GARDEN = dict(
@@ -247,9 +251,9 @@ def plan_page(u, p, standalone=False):
     head = (site_svg() if p.get("site") else "") + NORTH_SVG
     note = f'<p class="foot" style="margin-top:5mm">{p["note"]}</p>' if p.get("note") else ""
     return f'''<div class="page plan"><div class="l">
-  <p class="eyebrow">Rumah Márton<br>Mártonhegy, Budapest</p><h2>{u["name"]}</h2><p class="eyebrow" style="margin-top:2mm">{p["title"]}</p>
+  <p class="eyebrow">{t("eyebrow", EYE)}</p><h2>{u["name"]}</h2><p class="eyebrow" style="margin-top:2mm">{p["title"]}</p>
   {sched_html(p)}{note}
-  <p class="foot">Areas in m², based on the permitted plans.</p>
+  <p class="foot">{t("areas_note", "Areas in m², based on the permitted plans.")}</p>
 </div><div class="r"><div class="head">{head}</div>
   <div class="draw"><div class="box" style="width:{wmm:.1f}mm"><img src="{data_uri(png,'image/png')}">{lbl}</div></div>
 </div></div>''', png
@@ -257,7 +261,7 @@ def plan_page(u, p, standalone=False):
 def cover_page(u):
     facts = "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in u["facts"])
     return f'''<div class="page cover"><div class="l">
-  <p class="eyebrow">Rumah Márton<br>Mártonhegy, Budapest</p><h1>{u["name"]}</h1><p class="lede">{u["lede"]}</p>
+  <p class="eyebrow">{t("eyebrow", EYE)}</p><h1>{u["name"]}</h1><p class="lede">{u["lede"]}</p>
   <dl class="facts">{facts}</dl></div>
 <div class="r"><img src="{data_uri(jpeg(u["cover"]),'image/jpeg')}"></div></div>'''
 
@@ -265,16 +269,16 @@ def closing_page(u):
     left = "".join(f"<p>{t.format(name=u['name'])}</p>" for t in CLOSING_LEFT)
     inc = "".join(f"<h3>{h}</h3><ul>{''.join(f'<li>{x}</li>' for x in items)}</ul>" for h, items in INCLUDED)
     return f'''<div class="page closing"><div class="c">
-  <p class="eyebrow">Rumah Márton<br>Mártonhegy, Budapest</p><h2 style="font-size:28pt;margin:6mm 0 6mm">Be in touch</h2>{left}
+  <p class="eyebrow">{t("eyebrow", EYE)}</p><h2 style="font-size:28pt;margin:6mm 0 6mm">{t("be_in_touch", "Be in touch")}</h2>{left}
   <ul class="links">
-    <li><a href="{u["vr"]}">Explore the Residence in 360° <span>↗</span></a></li>
-    <li><a href="{SITE}">Visit the Rumah Márton website <span>↗</span></a></li>
-    <li><a href="https://www.wy-design.com/">Explore WY Design <span>↗</span></a></li>
-    <li><a href="https://roadster.hu/peiyee-yong-interju">Meet Pei Yong — Read the Interview <span>↗</span></a></li>
+    <li><a href="{u["vr"]}">{t("l_vr", "Explore the Residence in 360°")} <span>↗</span></a></li>
+    <li><a href="{SITE}{'' if LANG == 'en' else LANG + '/'}">{t("l_site", "Visit the Rumah Márton website")} <span>↗</span></a></li>
+    <li><a href="https://www.wy-design.com/">{t("l_wy", "Explore WY Design")} <span>↗</span></a></li>
+    <li><a href="https://roadster.hu/peiyee-yong-interju">{t("l_pei", "Meet Pei Yong — Read the Interview")} <span>↗</span></a></li>
   </ul>
-  <p class="addr">Rumah Márton<br>Mártonvölgyi út, District XII, Budapest<br><a href="mailto:pei@wy-design.com">pei@wy-design.com</a></p>
-  <p class="done">Planned completion — Q3 2028</p>
-</div><div class="c inc"><p class="eyebrow">Included in every home</p>{inc}<h3>{BESPOKE[0]}</h3><p class="bespoke">{BESPOKE[1]}</p><p class="small">{SMALL_PRINT}</p></div></div>'''
+  <p class="addr">{t("addr", "Rumah Márton<br>Mártonvölgyi út, District XII, Budapest")}<br><a href="mailto:pei@wy-design.com">pei@wy-design.com</a></p>
+  <p class="done">{t("done", "Planned completion — Q3 2028")}</p>
+</div><div class="c inc"><p class="eyebrow">{t("included", "Included in every home")}</p>{inc}<h3>{BESPOKE[0]}</h3><p class="bespoke">{BESPOKE[1]}</p><p class="small">{SMALL_PRINT}</p></div></div>'''
 
 def visual_page(u, pno, sub):
     d = fitz.open(BRO); info = d[pno - 1].get_image_info(xrefs=True)[0]
@@ -296,34 +300,38 @@ def map_block(width_mm):
     im = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB"); buf = io.BytesIO(); im.save(buf, "JPEG", quality=90)
     lines = [(l["bbox"], "".join(s["text"] for s in l["spans"]).strip()) for b in p.get_text("dict")["blocks"] for l in b.get("lines", [])]
     lines = [x for x in lines if x[1]]; used, tags = set(), []
-    for bb, t in lines:
-        if t.startswith("("): continue
+    for bb, tx in lines:
+        if tx.startswith("("): continue
         tm = next(((j, tt) for j, (b2, tt) in enumerate(lines) if tt.startswith("(") and j not in used and abs(b2[1] - bb[3]) < 4 and abs((b2[0] + b2[2]) / 2 - (bb[0] + bb[2]) / 2) < 30), None)
         if tm: used.add(tm[0])
-        name = MAP_NAMES.get(t, t); cx = ((bb[0] + bb[2]) / 2 - x0) / (x1 - x0) * 100; cy = (bb[1] - y0) / (y1 - y0) * 100 + 2
-        tags.append(f'<span class="{"tag home" if name == "Rumah Márton" else "tag"}" style="left:{cx:.1f}%;top:{cy:.1f}%"><b>{name}</b>{tm[1].strip("()") if tm else ""}</span>')
+        name_en = MAP_NAMES.get(tx, tx); name = T.get("map", {}).get(name_en, name_en); cx = ((bb[0] + bb[2]) / 2 - x0) / (x1 - x0) * 100; cy = (bb[1] - y0) / (y1 - y0) * 100 + 2
+        tags.append(f'<span class="{"tag home" if name_en == "Rumah Márton" else "tag"}" style="left:{cx:.1f}%;top:{cy:.1f}%"><b>{name}</b>{tm[1].strip("()").replace("mins", T.get("mins", "mins")) if tm else ""}</span>')
     return f'<div class="mb" style="width:{width_mm}mm;position:relative"><img src="{data_uri(buf.getvalue(),"image/jpeg")}" style="width:100%;display:block">{"".join(tags)}</div>'
 
 def location_page():
     body = "".join(f"<p>{x}</p>" for x in LOCATION_SHORT["body"])
-    return f'''<div class="page loc"><div class="l"><p class="eyebrow">Rumah Márton<br>Mártonhegy, Budapest</p><h2>{LOCATION_SHORT["title"]}</h2>{body}</div>
-<div class="r">{map_block(178)}<p class="cap">The neighbourhood · approximate travel times</p></div></div>'''
+    return f'''<div class="page loc"><div class="l"><p class="eyebrow">{t("eyebrow", EYE)}</p><h2>{LOCATION_SHORT["title"]}</h2>{body}</div>
+<div class="r">{map_block(178)}<p class="cap">{t("map_cap", "The neighbourhood · approximate travel times")}</p></div></div>'''
 
 def render(html, path):
     html = html.replace("Rumah Márton", "Rumah&nbsp;Márton")   # the name never breaks across lines
-    doc = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>{html}</body></html>'
+    css = CSS
+    if LANG == "zh":   # Chinese: Noto CJK beside the Latin faces
+        css = css.replace("'Newsreader',serif", "'Newsreader','Noto Serif CJK SC',serif").replace("'Albert Sans',sans-serif", "'Albert Sans','Noto Sans CJK SC',sans-serif").replace("font-family:Newsreader", "font-family:Newsreader,'Noto Serif CJK SC'")
+        css += "body{line-break:strict;word-break:normal} h1,h2{word-break:keep-all} .text h1{font-size:27pt;line-height:1.25} .eyebrow,.cap,.facts dt,.closing .links a,.inc h3,.spec h4,.cl4 h3,.cl4 .links a{letter-spacing:.1em}"
+    doc = f'<!doctype html><html><head><meta charset="utf-8"><style>{css}</style></head><body>{html}</body></html>'
     with sync_playwright() as pw:
         b = pw.chromium.launch(); pg = b.new_page(); pg.set_content(doc, wait_until="load"); pg.wait_for_timeout(400)
         pg.pdf(path=str(path), width="297mm", height="210mm", print_background=True, prefer_css_page_size=True); b.close()
 
 def build(u):
-    tmp = OUT / f"_{u['key']}"; tmp.mkdir(exist_ok=True)
+    tmp = OUT / f"_{u['key']}{SUF}"; tmp.mkdir(exist_ok=True)
     render(cover_page(u) + location_page(), tmp / "cover.pdf")
     plan_pdfs = []
     for p in u["plans"]:
         html, png = plan_page(u, p)
-        f = OUT / "plans" / f"rumah-marton-{p['slug']}.pdf"; render(html, f); plan_pdfs.append(f)
-        (OUT / "plans" / f"rumah-marton-{p['slug']}.png").write_bytes(png)
+        f = OUT / "plans" / f"rumah-marton-{p['slug']}{SUF}.pdf"; render(html, f); plan_pdfs.append(f)
+        if not SUF: (OUT / "plans" / f"rumah-marton-{p['slug']}.png").write_bytes(png)
     render(closing_page(u), tmp / "closing.pdf")
     src = fitz.open(BRO); out = fitz.open()
     out.insert_pdf(fitz.open(tmp / "cover.pdf"))
@@ -331,7 +339,7 @@ def build(u):
     render("".join(visual_page(u, n, sub) for n, sub in u["visuals"]), tmp / "visuals.pdf")
     out.insert_pdf(fitz.open(tmp / "visuals.pdf"))
     out.insert_pdf(fitz.open(tmp / "closing.pdf"))
-    out.set_metadata({"title": f"Rumah Márton · {u['name']}", "author": "WY Design"})
+    out.set_metadata({"title": f"{t('doc_prefix', 'Rumah Márton')} · {u['name']}", "author": "WY Design"})
     out.save(OUT / u["file"], garbage=4, deflate=True)
     print(u["file"], out.page_count, "pages", (OUT / u["file"]).stat().st_size // 1024, "KB")
 
@@ -344,33 +352,31 @@ WEB_DATA = pathlib.Path("/home/claude/rm/src/content/plans.json")
 TABS = {"penthouse-plan-3-bedrooms": "3 bedrooms", "penthouse-plan-2-bedrooms": "2 bedrooms", "penthouse-roof-terrace-plan": "Rooftop terrace", "garden-residence-plan": "Ground floor"}
 
 def web_plans():
+    """Plan images (English run only; they carry no words) + plan data and downloads for the current language."""
     WEB_MEDIA.mkdir(parents=True, exist_ok=True)
     data = {}
-    with sync_playwright() as pw:
-        b = pw.chromium.launch(); pg = b.new_page(device_scale_factor=2.4, viewport={"width": 1200, "height": 1000})
-        for u in (GARDEN, PENTHOUSE):
-            items = []
-            for p in u["plans"]:
-                png, rect, labels = plan_image(p["page"])
-                w = 1000
-                lbl = "".join(f'<span class="lbl" style="left:{x*100:.2f}%;top:{y*100:.2f}%;font-size:11.5px">{t}</span>' for t, x, y in labels)
-                north = NORTH_SVG.replace('width="15mm" height="17.5mm"', 'width="54" height="63"')
-                html = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS} body{{background:#fff}} .lbl{{position:absolute;transform:translate(-50%,-50%);font-family:Newsreader}}</style></head><body><div id="b" style="position:relative;width:{w}px;padding:0"><img src="{data_uri(png,"image/png")}" style="width:100%;display:block"></div></body></html>'
+    pw = sync_playwright().start() if not SUF else None
+    pg = pw.chromium.launch().new_page(device_scale_factor=2.4, viewport={"width": 1200, "height": 1000}) if pw else None
+    for u in (GARDEN, PENTHOUSE):
+        items = []
+        for p in u["plans"]:
+            png, rect, labels = plan_image(p["page"])
+            if pg:
+                html = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS} body{{background:#fff}}</style></head><body><div id="b" style="position:relative;width:1000px;padding:0"><img src="{data_uri(png,"image/png")}" style="width:100%;display:block"></div></body></html>'
                 pg.set_content(html, wait_until="load"); pg.wait_for_timeout(250)
-                shot = pg.locator("#b").screenshot(type="png")
-                Image.open(io.BytesIO(shot)).convert("RGB").save(WEB_MEDIA / f"{p['slug']}.webp", "WEBP", quality=88, method=6)
-                items.append(dict(slug=p["slug"], tab=TABS[p["slug"]], title=p["title"], image=f"/media/plans/{p['slug']}.webp",
-                                  pdf=f"/downloads/rumah-marton-{p['slug']}.pdf", labels=[[t, round(x, 4), round(y, 4)] for t, x, y in labels],
-                                  rooms=[list(r) for r in p["rooms"]], totals=[list(t) for t in p["totals"]], note=p.get("note", "")))
-            data[u["key"]] = dict(name=u["name"], facts=u["facts"], plans=items)
-        b.close()
-    WEB_DATA.write_text(json.dumps(data, ensure_ascii=False, indent=1))
-    # downloads for the website
+                Image.open(io.BytesIO(pg.locator("#b").screenshot(type="png"))).convert("RGB").save(WEB_MEDIA / f"{p['slug']}.webp", "WEBP", quality=88, method=6)
+            items.append(dict(slug=p["slug"], tab=T.get("tabs", TABS)[p["slug"]], title=p["title"], image=f"/media/plans/{p['slug']}.webp",
+                              pdf=f"/downloads/rumah-marton-{p['slug']}{SUF}.pdf", labels=[[x, round(a, 4), round(b, 4)] for x, a, b in labels],
+                              rooms=[list(r) for r in p["rooms"]], totals=[list(x) for x in p["totals"]], note=p.get("note", "")))
+        data[u["key"]] = dict(name=u["name"], facts=u["facts"], plans=items)
+    if pw: pw.stop()
+    WEB_DATA.with_name(f"plans{SUF}.json").write_text(json.dumps(data, ensure_ascii=False, indent=1))
     dl = pathlib.Path("/home/claude/rm/public/downloads")
-    (dl / "rumah-marton-residence-01-garden.pdf").write_bytes((OUT / GARDEN["file"]).read_bytes())
-    (dl / "rumah-marton-residence-03-penthouse.pdf").write_bytes((OUT / PENTHOUSE["file"]).read_bytes())
-    for f in (OUT / "plans").glob("*.pdf"): (dl / f.name).write_bytes(f.read_bytes())
-    print("web plans", sorted(x.name for x in WEB_MEDIA.iterdir()))
+    (dl / f"rumah-marton-residence-01-garden{SUF}.pdf").write_bytes((OUT / GARDEN["file"]).read_bytes())
+    (dl / f"rumah-marton-residence-03-penthouse{SUF}.pdf").write_bytes((OUT / PENTHOUSE["file"]).read_bytes())
+    for p in GARDEN["plans"] + PENTHOUSE["plans"]:
+        f = OUT / "plans" / f"rumah-marton-{p['slug']}{SUF}.pdf"; (dl / f.name).write_bytes(f.read_bytes())
+    print("web plans", LANG, WEB_DATA.with_name(f"plans{SUF}.json").name)
 
 if __name__ == "__main__":
     web_plans()

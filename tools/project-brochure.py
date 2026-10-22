@@ -8,8 +8,9 @@ from PIL import Image
 import build as B
 
 SRC = "/home/claude/work/bro/src.pdf"   # 2026_Rumah_Marton_WY_For_Claude.pdf
-OUT = B.OUT / "Rumah-Marton-Brochure.pdf"
+OUT = B.OUT / "Rumah-Marton-Brochure.pdf"   # build_lang.py changes this per language
 EYEBROW = "Rumah Márton<br>Mártonhegy, Budapest"
+t = B.t
 
 # ============================== CONTENT ==============================
 COVER = dict(lede="A thoughtful home of quiet luxury, nestled in Mártonhegy, Budapest.",
@@ -68,7 +69,7 @@ CLOSING = ["We would love to show you the site and talk you through the plans fo
            "If you wish, we can also explore how the finishes, specifications and spaces might be tailored to your needs, guided by our award-winning architectural team and subject to design and construction feasibility.",
            "Detailed specifications, pricing, payment stages and terms, and the planned construction programme are available on request."]
 LINKS = [("Explore the Garden Residence in 360°", B.GARDEN["vr"]), ("Explore the Penthouse in 360°", B.PENTHOUSE["vr"]),
-         ("Visit the Rumah Márton website", B.SITE), ("Explore WY Design", "https://www.wy-design.com/"),
+         ("Visit the Rumah Márton website", B.SITE + ("" if B.LANG == "en" else B.LANG + "/")), ("Explore WY Design", "https://www.wy-design.com/"),
          ("Meet Pei Yong — Read the Interview", "https://roadster.hu/peiyee-yong-interju")]
 PRESS = [("Designboom", "https://www.designboom.com/architecture/mirrored-twin-houses-wy-design-hungarian-village-charm-10-10-2024/"),
          ("EDGE International Award", "https://epiteszforum.hu/egy-uj-videki-tipologia-kiserlete--ket-szin-ikerhaz"),
@@ -196,15 +197,15 @@ def text_page(d, facts=None):
 
 def cover(doc):
     info = doc[2].get_image_info(xrefs=True)[0]; img, _ = img_bytes(doc, info["xref"])
-    return f'''<div class="page cover"><div class="l"><p class="eyebrow">{EYEBROW}</p><h1>Rumah Márton</h1><p class="lede">{COVER["lede"]}</p></div>
+    return f'''<div class="page cover"><div class="l"><p class="eyebrow">{EYEBROW}</p><h1>{t("cover_title", "Rumah Márton")}</h1><p class="lede">{COVER["lede"]}</p></div>
 <div class="r"><img src="{B.data_uri(img,"image/jpeg")}"></div></div>'''
 
 def points():
     li = "".join(f'<li><p class="lead">{a}</p>{f"<p class=det>{b}</p>" if b else ""}</li>' for a, b in POINTS)
-    return f'<div class="page pts"><p class="eyebrow">{EYEBROW}</p><h2 style="margin:5mm 0 1.5mm;font-size:26pt">A curated way of living</h2><p class="det" style="font-size:9pt;max-width:120mm;margin:0 0 3mm">Conceived by an award-winning team with a thoughtful approach to design and uncompromising attention to detail.</p><ol>{li}</ol></div>'
+    return f'<div class="page pts"><p class="eyebrow">{EYEBROW}</p><h2 style="margin:5mm 0 1.5mm;font-size:26pt">{t("pts_head", "A curated way of living")}</h2><p class="det" style="font-size:9pt;max-width:120mm;margin:0 0 3mm">{t("pts_sub", "Conceived by an award-winning team with a thoughtful approach to design and uncompromising attention to detail.")}</p><ol>{li}</ol></div>'
 
 def mappage(doc):
-    return f'''<div class="page map">{B.map_block(234)}<p class="cap">The neighbourhood · approximate travel times</p></div>'''
+    return f'''<div class="page map">{B.map_block(234)}<p class="cap">{t("map_cap", "The neighbourhood · approximate travel times")}</p></div>'''
 
 def spec(i):
     cols = ""
@@ -216,26 +217,26 @@ def spec(i):
             h += "<ul>" + "".join(f"<li>{x}</li>" for x in lines) + "</ul>"
         cols += f"<div>{h}</div>"
     note = f'<p class="note">{SPEC_NOTE}</p>' if i == 1 else ""
-    return f'<div class="page spec"><div class="top"><p class="eyebrow">{EYEBROW}</p><h2>Specification</h2></div>{cols}{note}</div>'
+    return f'<div class="page spec"><div class="top"><p class="eyebrow">{EYEBROW}</p><h2>{t("spec_title", "Specification")}</h2></div>{cols}{note}</div>'
 
-SECONDARY = [("Explore WY Design", "https://www.wy-design.com/"), ("Meet Pei Yong — Read the Interview", "https://roadster.hu/peiyee-yong-interju")] + PRESS
-PRIMARY = [l for l in LINKS if l[0] not in ("Explore WY Design", "Meet Pei Yong — Read the Interview")]
+def SECONDARY(): return [l for l in LINKS if "wy-design.com" in l[1] or "roadster" in l[1]]
+def PRIMARY(): return [l for l in LINKS if not ("wy-design.com" in l[1] or "roadster" in l[1])]
 
 def closing(doc):
     info = doc[31].get_image_info(xrefs=True)[0]; img, _ = img_bytes(doc, info["xref"])
     photo = f'<div class="page vis"><div class="frame"><img src="{B.data_uri(img,"image/jpeg")}"></div></div>'
     paras = "".join(f"<p>{t}</p>" for t in CLOSING)
     li = lambda L: "".join(f'<li><a href="{u}">{t} <span>↗</span></a></li>' for t, u in L)
-    form = B.SITE.rstrip("/") + "/en/#enquire"
+    form = B.SITE.rstrip("/") + f"/{B.LANG}/#enquire"
     # one grid for both columns, so the right-hand links start level with the residence links
     return photo + f'''<div class="page cl4">
-<div class="a"><p class="eyebrow">{EYEBROW}</p><h2>Get in touch</h2>{paras}<h3>{B.BESPOKE[0]}</h3><p>{B.BESPOKE[1]}</p></div>
+<div class="a"><p class="eyebrow">{EYEBROW}</p><h2>{t("get_in_touch", "Get in touch")}</h2>{paras}<h3>{B.BESPOKE[0]}</h3><p>{B.BESPOKE[1]}</p></div>
 <div class="b"></div>
-<div class="a"><ul class="links">{li(PRIMARY)}</ul></div>
-<div class="b"><ul class="quiet top">{li(SECONDARY[:2])}</ul><h3>Selected recognition</h3><ul class="quiet">{li(PRESS)}</ul></div>
+<div class="a"><ul class="links">{li(PRIMARY())}</ul></div>
+<div class="b"><ul class="quiet top">{li(SECONDARY())}</ul><h3>{t("recognition", "Selected recognition")}</h3><ul class="quiet">{li(PRESS)}</ul></div>
 <div class="a foot"><p class="mail"><a href="mailto:pei@wy-design.com">pei@wy-design.com</a></p>
-<p class="form"><a href="{form}">Or send us a message online ↗</a></p>
-<p class="meta">Mártonvölgyi út, Budapest XII · Completion Q3 2028</p></div>
+<p class="form"><a href="{form}">{t("online", "Or send us a message online")} ↗</a></p>
+<p class="meta">{t("meta", "Mártonvölgyi út, Budapest XII · Completion Q3 2028")}</p></div>
 <div class="b foot"><p class="small">{B.SMALL_PRINT}</p></div>
 </div>'''
 
@@ -257,7 +258,7 @@ def main():
         elif k == "closing": html.append(closing(doc))
     B.CSS = CSS
     B.render("".join(html), OUT)
-    out = fitz.open(OUT); out.set_metadata({"title": "Rumah Márton · Mártonhegy, Budapest", "author": "WY Design"}); out.save(str(OUT) + ".tmp", garbage=4, deflate=True)
+    out = fitz.open(OUT); out.set_metadata({"title": t("doc_title", "Rumah Márton · Mártonhegy, Budapest"), "author": "WY Design"}); out.save(str(OUT) + ".tmp", garbage=4, deflate=True)
     import os; os.replace(str(OUT) + ".tmp", OUT)
     print(OUT.name, fitz.open(OUT).page_count, "pages", OUT.stat().st_size // 1024, "KB")
 

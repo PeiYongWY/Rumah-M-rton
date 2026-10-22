@@ -4,13 +4,17 @@ import Img from '../../components/Img.astro';
 import Footer from '../../components/Footer.astro';
 import Tracking from '../../components/Tracking.astro';
 import settings from '../../content/settings.json';
-import plans from '../../content/plans.json';
+import plansEn from '../../content/plans.json';
+import plansHu from '../../content/plans-hu.json';
+import plansZh from '../../content/plans-zh.json';
 import { getImage } from 'astro:assets';
 import { image } from '../../lib/images';
 import { enabled, t, path, abs } from '../../lib/i18n';
 export function getStaticPaths() { return enabled.map((l) => ({ params: { lang: l.code } })); }
 const { lang } = Astro.params as { lang: string };
 const tx = t(lang);
+const plans: any = ({ en: plansEn, hu: plansHu, zh: plansZh } as any)[lang] || plansEn;
+const dl = (f: string) => (lang === 'en' ? f : f.replace(/\.pdf$/, `-${lang}.pdf`));   // each language links its own PDFs
 const S = settings; const c = S.contact;
 const preview = process.env.PREVIEW === '1';
 const filmPoster = await getImage({ src: image(S.media.filmPoster), width: 1600, format: 'webp', quality: 86 });
@@ -118,7 +122,7 @@ const ld = {
               </dl>
               <ul class="unit-links">
                 {u.floorPlan && <li><a class="tlink" href={(plans as any)[u.track]?.plans[0].pdf || u.floorPlan} data-plan={u.track} data-track="floor_plan_click" data-item={u.track}>{tx.residences.floorPlan}<Fragment set:html={RA} /></a></li>}
-                {(plans as any)[u.track] && <li><a class="tlink" href={u.track === 'garden' ? '/downloads/rumah-marton-residence-01-garden.pdf' : '/downloads/rumah-marton-residence-03-penthouse.pdf'} data-track="residence_brochure_click" data-item={u.track} data-gate={`Residence brochure · ${u.name}`} data-gate-kind="res">{tx.residences.brochure}<Fragment set:html={NE} /></a></li>}
+                {(plans as any)[u.track] && <li><a class="tlink" href={dl(u.track === 'garden' ? '/downloads/rumah-marton-residence-01-garden.pdf' : '/downloads/rumah-marton-residence-03-penthouse.pdf')} data-track="residence_brochure_click" data-item={u.track} data-gate={`Residence brochure · ${u.name}`} data-gate-kind="res">{tx.residences.brochure}<Fragment set:html={NE} /></a></li>}
                 {u.virtualTour && <li><a class="tlink" href={u.virtualTour} {...ext} data-track="virtual_tour_click" data-item={u.track}>{tx.residences.tour}<Fragment set:html={NE} /><span class="sr"> ({tx.residences.newTab})</span></a></li>}
                 <li><a class="tlink quiet" href="#enquire" data-enquire={u.interest} data-track="request_details_click" data-item={u.track}>{tx.residences.details}<Fragment set:html={RA} /></a></li>
               </ul>
@@ -131,7 +135,7 @@ const ld = {
       <div class="rrow r-left roof-row">
         <figure class="plate rise"><Img name={S.images.rooftopNight} alt={tx.rooftop.alt} sizes="(max-width: 860px) 100vw, 66vw" /></figure>
         <div class="info brochure-side rise">
-          <a class="tlink" href={S.brochure} {...ext} data-track="brochure_click" data-item="brochure" data-gate="Project brochure" data-gate-kind="proj">{tx.brochure.link}<span class="arr" aria-hidden="true"> ↗︎</span><span class="sr"> ({tx.residences.newTab})</span></a>
+          <a class="tlink" href={dl(S.brochure)} {...ext} data-track="brochure_click" data-item="brochure" data-gate="Project brochure" data-gate-kind="proj">{tx.brochure.link}<span class="arr" aria-hidden="true"> ↗︎</span><span class="sr"> ({tx.residences.newTab})</span></a>
         </div>
       </div>
     </div>
@@ -224,7 +228,7 @@ const ld = {
           </div>
         ))}
         <ul class="fp-links">
-          <li><a class="tlink" href={u.track === 'garden' ? '/downloads/rumah-marton-residence-01-garden.pdf' : '/downloads/rumah-marton-residence-03-penthouse.pdf'} data-track="residence_brochure_click" data-item={u.track} data-gate={`Residence brochure · ${P.name}`} data-gate-kind="res">{tx.plan.brochure}<Fragment set:html={NE} /></a></li>
+          <li><a class="tlink" href={dl(u.track === 'garden' ? '/downloads/rumah-marton-residence-01-garden.pdf' : '/downloads/rumah-marton-residence-03-penthouse.pdf')} data-track="residence_brochure_click" data-item={u.track} data-gate={`Residence brochure · ${P.name}`} data-gate-kind="res">{tx.plan.brochure}<Fragment set:html={NE} /></a></li>
           {u.virtualTour && <li><a class="tlink" href={u.virtualTour} {...ext} data-track="virtual_tour_click" data-item={u.track}>{tx.plan.tour}<Fragment set:html={NE} /></a></li>}
           <li><a class="tlink quiet" href="#enquire" data-enquire={u.interest} data-close-fp data-track="request_details_click" data-item={u.track}>{tx.plan.enquire}<Fragment set:html={RA} /></a></li>
         </ul>

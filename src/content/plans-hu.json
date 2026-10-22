@@ -1,0 +1,567 @@
+{
+ "garden": {
+  "name": "Kertes rezidencia",
+  "facts": [
+   [
+    "Szint",
+    "Földszint"
+   ],
+   [
+    "Hálószobák",
+    "2 hálószoba és egy dolgozószoba, amely harmadik hálószobaként is használható"
+   ],
+   [
+    "Belső alapterület",
+    "86 m²"
+   ],
+   [
+    "Teraszok",
+    "61 m²"
+   ],
+   [
+    "Privát kert",
+    "232 m²"
+   ]
+  ],
+  "plans": [
+   {
+    "slug": "garden-residence-plan",
+    "tab": "Földszint",
+    "title": "Földszinti alaprajz",
+    "image": "/media/plans/garden-residence-plan.webp",
+    "pdf": "/downloads/rumah-marton-garden-residence-plan-hu.pdf",
+    "labels": [
+     [
+      "02",
+      0.2788,
+      0.3089
+     ],
+     [
+      "04",
+      0.3766,
+      0.3089
+     ],
+     [
+      "03",
+      0.1557,
+      0.3089
+     ],
+     [
+      "01",
+      0.2512,
+      0.4227
+     ],
+     [
+      "05",
+      0.3766,
+      0.2134
+     ],
+     [
+      "06",
+      0.6084,
+      0.3089
+     ],
+     [
+      "T1",
+      0.873,
+      0.3089
+     ],
+     [
+      "07",
+      0.6084,
+      0.5895
+     ],
+     [
+      "10",
+      0.6084,
+      0.6762
+     ],
+     [
+      "08",
+      0.4199,
+      0.6762
+     ],
+     [
+      "11",
+      0.4199,
+      0.7923
+     ],
+     [
+      "09",
+      0.2069,
+      0.6762
+     ],
+     [
+      "T2",
+      0.2793,
+      0.0701
+     ]
+    ],
+    "rooms": [
+     [
+      "01",
+      "Privát liftelőtér",
+      "3.45"
+     ],
+     [
+      "02",
+      "Bejárati előszoba",
+      "4.49"
+     ],
+     [
+      "03",
+      "Dolgozószoba",
+      "3.24"
+     ],
+     [
+      "04",
+      "Előtér",
+      "2.13"
+     ],
+     [
+      "05",
+      "Vendég-WC",
+      "1.30"
+     ],
+     [
+      "06",
+      "Konyha és étkező",
+      "15.13"
+     ],
+     [
+      "07",
+      "Nappali",
+      "24.28"
+     ],
+     [
+      "08",
+      "Folyosó",
+      "2.27"
+     ],
+     [
+      "09",
+      "Hálószoba 01",
+      "13.23"
+     ],
+     [
+      "10",
+      "Hálószoba 02",
+      "11.40"
+     ],
+     [
+      "11",
+      "Fürdőszoba",
+      "5.05"
+     ]
+    ],
+    "totals": [
+     [
+      "Belső alapterület",
+      "85.97",
+      "strong"
+     ],
+     [
+      "T1  Terasz",
+      "40.54",
+      ""
+     ],
+     [
+      "T2  Terasz",
+      "20.71",
+      ""
+     ],
+     [
+      "Teraszok",
+      "61.25",
+      "sub"
+     ],
+     [
+      "Súlyozott alapterület",
+      "116.60",
+      "strong",
+      "teraszok 50%-kal számítva"
+     ],
+     [
+      "Privát kert",
+      "232.17",
+      "garden"
+     ]
+    ],
+    "note": ""
+   }
+  ]
+ },
+ "penthouse": {
+  "name": "Penthouse",
+  "facts": [
+   [
+    "Szint",
+    "Legfelső szint, tetőterasszal"
+   ],
+   [
+    "Hálószobák",
+    "3 hálószoba, vagy 2 egy tágasabb fő hálószobával"
+   ],
+   [
+    "Belső alapterület",
+    "100 m²"
+   ],
+   [
+    "Erkélyek",
+    "21 m²"
+   ],
+   [
+    "Tetőterasz",
+    "39 m²"
+   ]
+  ],
+  "plans": [
+   {
+    "slug": "penthouse-plan-3-bedrooms",
+    "tab": "3 hálószoba",
+    "title": "Alaprajz · 3 hálószoba",
+    "image": "/media/plans/penthouse-plan-3-bedrooms.webp",
+    "pdf": "/downloads/rumah-marton-penthouse-plan-3-bedrooms-hu.pdf",
+    "labels": [
+     [
+      "01",
+      0.5206,
+      0.4611
+     ],
+     [
+      "04",
+      0.5206,
+      0.3685
+     ],
+     [
+      "05",
+      0.7955,
+      0.2263
+     ],
+     [
+      "06",
+      0.582,
+      0.2263
+     ],
+     [
+      "10",
+      0.7955,
+      0.3685
+     ],
+     [
+      "07",
+      0.582,
+      0.1166
+     ],
+     [
+      "08",
+      0.2581,
+      0.2263
+     ],
+     [
+      "B2",
+      0.0883,
+      0.2263
+     ],
+     [
+      "09",
+      0.2581,
+      0.3685
+     ],
+     [
+      "11",
+      0.3326,
+      0.4611
+     ],
+     [
+      "02",
+      0.3326,
+      0.8208
+     ],
+     [
+      "03",
+      0.709,
+      0.8208
+     ],
+     [
+      "B1",
+      0.8727,
+      0.8208
+     ]
+    ],
+    "rooms": [
+     [
+      "01",
+      "Előszoba",
+      "4.30"
+     ],
+     [
+      "02",
+      "Konyha és étkező",
+      "18.90"
+     ],
+     [
+      "03",
+      "Nappali",
+      "22.27"
+     ],
+     [
+      "04",
+      "Folyosó",
+      "3.50"
+     ],
+     [
+      "05",
+      "Fő hálószoba",
+      "11.20"
+     ],
+     [
+      "06",
+      "Gardrób",
+      "4.32"
+     ],
+     [
+      "07",
+      "Fő fürdőszoba",
+      "4.68"
+     ],
+     [
+      "08",
+      "Hálószoba 02",
+      "13.44"
+     ],
+     [
+      "09",
+      "Fürdőszoba",
+      "4.59"
+     ],
+     [
+      "10",
+      "Hálószoba 03 / dolgozószoba",
+      "10.23"
+     ],
+     [
+      "11",
+      "Privát liftelőtér",
+      "2.20"
+     ]
+    ],
+    "totals": [
+     [
+      "Belső alapterület",
+      "99.63",
+      "strong"
+     ],
+     [
+      "B1  Erkély",
+      "13.88",
+      ""
+     ],
+     [
+      "B2  Erkély",
+      "6.78",
+      ""
+     ],
+     [
+      "Erkélyek",
+      "20.66",
+      "sub"
+     ],
+     [
+      "T1  Tetőterasz",
+      "38.53",
+      "",
+      "kültéri konyha előkészítéssel · lásd a tetőszint alaprajzát"
+     ],
+     [
+      "Súlyozott alapterület",
+      "129.23",
+      "strong",
+      "kültéri területek 50%-kal számítva"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "slug": "penthouse-plan-2-bedrooms",
+    "tab": "2 hálószoba",
+    "title": "Alaprajz · 2 hálószoba, tágas fő hálószobával",
+    "image": "/media/plans/penthouse-plan-2-bedrooms.webp",
+    "pdf": "/downloads/rumah-marton-penthouse-plan-2-bedrooms-hu.pdf",
+    "labels": [
+     [
+      "01",
+      0.5206,
+      0.4611
+     ],
+     [
+      "04",
+      0.5206,
+      0.3685
+     ],
+     [
+      "05",
+      0.7955,
+      0.2263
+     ],
+     [
+      "06",
+      0.7955,
+      0.3685
+     ],
+     [
+      "07",
+      0.582,
+      0.1166
+     ],
+     [
+      "08",
+      0.2581,
+      0.2263
+     ],
+     [
+      "B2",
+      0.0883,
+      0.2263
+     ],
+     [
+      "09",
+      0.2581,
+      0.3685
+     ],
+     [
+      "10",
+      0.3326,
+      0.4611
+     ],
+     [
+      "02",
+      0.3326,
+      0.8208
+     ],
+     [
+      "03",
+      0.709,
+      0.8208
+     ],
+     [
+      "B1",
+      0.8727,
+      0.8208
+     ]
+    ],
+    "rooms": [
+     [
+      "01",
+      "Előszoba",
+      "4.30"
+     ],
+     [
+      "02",
+      "Konyha és étkező",
+      "18.90"
+     ],
+     [
+      "03",
+      "Nappali",
+      "22.27"
+     ],
+     [
+      "04",
+      "Folyosó",
+      "3.50"
+     ],
+     [
+      "05",
+      "Fő hálószoba",
+      "14.00"
+     ],
+     [
+      "06",
+      "Gardrób",
+      "10.80"
+     ],
+     [
+      "07",
+      "Fő fürdőszoba",
+      "6.30"
+     ],
+     [
+      "08",
+      "Hálószoba 02",
+      "13.44"
+     ],
+     [
+      "09",
+      "Fürdőszoba",
+      "4.59"
+     ],
+     [
+      "10",
+      "Privát liftelőtér",
+      "2.20"
+     ]
+    ],
+    "totals": [
+     [
+      "Belső alapterület",
+      "100.30",
+      "strong"
+     ],
+     [
+      "B1  Erkély",
+      "13.88",
+      ""
+     ],
+     [
+      "B2  Erkély",
+      "6.78",
+      ""
+     ],
+     [
+      "Erkélyek",
+      "20.66",
+      "sub"
+     ],
+     [
+      "T1  Tetőterasz",
+      "38.53",
+      "",
+      "kültéri konyha előkészítéssel · lásd a tetőszint alaprajzát"
+     ],
+     [
+      "Súlyozott alapterület",
+      "129.90",
+      "strong",
+      "kültéri területek 50%-kal számítva"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "slug": "penthouse-roof-terrace-plan",
+    "tab": "Tetőterasz",
+    "title": "Tetőterasz alaprajza",
+    "image": "/media/plans/penthouse-roof-terrace-plan.webp",
+    "pdf": "/downloads/rumah-marton-penthouse-roof-terrace-plan-hu.pdf",
+    "labels": [
+     [
+      "T1",
+      0.3935,
+      0.5862
+     ]
+    ],
+    "rooms": [],
+    "totals": [
+     [
+      "T1  Tetőterasz",
+      "38.53",
+      "strong",
+      "a penthouse kizárólagos használatában, kültéri konyha előkészítéssel"
+     ]
+    ],
+    "note": "A B1 és B2 erkély az alatta lévő lakószinten található."
+   }
+  ]
+ }
+}
