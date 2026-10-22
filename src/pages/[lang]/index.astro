@@ -23,13 +23,13 @@ const wyLink = `<a href="${S.explore.wyDesign}" target="_blank" rel="noopener" d
 const ld = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'ApartmentComplex', '@id': abs('/#rumah-marton'), name: 'Rumah Márton', description: tx.meta.description, url: abs(path(lang)),
+    { '@type': 'ApartmentComplex', '@id': abs('/#rumah-marton'), name: 'Rumah Márton', description: tx.meta.description, url: abs(path(lang)), alternateName: 'Rumah Marton', keywords: 'new-build apartments for sale, premium apartments, penthouse, Mártonhegy, Hegyvidék, Budapest District XII, XII. kerület, új építésű lakás', containedInPlace: { '@type': 'Place', name: 'Mártonhegy, Hegyvidék, Budapest XII' },
       image: abs(S.images.share), numberOfAccommodationUnits: S.residences.length,
       address: { '@type': 'PostalAddress', streetAddress: c.street, addressLocality: c.city, addressRegion: `${c.district}. kerület`, addressCountry: 'HU' },
       containsPlace: units.map((u) => ({ '@type': 'Apartment', name: `Rumah Márton · ${u.name}`, numberOfBedrooms: u.bedrooms,
         floorSize: { '@type': 'QuantitativeValue', value: u.interiorM2, unitCode: 'MTK' },
         offers: { '@type': 'Offer', availability: u.status === 'sold' ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' } })) },
-    { '@type': 'Organization', name: c.developer, url: c.developerUrl, email: c.email },
+    { '@type': 'Organization', name: c.developer, url: c.developerUrl, email: c.email, sameAs: [c.developerUrl, 'https://www.instagram.com/' + c.instagram] },
   ],
 };
 ---
