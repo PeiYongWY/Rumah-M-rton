@@ -88,6 +88,14 @@ const cfg = {
   document.querySelectorAll('[data-src]').forEach(function (i) { i.value = src; });
   document.querySelectorAll('[data-camp]').forEach(function (i) { i.value = camp; });
 
+  /* ---------- reveal on scroll, as on wy-design.com: once, gently ---------- */
+  (function () {
+    var els = document.querySelectorAll('.rise');
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    els.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top < innerHeight * 0.88) return; el.classList.add('pre'); io.observe(el); });
+  })();
+
   /* ---------- the name in the header returns to the top ---------- */
   document.querySelectorAll('[data-top]').forEach(function (a) {
     if (a.getAttribute('href') !== '#top') return;

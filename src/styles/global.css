@@ -702,3 +702,20 @@ body { font-size: 16px; line-height: 1.6 }
 .roof-row { margin-bottom: 0 }
 .residences + .considered { padding-top: clamp(80px, 9vw, 140px); padding-bottom: clamp(70px, 8vw, 120px) }
 .fp-n { right: -24px; width: 21px; height: 24px }
+
+/* ===== reveal as on wy-design.com: text and photographs rise once, photographs settle ===== */
+:root { --ease-wy: cubic-bezier(.2, .65, .15, 1) }
+.rise, .points-img img { animation: none !important }
+.rise { transition: opacity 1.2s var(--ease-wy), transform 1.4s var(--ease-wy) }
+.rise.pre { opacity: 0; transform: translateY(36px) }
+figure.rise { overflow: hidden }
+figure.rise img { transition: transform 1.8s var(--ease-wy) }
+figure.rise.pre img { transform: scale(1.08) }
+/* the first exterior photograph opens from slightly smaller instead, never cropped */
+.points-img.rise { overflow: visible }
+.points-img.rise.pre img { transform: scale(.94) }
+@media (prefers-reduced-motion: reduce) { .rise, .rise img { transition: none !important } }
+/* pop-up room numbers: one size and style on every plan */
+.fp-l { position: absolute; transform: translate(-50%, -50%); font-size: 10.5px; letter-spacing: .03em; color: #4A4743; pointer-events: none; font-family: 'Albert Sans', sans-serif }
+.fp-zoom.is-zoomed .fp-l { font-size: 13px }
+@media (max-width: 860px) { .fp-l { font-size: 8.5px } }

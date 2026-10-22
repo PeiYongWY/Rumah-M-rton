@@ -71,12 +71,15 @@ CLOSING_LEFT = [
     "If you wish, we can also explore how the finishes, specifications and spaces might be tailored to your needs, guided by our award-winning architectural team and subject to design and construction feasibility.",
     "Detailed specifications, pricing, payment stages and terms, and the planned construction programme are available on request.",
 ]
-INCLUDED = [("Privacy & access", ["One residence per floor", "Direct lift access to a private lobby"]),
-            ("Comfort & technology", ["Geothermal or air-source heat-pump heating and cooling, with no gas connection",
-                                      "Heat-recovery ventilation with filtered fresh air",
-                                      "High-performance triple glazing with naturally finished oak frames"]),
-            ("Materials & finishes", ["Oak and limestone flooring", "Refined mineral plaster wall finishes", "Quality-finished lobby and bathroom areas"]),
+INCLUDED = [("Privacy & access", ["One residence per floor, with direct lift access to a private lobby",
+                                  "Keyless entry, secure basement storage and EV-ready parking connection"]),
+            ("Comfort & technology", ["Geothermal or air-source heat-pump heating and cooling, with filtered fresh-air ventilation",
+                                      "Smart-home-ready infrastructure for future integration"]),
+            ("Materials & finishes", ["Triple-glazed windows with naturally finished oak frames to the interior",
+                                      "Oak and limestone flooring, with refined mineral plaster walls",
+                                      "Considered detailing and finishes to lobbies and bathrooms"]),
             ("Outdoor living", ["Private outdoor living spaces", "Provision for a dedicated outdoor kitchen"])]
+BESPOKE = ("Bespoke interiors", "We would be delighted to work with you to create a fully fitted and furnished interior. Speak with us to explore the possibilities.")
 SMALL_PRINT = "Illustrations are architectural visualisations. Areas, specifications, layout options and completion dates are subject to final confirmation in the sale and purchase documentation."
 # =====================================================================
 
@@ -138,6 +141,7 @@ h2{font-family:'Newsreader',serif;font-weight:300;font-size:22pt;line-height:1.0
 .vis img{display:block;max-width:261mm;max-height:166mm;width:auto;height:auto}
 .vis .cap{margin:5mm 0 0}
 /* closing */
+.closing .bespoke{font-family:'Newsreader',serif;font-size:9.2pt;line-height:1.45;margin:0;max-width:100mm;color:#6E6A64}
 .closing{display:grid;grid-template-columns:1fr 1fr}
 .closing .c{padding:17mm 14mm 13mm 15mm;display:flex;flex-direction:column}
 .closing .c + .c{background:#F2EEE7}
@@ -148,9 +152,9 @@ h2{font-family:'Newsreader',serif;font-weight:300;font-size:22pt;line-height:1.0
 .closing .addr{font-family:'Newsreader',serif;font-size:12pt;line-height:1.5;margin-top:auto}
 .closing .addr a{color:inherit;text-decoration:none}
 .closing .done{font-size:7.2pt;letter-spacing:.2em;text-transform:uppercase;color:#77736D;margin-top:4mm}
-.inc h3{font-size:7.2pt;letter-spacing:.2em;text-transform:uppercase;color:#77736D;font-weight:400;margin:6mm 0 2mm}
+.inc h3{font-size:6.4pt;letter-spacing:.2em;text-transform:uppercase;color:#9A958D;font-weight:400;margin:5mm 0 1.4mm}
 .inc ul{list-style:none;margin:0;padding:0}
-.inc li{font-family:'Newsreader',serif;font-size:11.2pt;line-height:1.4;padding:1.1mm 0}
+.inc li{font-family:'Newsreader',serif;font-size:9.2pt;line-height:1.4;padding:.7mm 0;color:#6E6A64}
 .closing .small{margin:auto 0 0;font-size:6.8pt;line-height:1.5;color:#8C877F;max-width:118mm}
 """
 
@@ -187,7 +191,9 @@ def plan_image(pno):
     im = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB")
     t = info["transform"]; k = im.width / t[0]; ox, oy = t[4], t[5]
     import numpy as np
-    a = np.asarray(im).astype(int); ys, xs = np.where(a.sum(axis=2) < 735)
+    ink = np.asarray(im).astype(int).sum(axis=2) < 735
+    cols = np.where(ink.sum(axis=0) >= 6)[0]; rows = np.where(ink.sum(axis=1) >= 6)[0]   # ignore stray specks
+    xs, ys = cols, rows
     m = 10
     x0, y0, x1, y1 = xs.min() - m, ys.min() - m, xs.max() + m, ys.max() + m
     crop = im.crop((x0, y0, x1, y1))
@@ -254,7 +260,7 @@ def closing_page(u):
   </ul>
   <p class="addr">Rumah Márton<br>Mártonvölgyi út, District XII, Budapest<br><a href="mailto:pei@wy-design.com">pei@wy-design.com</a></p>
   <p class="done">Planned completion — Q3 2028</p>
-</div><div class="c inc"><p class="eyebrow">Included in every home</p>{inc}<p class="small">{SMALL_PRINT}</p></div></div>'''
+</div><div class="c inc"><p class="eyebrow">Included in every home</p>{inc}<h3>{BESPOKE[0]}</h3><p class="bespoke">{BESPOKE[1]}</p><p class="small">{SMALL_PRINT}</p></div></div>'''
 
 def visual_page(u, pno, sub):
     d = fitz.open(BRO); info = d[pno - 1].get_image_info(xrefs=True)[0]
@@ -308,12 +314,12 @@ def web_plans():
                 w = 1000
                 lbl = "".join(f'<span class="lbl" style="left:{x*100:.2f}%;top:{y*100:.2f}%;font-size:11.5px">{t}</span>' for t, x, y in labels)
                 north = NORTH_SVG.replace('width="15mm" height="17.5mm"', 'width="54" height="63"')
-                html = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS} body{{background:#fff}} .lbl{{position:absolute;transform:translate(-50%,-50%);font-family:Newsreader}}</style></head><body><div id="b" style="position:relative;width:{w}px;padding:0"><img src="{data_uri(png,"image/png")}" style="width:100%;display:block">{lbl}</div></body></html>'
+                html = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS} body{{background:#fff}} .lbl{{position:absolute;transform:translate(-50%,-50%);font-family:Newsreader}}</style></head><body><div id="b" style="position:relative;width:{w}px;padding:0"><img src="{data_uri(png,"image/png")}" style="width:100%;display:block"></div></body></html>'
                 pg.set_content(html, wait_until="load"); pg.wait_for_timeout(250)
                 shot = pg.locator("#b").screenshot(type="png")
                 Image.open(io.BytesIO(shot)).convert("RGB").save(WEB_MEDIA / f"{p['slug']}.webp", "WEBP", quality=88, method=6)
                 items.append(dict(slug=p["slug"], tab=TABS[p["slug"]], title=p["title"], image=f"/media/plans/{p['slug']}.webp",
-                                  pdf=f"/downloads/rumah-marton-{p['slug']}.pdf",
+                                  pdf=f"/downloads/rumah-marton-{p['slug']}.pdf", labels=[[t, round(x, 4), round(y, 4)] for t, x, y in labels],
                                   rooms=[list(r) for r in p["rooms"]], totals=[list(t) for t in p["totals"]], note=p.get("note", "")))
             data[u["key"]] = dict(name=u["name"], facts=u["facts"], plans=items)
         b.close()
