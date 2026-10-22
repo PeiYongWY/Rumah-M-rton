@@ -1,231 +1,250 @@
 {
-  "_status": "NOT TRANSLATED - English placeholder. Translate after the English copy is approved; then set enabled: true in settings.json.",
+  "_status": "hu-draft-for-native-review",
   "meta": {
-    "title": "Rumah Márton · New-build apartments and penthouse for sale in Mártonhegy, Budapest XII",
-    "description": "Three newly built luxury residences in Mártonhegy, Budapest's 12th district: two apartments and a villa-style penthouse, one per floor, with private gardens, rooftop terraces and views of Castle Hill. By WY Design.",
-    "privacyTitle": "Privacy policy · Rumah Márton",
-    "thanksTitle": "Thank you · Rumah Márton"
+    "title": "Rumah Márton · Prémium új építésű lakások eladók – Mártonhegy, Budapest XII. kerület",
+    "description": "Prémium új építésű lakások eladók a Mártonhegyen, Budapest XII. kerületében (Hegyvidék): kertkapcsolatos rezidencia és penthouse tetőterasszal, szintenként egy lakás, panorámás kilátással a Várra és a Citadellára. Tervezett átadás: 2028 III. negyedév. A WY Design fejlesztése.",
+    "privacyTitle": "Adatvédelmi tájékoztató · Rumah Márton",
+    "thanksTitle": "Köszönjük · Rumah Márton"
   },
   "nav": {
-    "skip": "Skip to content",
-    "residences": "Residences",
-    "brochure": "Brochure",
-    "enquire": "Enquire",
-    "language": "Language",
-    "home": "Rumah Márton, home"
+    "skip": "Ugrás a tartalomra",
+    "residences": "Lakások",
+    "enquire": "Érdeklődés",
+    "language": "Nyelv",
+    "home": "Rumah Márton, kezdőlap"
   },
   "hero": {
     "title": "Rumah Márton",
-    "line": "A rare perspective on living.",
-    "alt": "The Penthouse living room at night, with Budapest and the lit Citadella beyond the glass"
+    "line": "Ritka cím. Limitált kollekció.",
+    "alt": "A penthouse nappalija éjjel, az üvegfalon túl Budapest és a kivilágított Citadella"
   },
   "intro": {
-    "label": "New-build residences in Mártonhegy, Budapest XII",
+    "label": "Új építésű lakások a Mártonhegyen, Budapest XII. kerület",
     "headline": [
-      "Thoughtful spaces.",
-      "Tactile materials.",
-      "Timeless presence."
+      "Átgondolt terek.",
+      "Tapintható anyagok.",
+      "Időtlen jelenlét."
     ],
     "body": [
-      "Tucked into the tranquil hills of Mártonhegy, one of Budapest's most sought-after residential enclaves, Rumah Márton presents a rare opportunity to own a newly built home in this coveted neighbourhood.",
-      "An exclusive collection of just three residences, each conceived with the privacy, quality and character of a private villa. With one residence per floor, direct lift access, sun-filled interiors and expansive terraces opening onto private gardens or panoramic rooftop views — each with an outdoor kitchen — every home offers a different perspective on apartment living."
-    ],
-    "closing": "Where the privacy, quality and character of a private villa meet the ease of apartment living."
+      "A Mártonhegy csendes dombjai között, Budapest egyik legkeresettebb lakókörnyékén a Rumah Márton ritka lehetőséget kínál: új építésű otthont ebben a különleges környezetben.",
+      "Mindössze három rezidenciából álló, exkluzív kollekció – mindegyik egy magánvilla intimitásával, minőségével és karakterével. Szintenként egy lakás, napfényes belső terek és tágas teraszok, amelyek privát kertre vagy panorámás tetőteraszra nyílnak, mindegyik kültéri konyha kiépítésének lehetőségével: minden otthon egy villa terét, minőségét és nyugalmát ötvözi a lakás kényelmével."
+    ]
   },
   "points": {
-    "label": "The collection",
-    "heading": "Three residences in the hills of Buda",
-    "imageAlt": "The south façade of Rumah Márton in lime plaster and stone, with planted balconies, set among pines",
+    "label": "A kollekció",
+    "heading": "Prémium új építésű lakások a Mártonhegyen, XII. kerület",
+    "imageAlt": "A Rumah Márton a kert felől: meszes vakolatú homlokzat, növényekkel beültetett erkélyek a fenyők között",
     "items": [
       {
-        "lead": "One residence per floor.",
-        "detail": "An exclusive collection of two apartments and one villa-style penthouse, each with direct lift access."
+        "lead": "Szintenként egy lakás.",
+        "detail": "Közvetlen liftkapcsolat, privát előtér és a szabadba nyíló lakóterek."
       },
       {
-        "lead": "Sun-filled interiors. Private gardens. Rooftop terraces. Outdoor kitchens.",
+        "lead": "Privát kertek. Tágas teraszok. Kültéri konyha kiépítésének lehetősége.",
         "detail": ""
       },
       {
-        "lead": "Panoramic views towards Castle Hill and the Citadella.",
+        "lead": "Panorámás kilátás a Várra és a Citadellára.",
         "detail": ""
       },
       {
-        "lead": "Understated sophistication. Quiet luxury. Villa-level quality and craftsmanship.",
+        "lead": "Mélygarázs. Saját tároló.",
         "detail": ""
       },
       {
-        "lead": "A rare opportunity to own a newly built residence in the coveted hills of Mártonhegy.",
-        "detail": ""
+        "lead": "Visszafogott elegancia. Csendes luxus.",
+        "detail": "Átgondolt arányok, gondosan választott anyagok és kiemelkedő kivitelezés."
       },
       {
-        "lead": "Crafted with care.",
-        "detail": "By an award-winning design team"
+        "lead": "Gondos alkotás.",
+        "detail": "Díjnyertes tervezőcsapattól"
       }
-    ],
-    "enquire": "Enquire privately"
-  },
-  "brochure": {
-    "link": "View project brochure",
-    "note": "Plans, visualisations and specification · PDF, 5 MB · opens in a new tab",
-    "filmLabel": "Rumah Márton, architectural film",
-    "play": "Play film",
-    "pause": "Pause film",
-    "soundOn": "Sound on",
-    "soundOff": "Sound off"
+    ]
   },
   "residences": {
-    "label": "Residences",
-    "heading": "Three residences. Three distinct expressions.",
-    "note": "Areas are approximate and taken from the design drawings. Prices on request.",
-    "interior": "Interior",
-    "exterior": "Exterior",
-    "bedrooms": "Bedrooms",
-    "tbc": "To be confirmed",
-    "available": "Available",
-    "sold": "Sold",
-    "floorPlan": "Floor plan",
-    "floorPlanPdf": "PDF, opens in a new tab",
-    "enquire": "Enquire",
+    "label": "Lakások",
+    "heading": "Eladó lakások: Kertes rezidencia és Penthouse",
+    "interior": "Belső alapterület",
+    "outdoor": "Kültér",
+    "bedrooms": "Hálószobák",
+    "available": "Eladó",
+    "sold": "Elkelt",
+    "floorPlan": "Alaprajz megtekintése",
+    "tour": "360°-os virtuális séta",
+    "details": "További információt kérek",
+    "newTab": "új lapon nyílik meg",
+    "pricing": "Az alapterületek tájékoztató jellegűek. Árak és elérhetőség érdeklődésre.",
     "items": [
       {
-        "name": "Residence 01 — Apartment",
-        "sub": "The Garden Residence · ground floor",
-        "alt": "The Garden Residence terrace and outdoor kitchen, opening to the private garden",
+        "name": "Kertes rezidencia",
+        "floor": "Földszint",
+        "alt": "A kertes rezidencia terasza, nappalija és kültéri konyhája a kert felé nyitva",
         "interior": "86 m²",
-        "exterior": "61 m² terraces · 232 m² private garden",
-        "bedrooms": "2 and a study"
+        "outdoor": "61 m² terasz · 232 m² privát kert",
+        "bedrooms": "2 + dolgozószoba",
+        "interest": "Garden Residence"
       },
       {
-        "name": "Residence 02 — Apartment",
-        "sub": "The First Floor Residence",
-        "alt": "The First Floor Residence outdoor kitchen and dining terrace",
-        "interior": "110 m²",
-        "exterior": "46 m² terraces and balcony · 361 m² garden",
-        "bedrooms": "3"
+        "name": "Első emeleti rezidencia",
+        "floor": "Első emelet",
+        "alt": "Az első emeleti rezidencia kültéri konyhája és étkezőterasza"
       },
       {
-        "name": "Residence 03 — Penthouse",
-        "sub": "Top floor and private roof terrace",
-        "alt": "The Penthouse rooftop terrace at night, with an outdoor kitchen and fire, Budapest's lights below",
+        "name": "Penthouse",
+        "floor": "Legfelső szint",
+        "alt": "A penthouse nappalija széles ablakkal Budapestre és a Citadellára",
         "interior": "100 m²",
-        "exterior": "21 m² balconies · 39 m² rooftop terrace",
-        "bedrooms": "2, or 3 with the study"
+        "outdoor": "21 m² erkély · 39 m² tetőterasz",
+        "bedrooms": "3",
+        "interest": "Penthouse"
       }
     ],
-    "brochure": "Download residence brochure",
-    "tour": "Explore 360° virtual tour"
+    "brochure": "Lakásismertető letöltése"
   },
   "enquiry": {
-    "label": "Private enquiry",
-    "heading": "A rare address. A limited collection.",
-    "body": "Only three private residences in one of Budapest's most desirable hillside neighbourhoods. Request detailed floor plans or arrange a private presentation.",
-    "name": "Name",
-    "email": "Email",
-    "phone": "Phone (optional)",
-    "interest": "Residence of interest (optional)",
-    "interestNone": "No preference",
+    "heading": "Rumah Márton",
+    "name": "Név",
+    "email": "E-mail",
+    "phone": "Telefon (nem kötelező)",
+    "interest": "Melyik lakás érdekli (nem kötelező)",
+    "interestNone": "Nincs preferencia",
     "interestOptions": [
-      "Residence 01 — Apartment",
-      "Residence 03 — Penthouse",
-      "The collection"
+      "Garden Residence",
+      "Penthouse"
     ],
-    "message": "Message",
-    "viewing": "I would like to arrange a private viewing.",
-    "consentBefore": "We will use your details only to reply to you. See our ",
-    "consentLink": "privacy policy",
+    "message": "Üzenet",
+    "viewing": "Személyes bemutatót szeretnék.",
+    "consentBefore": "Adatait kizárólag a válaszadáshoz használjuk. Részletek: ",
+    "consentLink": "adatvédelmi tájékoztató",
     "consentAfter": ".",
-    "send": "Send",
-    "sending": "Sending…",
-    "errName": "Please add your name.",
-    "errEmail": "Please check your email address.",
-    "errConsent": "Please confirm the privacy statement so we can reply.",
-    "success": "Thank you. Your enquiry has been received, and we will be in touch personally.",
-    "error": "Your enquiry could not be sent just now. Please try again, or write to us directly at",
-    "prefill": "I would like to know more about the {r}.",
-    "emailPh": "Your email",
-    "messagePh": "Your message",
-    "text": "Whether you have a question, would like to explore a residence, or arrange a private presentation, we'd be delighted to hear from you.",
-    "writeBefore": "Or simply write to us at ",
-    "writeAfter": "."
+    "send": "Küldés",
+    "sending": "Küldés…",
+    "errName": "Kérjük, adja meg a nevét.",
+    "errEmail": "Kérjük, ellenőrizze az e-mail-címét.",
+    "errConsent": "Kérjük, fogadja el az adatvédelmi tájékoztatót.",
+    "success": "Köszönjük! Megkaptuk érdeklődését, hamarosan személyesen jelentkezünk.",
+    "error": "Üzenetét most nem sikerült elküldeni. Kérjük, próbálja újra, vagy írjon nekünk közvetlenül:",
+    "line": "A WY Design limitált rezidencia-kollekciója.",
+    "invite": "Szeretnénk személyesen bemutatni Önnek a Rumah Mártont.",
+    "text": "Akár kérdése van, akár szívesen megismerne egy lakást, vagy személyes bemutatót szeretne, örömmel hallunk Önről.",
+    "writeBefore": "Vagy írjon nekünk egyszerűen: ",
+    "writeAfter": ".",
+    "prefill": "Szeretnék többet megtudni erről: {r}.",
+    "emailPh": "Az Ön e-mail-címe",
+    "messagePh": "Üzenete"
   },
   "footer": {
-    "line": "A limited-edition residential collection by WY Design.",
-    "contact": "Contact",
-    "privacy": "Privacy policy",
-    "credit": "Architecture and development by",
-    "disclaimer": "Images are visualisations. Areas and details are indicative and confirmed in the sale contract."
+    "line": "A WY Design limitált rezidencia-kollekciója.",
+    "contact": "Kapcsolat",
+    "privacy": "Adatvédelmi tájékoztató",
+    "credit": "Építészet és fejlesztés:",
+    "disclaimer": "A képek látványtervek. Az alapterületek és részletek tájékoztató jellegűek; a végleges adatokat az adásvételi szerződés rögzíti."
   },
   "cookies": {
-    "text": "We would like to use cookies to measure visits and the performance of our adverts. Nothing is set unless you accept.",
-    "accept": "Accept",
-    "decline": "Decline",
-    "settings": "Cookie settings"
+    "text": "Sütiket szeretnénk használni a látogatások és hirdetéseink hatékonyságának méréséhez. Elfogadás nélkül semmit nem tárolunk.",
+    "accept": "Elfogadom",
+    "decline": "Elutasítom",
+    "settings": "Süti-beállítások"
   },
   "privacy": {
-    "label": "Privacy policy",
-    "heading": "How we use your details",
+    "label": "Adatvédelmi tájékoztató",
+    "heading": "Hogyan kezeljük az adatait",
     "draft": "",
     "sections": [
       {
-        "h": "Who we are",
-        "p": "WY Design Kft., Harmat utca 208, Budapest, Hungary, is responsible for the information collected on this website. You can contact us at pei@wy-design.com."
+        "h": "Kik vagyunk",
+        "p": "A weboldalon gyűjtött adatokért a WY Design Kft. (Harmat utca 208, Budapest) felel. Elérhetőségünk: pei@wy-design.com."
       },
       {
-        "h": "What we collect, and why",
-        "p": "When you send an enquiry we receive your email address, your message, the residence you asked about if any, and how you found the site (for example the name of an advert). When you request a brochure we receive your email address and which brochure you opened. We use these details only to reply to you personally and to follow up on your interest in Rumah Márton. We do not add you to a mailing list or send automated marketing emails. The legal basis is your request and our legitimate interest in answering it."
+        "h": "Milyen adatokat gyűjtünk, és miért",
+        "p": "Érdeklődés küldésekor megkapjuk az e-mail-címét, üzenetét, az esetlegesen megjelölt lakást, valamint azt, hogyan talált ránk (például egy hirdetés nevét). Ismertető kérésekor az e-mail-címét és a megnyitott ismertetőt kapjuk meg. Ezeket az adatokat kizárólag arra használjuk, hogy személyesen válaszoljunk, és felvegyük Önnel a kapcsolatot a Rumah Márton iránti érdeklődése kapcsán. Nem iratjuk fel levelezőlistára, és nem küldünk automatikus marketingleveleket. Az adatkezelés jogalapja az Ön kérése és a megválaszolásához fűződő jogos érdekünk."
       },
       {
-        "h": "Cookies and measurement",
-        "p": "With your permission, the site may use Google Analytics, Google Ads and Meta to measure visits and the performance of our adverts. Nothing is loaded unless you choose Accept, and you can change your choice at any time with the Cookie settings link at the foot of the page."
+        "h": "Sütik és mérés",
+        "p": "Az Ön hozzájárulásával a weboldal a Google Analytics, a Google Ads és a Meta szolgáltatásait használhatja a látogatások és hirdetéseink mérésére. Elfogadás nélkül ezek nem töltődnek be, döntését pedig bármikor módosíthatja az oldal alján található Süti-beállítások hivatkozással."
       },
       {
-        "h": "Where your details are kept",
-        "p": "The website is hosted by Netlify. Enquiries and brochure requests are delivered to our email by the form service Web3Forms. We do not sell your details, and we share them only with those directly involved in the sale of Rumah Márton. We keep them while the residences are for sale and for up to two years afterwards."
+        "h": "Hol tároljuk az adatokat",
+        "p": "A weboldal tárhelyszolgáltatója a Netlify. Az érdeklődéseket és ismertetőkéréseket a Web3Forms űrlapszolgáltatás továbbítja e-mail-címünkre. Adatait nem értékesítjük, és csak a Rumah Márton értékesítésében közvetlenül érintettekkel osztjuk meg. Az adatokat a lakások értékesítésének idejére és azt követően legfeljebb két évig őrizzük meg."
       },
       {
-        "h": "Your rights",
-        "p": "You can ask us at any time to see, correct or delete your details, or to stop contacting you, by writing to pei@wy-design.com. You may also contact the Hungarian data protection authority (NAIH)."
+        "h": "Az Ön jogai",
+        "p": "Bármikor kérheti adatai megtekintését, helyesbítését vagy törlését, illetve azt, hogy ne keressük többé – írjon a pei@wy-design.com címre. Panaszával a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH) is fordulhat."
       }
     ],
-    "updated": "Last updated October 2026.",
-    "backLink": "Back to Rumah Márton"
+    "updated": "Utolsó frissítés: 2026. október.",
+    "backLink": "Vissza a Rumah Mártonhoz"
   },
   "thanks": {
-    "label": "Private enquiry",
-    "back": "Return to Rumah Márton"
+    "label": "Érdeklődés",
+    "back": "Vissza a Rumah Mártonhoz"
+  },
+  "status": {
+    "label": "A projekt állása",
+    "items": [
+      "Építési engedély megadva",
+      "Társasház-alapítás hivatalosan bejegyezve",
+      "Tervezett átadás — 2028 III. negyedév"
+    ]
+  },
+  "film": {
+    "label": "Rumah Márton – építészeti film",
+    "pause": "Szünet",
+    "play": "Lejátszás",
+    "soundOn": "Hang be",
+    "soundOff": "Hang ki"
+  },
+  "explore": {
+    "heading": "Fedezze fel",
+    "wy": "A WY Design bemutatkozása",
+    "pei": "Ismerje meg Pei Yongot — interjú",
+    "pressTitle": "A WY Design válogatott elismerései",
+    "links": {
+      "designboom": "Designboom",
+      "edge": "EDGE International Award",
+      "bigsee-architecture": "BIG SEE Architecture Award",
+      "bigsee-interior": "BIG SEE Interior Award"
+    }
+  },
+  "brochure": {
+    "link": "Projektismertető megtekintése"
+  },
+  "rooftop": {
+    "alt": "A penthouse tetőterasza éjjel: kültéri konyha, tűzrakóhely és Budapest fényei",
+    "caption": "A penthouse tetőterasza"
   },
   "considered": {
-    "phrase": "A more considered way of living.",
-    "dayAlt": "A bedroom in the morning light, oak wardrobes and a tall window onto the trees",
-    "nightAlt": "A bedroom at night, softly lit plaster walls and a door open to the garden"
+    "phrase": "Egy átgondoltabb életmód.",
+    "dayAlt": "Hálószoba reggeli fényben, tölgy gardróbszekrények és magas ablak a fákra",
+    "nightAlt": "Hálószoba éjjel, lágyan megvilágított vakolt falak és a kertre nyíló ajtó"
   },
   "living": {
-    "alt": "Living and dining space with full-height windows towards the city and the hills"
+    "alt": "Nappali és étkező padlótól mennyezetig érő ablakokkal a város és a hegyek felé"
   },
   "gate": {
-    "resTitle": "Discover the Residence",
-    "resLead": "Explore the floor plans, architectural details and specifications in our residence brochure.",
-    "resGo": "View Residence Brochure",
-    "projTitle": "Discover Rumah Márton",
-    "projLead": "Explore the architecture, the residences and the specifications in our project brochure.",
-    "projGo": "View Project Brochure",
-    "ph": "Your email address",
-    "note": "We value personal conversations and do not send automated marketing emails. Your email address will be handled in accordance with our ",
-    "noteLink": "Privacy Policy",
-    "noteAfter": ".",
-    "close": "Close",
-    "err": "Please check your email address."
+    "resTitle": "Ismerje meg a lakást",
+    "resLead": "Alaprajzok, építészeti részletek és műszaki tartalom a lakásismertetőben.",
+    "resGo": "Lakásismertető megtekintése",
+    "projTitle": "Ismerje meg a Rumah Mártont",
+    "projLead": "Építészet, lakások és műszaki tartalom a projektismertetőben.",
+    "projGo": "Projektismertető megtekintése",
+    "ph": "Az Ön e-mail-címe",
+    "note": "A személyes kapcsolatot tartjuk fontosnak, automatikus marketinglevelet nem küldünk. E-mail-címét ",
+    "noteLink": "adatvédelmi tájékoztatónk",
+    "noteAfter": " szerint kezeljük.",
+    "close": "Bezárás",
+    "err": "Kérjük, ellenőrizze az e-mail-címét."
   },
   "plan": {
-    "available": "Available",
-    "zoomIn": "Zoom in",
-    "zoomOut": "Zoom out",
-    "rooms": "Room areas",
-    "brochure": "Download residence brochure",
-    "tour": "Explore the 360° virtual tour",
-    "enquire": "Enquire about this residence",
-    "pdf": "Floor plan (PDF)",
-    "close": "Close",
-    "hint": "Tap or click the plan to zoom"
+    "available": "Eladó",
+    "zoomIn": "Nagyítás",
+    "zoomOut": "Kicsinyítés",
+    "rooms": "Helyiségek alapterülete",
+    "brochure": "Lakásismertető letöltése",
+    "tour": "360°-os virtuális séta",
+    "enquire": "Érdeklődöm a lakás iránt",
+    "pdf": "Alaprajz (PDF)",
+    "close": "Bezárás",
+    "hint": "Koppintson vagy kattintson az alaprajzra a nagyításhoz"
   }
 }

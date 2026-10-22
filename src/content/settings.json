@@ -14,7 +14,7 @@
       "label": "HU",
       "locale": "hu_HU",
       "htmlLang": "hu",
-      "enabled": false
+      "enabled": true
     },
     {
       "code": "zh",
