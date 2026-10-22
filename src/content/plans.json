@@ -1,0 +1,364 @@
+{
+ "garden": {
+  "name": "Garden Residence",
+  "facts": [
+   [
+    "Floor",
+    "Ground floor"
+   ],
+   [
+    "Bedrooms",
+    "2 bedrooms and a study, which may be used as a third bedroom"
+   ],
+   [
+    "Interior",
+    "86 m²"
+   ],
+   [
+    "Terraces",
+    "61 m²"
+   ],
+   [
+    "Private garden",
+    "232 m²"
+   ]
+  ],
+  "plans": [
+   {
+    "slug": "garden-residence-plan",
+    "tab": "Ground floor",
+    "title": "Ground floor plan",
+    "image": "/media/plans/garden-residence-plan.webp",
+    "pdf": "/downloads/rumah-marton-garden-residence-plan.pdf",
+    "rooms": [
+     [
+      "01",
+      "Private lobby",
+      "3.45"
+     ],
+     [
+      "02",
+      "Entrance hall",
+      "4.49"
+     ],
+     [
+      "03",
+      "Study",
+      "3.24"
+     ],
+     [
+      "04",
+      "Foyer",
+      "2.13"
+     ],
+     [
+      "05",
+      "Powder room",
+      "1.30"
+     ],
+     [
+      "06",
+      "Kitchen and dining",
+      "15.13"
+     ],
+     [
+      "07",
+      "Living",
+      "24.28"
+     ],
+     [
+      "08",
+      "Corridor",
+      "2.27"
+     ],
+     [
+      "09",
+      "Bedroom 01",
+      "13.23"
+     ],
+     [
+      "10",
+      "Bedroom 02",
+      "11.40"
+     ],
+     [
+      "11",
+      "Bathroom",
+      "5.05"
+     ]
+    ],
+    "totals": [
+     [
+      "Interior",
+      "85.97",
+      "strong"
+     ],
+     [
+      "T1  Terrace",
+      "40.54",
+      ""
+     ],
+     [
+      "T2  Terrace",
+      "20.71",
+      ""
+     ],
+     [
+      "Terraces",
+      "61.25",
+      "sub"
+     ],
+     [
+      "Weighted area",
+      "116.60",
+      "strong",
+      "terraces at 50%"
+     ],
+     [
+      "Private garden",
+      "232.17",
+      "garden"
+     ]
+    ],
+    "note": ""
+   }
+  ]
+ },
+ "penthouse": {
+  "name": "Penthouse Residence",
+  "facts": [
+   [
+    "Floor",
+    "Top floor, with rooftop terrace"
+   ],
+   [
+    "Bedrooms",
+    "3 bedrooms, or 2 with a grander master suite"
+   ],
+   [
+    "Interior",
+    "100 m²"
+   ],
+   [
+    "Balconies",
+    "21 m²"
+   ],
+   [
+    "Rooftop terrace",
+    "39 m²"
+   ]
+  ],
+  "plans": [
+   {
+    "slug": "penthouse-plan-3-bedrooms",
+    "tab": "3 bedrooms",
+    "title": "Floor plan · 3 bedrooms",
+    "image": "/media/plans/penthouse-plan-3-bedrooms.webp",
+    "pdf": "/downloads/rumah-marton-penthouse-plan-3-bedrooms.pdf",
+    "rooms": [
+     [
+      "01",
+      "Entrance foyer",
+      "4.30"
+     ],
+     [
+      "02",
+      "Kitchen and dining",
+      "18.90"
+     ],
+     [
+      "03",
+      "Living",
+      "22.27"
+     ],
+     [
+      "04",
+      "Corridor",
+      "3.50"
+     ],
+     [
+      "05",
+      "Master suite",
+      "11.20"
+     ],
+     [
+      "06",
+      "Master closet",
+      "4.32"
+     ],
+     [
+      "07",
+      "Master bath",
+      "4.68"
+     ],
+     [
+      "08",
+      "Bedroom 02",
+      "13.44"
+     ],
+     [
+      "09",
+      "Bathroom",
+      "4.59"
+     ],
+     [
+      "10",
+      "Bedroom 03 / study",
+      "10.23"
+     ],
+     [
+      "11",
+      "Private lobby",
+      "2.20"
+     ]
+    ],
+    "totals": [
+     [
+      "Interior",
+      "99.63",
+      "strong"
+     ],
+     [
+      "B1  Balcony",
+      "13.88",
+      ""
+     ],
+     [
+      "B2  Balcony",
+      "6.78",
+      ""
+     ],
+     [
+      "Balconies",
+      "20.66",
+      "sub"
+     ],
+     [
+      "T1  Rooftop terrace",
+      "38.53",
+      "",
+      "with kitchen provision · see roof plan"
+     ],
+     [
+      "Weighted area",
+      "129.23",
+      "strong",
+      "outdoor areas at 50%"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "slug": "penthouse-plan-2-bedrooms",
+    "tab": "2 bedrooms",
+    "title": "Floor plan · 2 bedrooms, grand master suite",
+    "image": "/media/plans/penthouse-plan-2-bedrooms.webp",
+    "pdf": "/downloads/rumah-marton-penthouse-plan-2-bedrooms.pdf",
+    "rooms": [
+     [
+      "01",
+      "Entrance foyer",
+      "4.30"
+     ],
+     [
+      "02",
+      "Kitchen and dining",
+      "18.90"
+     ],
+     [
+      "03",
+      "Living",
+      "22.27"
+     ],
+     [
+      "04",
+      "Corridor",
+      "3.50"
+     ],
+     [
+      "05",
+      "Master suite",
+      "14.00"
+     ],
+     [
+      "06",
+      "Master closet",
+      "10.80"
+     ],
+     [
+      "07",
+      "Master bath",
+      "6.30"
+     ],
+     [
+      "08",
+      "Bedroom 02",
+      "13.44"
+     ],
+     [
+      "09",
+      "Bathroom",
+      "4.59"
+     ],
+     [
+      "10",
+      "Private lobby",
+      "2.20"
+     ]
+    ],
+    "totals": [
+     [
+      "Interior",
+      "100.30",
+      "strong"
+     ],
+     [
+      "B1  Balcony",
+      "13.88",
+      ""
+     ],
+     [
+      "B2  Balcony",
+      "6.78",
+      ""
+     ],
+     [
+      "Balconies",
+      "20.66",
+      "sub"
+     ],
+     [
+      "T1  Rooftop terrace",
+      "38.53",
+      "",
+      "with kitchen provision · see roof plan"
+     ],
+     [
+      "Weighted area",
+      "129.90",
+      "strong",
+      "outdoor areas at 50%"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "slug": "penthouse-roof-terrace-plan",
+    "tab": "Rooftop terrace",
+    "title": "Rooftop terrace plan",
+    "image": "/media/plans/penthouse-roof-terrace-plan.webp",
+    "pdf": "/downloads/rumah-marton-penthouse-roof-terrace-plan.pdf",
+    "rooms": [],
+    "totals": [
+     [
+      "T1  Rooftop terrace",
+      "38.53",
+      "strong",
+      "private to the Penthouse, with provision for an outdoor kitchen"
+     ]
+    ],
+    "note": "The balconies B1 and B2 are on the residence floor below."
+   }
+  ]
+ }
+}

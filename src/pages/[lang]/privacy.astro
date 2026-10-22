@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/Footer.astro';
+import Tracking from '../../components/Tracking.astro';
+import { enabled, t, path } from '../../lib/i18n';
+export function getStaticPaths() { return enabled.map((l) => ({ params: { lang: l.code } })); }
+const { lang } = Astro.params as { lang: string };
+const tx = t(lang); const P = tx.privacy;
+---
+<Base lang={lang} page="privacy" title={tx.meta.privacyTitle} description={P.heading} solidHeader noindex>
+<main id="main" class="doc">
+  <p class="back-top"><a href={path(lang)} data-back>← {P.backLink}</a></p>
+  <p class="label">{P.label}</p>
+  <h1 class="display d2">{P.heading}</h1>
+  {P.draft && <p><strong>{P.draft}</strong></p>}
+  {P.sections.map((s: any) => (<><h2>{s.h}</h2><p>{s.p}</p></>))}
+  <p class="caption">{P.updated}</p>
+  <p class="back-end"><a class="tlink" href={path(lang)} data-back>← {P.backLink}</a></p>
+</main>
+<script is:inline>document.querySelectorAll("[data-back]").forEach(function(a){a.addEventListener("click",function(e){try{if(document.referrer&&new URL(document.referrer).host===location.host&&history.length>1){e.preventDefault();history.back();}}catch(x){}});});</script>
+<Footer lang={lang} />
+<Tracking lang={lang} />
+</Base>

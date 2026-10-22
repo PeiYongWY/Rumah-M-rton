@@ -1,0 +1,29 @@
+---
+import settings from '../content/settings.json';
+import { t, path } from '../lib/i18n';
+interface Props { lang: string }
+const { lang } = Astro.props;
+const tx = t(lang); const c = settings.contact;
+---
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-col">
+        <p class="label">{tx.footer.contact}</p>
+        <a href={`mailto:${c.email}`}>{c.email}</a><br />
+        {c.phone && <><a href={`tel:${c.phone.replace(/\s/g, '')}`}>{c.phone}</a><br /></>}
+        {c.street}, {c.city} {c.district}
+      </div>
+      <div class="foot-col">
+        <p class="label">Rumah Márton</p>
+        <a href={`${path(lang)}#residences`}>{tx.nav.residences}</a><br />
+        <a href={`${path(lang)}#enquire`}>{tx.nav.enquire}</a><br />
+        {c.instagram && <a href={`https://www.instagram.com/${c.instagram}/`} target="_blank" rel="noopener">Instagram</a>}
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© {new Date().getFullYear()} {c.developer}. {tx.footer.disclaimer}</span>
+      <span><a href={path(lang, 'privacy')}>{tx.footer.privacy}</a> · <button class="linkish" type="button" data-cookie-settings>{tx.cookies.settings}</button> · {tx.footer.credit} <a href={c.developerUrl} target="_blank" rel="noopener">{c.developer}</a></span>
+    </div>
+  </div>
+</footer>

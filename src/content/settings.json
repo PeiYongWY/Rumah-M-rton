@@ -1,0 +1,123 @@
+{
+  "_readme": "Facts shared by every language: address, links, files, images, residence figures, analytics IDs. Words for each language live in src/content/i18n/<lang>.json.",
+  "siteUrl": "https://rumahmarton.com",
+  "languages": [
+    {
+      "code": "en",
+      "label": "EN",
+      "locale": "en_GB",
+      "htmlLang": "en",
+      "enabled": true
+    },
+    {
+      "code": "hu",
+      "label": "HU",
+      "locale": "hu_HU",
+      "htmlLang": "hu",
+      "enabled": false
+    },
+    {
+      "code": "zh",
+      "label": "中文",
+      "locale": "zh_CN",
+      "htmlLang": "zh-Hans",
+      "enabled": false
+    }
+  ],
+  "defaultLanguage": "en",
+  "contact": {
+    "email": "pei@wy-design.com",
+    "phone": "",
+    "street": "Mártonvölgyi út",
+    "city": "Budapest",
+    "district": "XII",
+    "instagram": "_wydesign",
+    "developer": "WY Design",
+    "developerUrl": "https://www.wy-design.com"
+  },
+  "analytics": {
+    "_note": "Paste IDs when the accounts exist. Nothing loads until a visitor accepts cookies (Google Consent Mode v2).",
+    "ga4": "",
+    "googleAds": "",
+    "googleAdsLeadLabel": "",
+    "googleAdsViewingLabel": "",
+    "metaPixel": "",
+    "searchConsoleVerification": ""
+  },
+  "images": {
+    "hero": "hero-living-night",
+    "sellingPoints": "exterior-overview",
+    "share": "/media/share.jpg",
+    "rooftopNight": "rooftop-night",
+    "bedroomDay": "bedroom-day",
+    "bedroomNight": "bedroom-night",
+    "living": "living-room"
+  },
+  "media": {
+    "film1600": "/media/rumah-marton-film.mp4",
+    "film960": "/media/rumah-marton-film-1280.mp4",
+    "filmPoster": "film-poster"
+  },
+  "brochure": "/downloads/rumah-marton-brochure.pdf",
+  "residences": [
+    {
+      "id": "garden-residence",
+      "number": "01",
+      "image": "garden-residence",
+      "status": "available",
+      "interiorM2": 86,
+      "bedrooms": 2,
+      "floorPlan": "/downloads/rumah-marton-residence-01-garden.pdf",
+      "virtualTour": "https://vr.justeasy.cn/view/1778l51xq23bg9e2-1778512683.html",
+      "track": "garden"
+    },
+    {
+      "id": "first-floor-residence",
+      "number": "02",
+      "image": "first-floor-residence",
+      "status": "sold",
+      "interiorM2": 110,
+      "bedrooms": 3,
+      "floorPlan": "",
+      "virtualTour": "",
+      "track": "first-floor"
+    },
+    {
+      "id": "penthouse",
+      "number": "03",
+      "image": "penthouse-view",
+      "status": "available",
+      "interiorM2": 100,
+      "bedrooms": 3,
+      "floorPlan": "/downloads/rumah-marton-residence-03-penthouse.pdf",
+      "virtualTour": "https://vr.justeasy.cn/view/177c88pt51c31950-1778513346.html",
+      "track": "penthouse"
+    }
+  ],
+  "explore": {
+    "wyDesign": "https://www.wy-design.com",
+    "interview": "https://roadster.hu/peiyee-yong-interju",
+    "press": [
+      {
+        "key": "designboom",
+        "url": "https://www.designboom.com/architecture/mirrored-twin-houses-wy-design-hungarian-village-charm-10-10-2024/"
+      },
+      {
+        "key": "edge",
+        "url": "https://epiteszforum.hu/egy-uj-videki-tipologia-kiserlete--ket-szin-ikerhaz"
+      },
+      {
+        "key": "bigsee-architecture",
+        "url": "https://bigsee.eu/almost-mirrored-twin-house/"
+      },
+      {
+        "key": "bigsee-interior",
+        "url": "https://bigsee.eu/vamhaz/"
+      }
+    ]
+  },
+  "forms": {
+    "web3formsKey": "b9c9dd19-4cce-466b-904e-ed9963925c1c",
+    "endpoint": "https://api.web3forms.com/submit"
+  }
+}

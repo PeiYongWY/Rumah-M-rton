@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/Footer.astro';
+import { enabled, t, path } from '../../lib/i18n';
+export function getStaticPaths() { return enabled.map((l) => ({ params: { lang: l.code } })); }
+const { lang } = Astro.params as { lang: string };
+const tx = t(lang);
+---
+<Base lang={lang} page="thank-you" title={tx.meta.thanksTitle} description={tx.enquiry.success} solidHeader noindex>
+<main id="main" class="doc">
+  <p class="label">{tx.thanks.label}</p>
+  <h1 class="display d2">{tx.enquiry.success}</h1>
+  <p><a class="tlink" href={path(lang)}>{tx.thanks.back}</a></p>
+</main>
+<Footer lang={lang} />
+</Base>

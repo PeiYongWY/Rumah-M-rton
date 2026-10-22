@@ -1,0 +1,258 @@
+---
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import Footer from '../../components/Footer.astro';
+import Tracking from '../../components/Tracking.astro';
+import settings from '../../content/settings.json';
+import plans from '../../content/plans.json';
+import { getImage } from 'astro:assets';
+import { image } from '../../lib/images';
+import { enabled, t, path, abs } from '../../lib/i18n';
+export function getStaticPaths() { return enabled.map((l) => ({ params: { lang: l.code } })); }
+const { lang } = Astro.params as { lang: string };
+const tx = t(lang);
+const S = settings; const c = S.contact;
+const preview = process.env.PREVIEW === '1';
+const filmPoster = await getImage({ src: image(S.media.filmPoster), width: 1600, format: 'webp', quality: 86 });
+const NE = '<span aria-hidden="true"> ↗</span>';
+const RA = '<span aria-hidden="true"> →</span>';
+const ARROW = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" stroke-width="1"/></svg>';
+const units = S.residences.map((r, i) => ({ ...r, ...tx.residences.items[i] }));
+const ext = { target: '_blank', rel: 'noopener' };
+const wyLink = `<a href="${S.explore.wyDesign}" target="_blank" rel="noopener" data-track="wy_design_click">WY Design</a>`;
+const ld = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'ApartmentComplex', '@id': abs('/#rumah-marton'), name: 'Rumah Márton', description: tx.meta.description, url: abs(path(lang)),
+      image: abs(S.images.share), numberOfAccommodationUnits: S.residences.length,
+      address: { '@type': 'PostalAddress', streetAddress: c.street, addressLocality: c.city, addressRegion: `${c.district}. kerület`, addressCountry: 'HU' },
+      containsPlace: units.map((u) => ({ '@type': 'Apartment', name: `Rumah Márton · ${u.name}`, numberOfBedrooms: u.bedrooms,
+        floorSize: { '@type': 'QuantitativeValue', value: u.interiorM2, unitCode: 'MTK' },
+        offers: { '@type': 'Offer', availability: u.status === 'sold' ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' } })) },
+    { '@type': 'Organization', name: c.developer, url: c.developerUrl, email: c.email },
+  ],
+};
+---
+<Base lang={lang} title={tx.meta.title} description={tx.meta.description} ld={ld}>
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <Img name={S.images.hero} alt={tx.hero.alt} sizes="100vw" eager />
+    <div class="hero-text"><div class="wrap">
+      <h1 id="hero-h">{tx.hero.title}</h1>
+      <p class="line">{tx.hero.line}</p>
+    </div></div>
+  </section>
+
+  <!-- EDITORIAL INTRODUCTION -->
+  <section class="section intro" aria-labelledby="intro-h">
+    <div class="wrap grid">
+      <p class="label intro-label">{tx.intro.label}</p>
+      <h2 class="display d1" id="intro-h">{tx.intro.headline.map((l: string) => <span>{l}</span>)}</h2>
+      <div class="body rise">{tx.intro.body.map((p: string) => <p>{p}</p>)}</div>
+    </div>
+  </section>
+
+  <!-- KEY SELLING POINTS -->
+  <section class="section points" id="collection" aria-labelledby="points-h">
+    <div class="wrap points-col">
+      <figure class="points-img rise"><Img name={S.images.sellingPoints} alt={tx.points.imageAlt} sizes="(max-width: 700px) 100vw, 680px" /></figure>
+      <p class="label">{tx.points.label}</p>
+      <h2 class="sr" id="points-h">{tx.points.heading}</h2>
+      <ol class="stmts rise">
+        {tx.points.items.map((p: any) => (
+          <li><p class="lead">{p.lead}</p>{p.detail && <p class="detail">{p.detail}</p>}</li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURAL FILM -->
+  <section class="film-band" aria-label={tx.film.label}>
+    <div class="wrap">
+      <figure class="film">
+        <video id="film" muted loop playsinline preload="metadata" poster={filmPoster.src}
+          data-src-large={S.media.film1600} data-src-small={S.media.film960} aria-label={tx.film.label}></video>
+        <div class="film-ctl">
+        <button type="button" class="film-pause is-paused" id="film-play" aria-pressed="true" data-play={tx.film.play} data-pause={tx.film.pause}>
+          <span data-lbl>{tx.film.play}</span>
+        </button>
+        <button type="button" class="film-sound" id="film-sound" aria-pressed="false" data-on={tx.film.soundOn} data-off={tx.film.soundOff}>
+          <span data-lbl>{tx.film.soundOn}</span>
+        </button>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROJECT STATUS -->
+  <section class="status-band" aria-labelledby="status-h">
+    <div class="wrap">
+      <h2 class="label" id="status-h">{tx.status.label}</h2>
+      <ul class="status-list">{tx.status.items.map((x: string) => <li>{x}</li>)}</ul>
+    </div>
+  </section>
+
+  <!-- THE THREE RESIDENCES -->
+  <section class="section residences" id="residences" aria-labelledby="res-h">
+    <div class="wrap">
+      <p class="label">{tx.residences.label}</p>
+      <h2 class="sr" id="res-h">{tx.residences.heading}</h2>
+      <div class="res-rows">
+        {units.map((u: any, k: number) => u.status === 'sold' ? (
+          <article class="rrow r-sold" id={u.id} aria-labelledby={`${u.id}-h`}>
+            <figure class="plate rise"><Img name={u.image} alt={u.alt} sizes="(max-width: 860px) 70vw, 34vw" max={1600} /></figure>
+            <div class="info rise"><h3 id={`${u.id}-h`}>{u.name}</h3><p class="status sold">{tx.residences.sold}</p></div>
+          </article>
+        ) : (
+          <article class={`rrow ${k === 0 ? 'r-left' : 'r-right'}`} id={u.id} aria-labelledby={`${u.id}-h`}>
+            <figure class="plate rise"><Img name={u.image} alt={u.alt} sizes="(max-width: 860px) 100vw, 66vw" /></figure>
+            <div class="info rise">
+              <h3 id={`${u.id}-h`}>{u.name}</h3>
+              <p class="unit-sub">{u.floor}. {tx.residences.available}.</p>
+              <dl class="facts">
+                <div><dt>{tx.residences.interior}</dt><dd>{u.interior}</dd></div>
+                <div><dt>{tx.residences.outdoor}</dt><dd>{u.outdoor}</dd></div>
+                <div><dt>{tx.residences.bedrooms}</dt><dd>{u.bedrooms}</dd></div>
+              </dl>
+              <ul class="unit-links">
+                {u.floorPlan && <li><a class="tlink" href={(plans as any)[u.track]?.plans[0].pdf || u.floorPlan} data-plan={u.track} data-track="floor_plan_click" data-item={u.track}>{tx.residences.floorPlan}<Fragment set:html={RA} /></a></li>}
+                {(plans as any)[u.track] && <li><a class="tlink" href={u.track === 'garden' ? '/downloads/rumah-marton-residence-01-garden.pdf' : '/downloads/rumah-marton-residence-03-penthouse.pdf'} data-track="residence_brochure_click" data-item={u.track} data-gate={`Residence brochure · ${u.name}`} data-gate-kind="res">{tx.residences.brochure}<Fragment set:html={NE} /></a></li>}
+                {u.virtualTour && <li><a class="tlink" href={u.virtualTour} {...ext} data-track="virtual_tour_click" data-item={u.track}>{tx.residences.tour}<Fragment set:html={NE} /><span class="sr"> ({tx.residences.newTab})</span></a></li>}
+                <li><a class="tlink quiet" href="#enquire" data-enquire={u.interest} data-track="request_details_click" data-item={u.track}>{tx.residences.details}<Fragment set:html={RA} /></a></li>
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- ROOFTOP AT NIGHT, WITH THE PROJECT BROCHURE -->
+      <div class="rrow r-left roof-row">
+        <figure class="plate rise"><Img name={S.images.rooftopNight} alt={tx.rooftop.alt} sizes="(max-width: 860px) 100vw, 66vw" /></figure>
+        <div class="info brochure-side">
+          <a class="tlink" href={S.brochure} {...ext} data-track="brochure_click" data-item="brochure" data-gate="Project brochure" data-gate-kind="proj">{tx.brochure.link}<span class="arr" aria-hidden="true"> ↗</span><span class="sr"> ({tx.residences.newTab})</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A MORE CONSIDERED WAY OF LIVING -->
+  <section class="considered" aria-labelledby="considered-h">
+    <div class="wrap">
+      <h2 class="sr" id="considered-h">{tx.considered.phrase}</h2>
+      <div class="pair">
+        <div class="pair-row">
+          <figure class="pair-n rise"><Img name={S.images.bedroomNight} alt={tx.considered.nightAlt} sizes="(max-width: 700px) 100vw, 36vw" /></figure>
+          <figure class="pair-d rise"><Img name={S.images.bedroomDay} alt={tx.considered.dayAlt} sizes="(max-width: 700px) 100vw, 48vw" /></figure>
+        </div>
+        <figure class="pair-c rise"><Img name={S.images.living} alt={tx.living.alt} sizes="(max-width: 700px) 100vw, 72vw" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY -->
+  <section class="enquiry" id="enquire" aria-labelledby="enq-h">
+    <div class="wrap">
+      <div class="enq-head">
+        <h2 class="enq-word" id="enq-h">{tx.enquiry.heading}</h2>
+        <p class="enq-line">{tx.enquiry.line}</p>
+        <p class="enq-invite">{tx.enquiry.invite}</p>
+        <p class="enq-text">{tx.enquiry.text}</p>
+        <p class="enq-write">{tx.enquiry.writeBefore}<a href={`mailto:${c.email}`}>{c.email}</a>{tx.enquiry.writeAfter}</p>
+      </div>
+      <div class="enq-form">
+        <form name={`enquiry-${lang}`} method="POST" action={S.forms.endpoint} novalidate>
+          <input type="hidden" name="subject" value="Rumah Márton · new enquiry" />
+          <input type="hidden" name="from_name" value="Rumah Márton website" />
+          <input type="hidden" name="language" value={lang} />
+          <input type="hidden" name="source" data-src />
+          <input type="hidden" name="campaign" data-camp />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="interest" value="" />
+          <div class="field"><label class="sr" for="f-email">{tx.enquiry.email}</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder={tx.enquiry.emailPh} required /></div>
+          <div class="field msg-row">
+            <label class="sr" for="f-msg">{tx.enquiry.message}</label>
+            <div class="msg-line"><textarea id="f-msg" name="message" rows="1" placeholder={tx.enquiry.messagePh}></textarea><button class="send" type="submit">{tx.enquiry.send}<span aria-hidden="true"> →</span></button></div>
+          </div>
+          <p class="consent-note">{tx.enquiry.consentBefore}<a href={path(lang, 'privacy')} target="_blank" rel="noopener">{tx.enquiry.consentLink}</a>{tx.enquiry.consentAfter}</p>
+          <p class="form-msg" id="f-state" role="status" aria-live="polite"></p>
+        </form>
+        <div class="form-done" id="f-done" hidden tabindex="-1"><p class="display d3">{tx.enquiry.success}</p></div>
+      </div>
+    </div>
+  </section>
+  <!-- DISCOVER MORE -->
+  <section class="discover" aria-labelledby="discover-h">
+    <div class="wrap discover-grid">
+      <h2 class="label" id="discover-h">{tx.explore.heading}</h2>
+      <ul class="dlinks">
+        <li><a href={S.explore.wyDesign} {...ext} data-track="wy_design_click">{tx.explore.wy}<span aria-hidden="true"> ↗</span></a></li>
+        <li><a href={S.explore.interview} {...ext} data-track="interview_click">{tx.explore.pei}<span aria-hidden="true"> ↗</span></a></li>
+      </ul>
+      <div class="recog">
+        <h3 class="label">{tx.explore.pressTitle}</h3>
+        <ul class="dlinks small">{S.explore.press.map((x: any) => <li><a href={x.url} {...ext} data-track="press_click" data-item={x.key}>{tx.explore.links[x.key]}<span aria-hidden="true"> ↗</span></a></li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOOR PLAN POP-UPS -->
+  {units.filter((u: any) => u.status !== 'sold' && (plans as any)[u.track]).map((u: any) => { const P = (plans as any)[u.track]; return (
+  <dialog class="fp" id={`fp-${u.track}`} aria-labelledby={`fp-${u.track}-h`}>
+    <div class="fp-in">
+      <div class="fp-plan">
+        {P.plans.length > 1 && <div class="fp-tabs" role="tablist">{P.plans.map((p: any, i: number) => <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-tab={i}>{p.tab}</button>)}</div>}
+        {P.plans.map((p: any, i: number) => (
+          <div class="fp-zoom" data-pane={i} hidden={i > 0}><span class="fp-img"><img src={p.image} alt={`${P.name} — ${p.title}`} loading="lazy" decoding="async" /><svg class="fp-n" viewBox="-24 -32 48 56" aria-label="North"><circle r="17" fill="none" stroke="currentColor" stroke-width="1"/><g transform="rotate(30)"><path d="M0 -13 L4.2 6 L0 3 L-4.2 6 Z" fill="currentColor"/><path d="M0 3 L4.2 6 L0 13 L-4.2 6 Z" fill="none" stroke="currentColor" stroke-width=".8"/><text x="0" y="-19.5" text-anchor="middle" transform="rotate(-30 0 -23.5)" font-size="11" fill="currentColor">N</text></g></svg></span></div>
+        ))}
+        <p class="fp-hint">{tx.plan.hint}</p>
+      </div>
+      <div class="fp-info">
+        <p class="fp-status">{tx.plan.available}</p>
+        <h3 id={`fp-${u.track}-h`}>{P.name}</h3>
+        <dl class="fp-facts">{P.facts.map((f: any) => <div><dt>{f[0]}</dt><dd>{f[1]}</dd></div>)}</dl>
+        {P.plans.map((p: any, i: number) => (
+          <div class="fp-sched" data-pane={i} hidden={i > 0}>
+            <p class="fp-title">{p.title}</p>
+            <details><summary>{tx.plan.rooms}</summary>
+              <table>{p.rooms.map((r: any) => <tr><td class="n">{r[0]}</td><td>{r[1]}</td><td class="a">{r[2]} m²</td></tr>)}</table>
+            </details>
+            <table class="fp-tot">{p.totals.map((t: any) => <tr class={t[2]}><td>{t[0].replace('  ', ' ')}{t[3] && <span>{t[3]}</span>}</td><td class="a">{t[1]} m²</td></tr>)}</table>
+            {p.note && <p class="fp-note">{p.note}</p>}
+            <a class="fp-pdf" href={p.pdf} {...ext} data-track="floor_plan_pdf" data-item={p.slug}>{tx.plan.pdf}<span aria-hidden="true"> ↗</span></a>
+          </div>
+        ))}
+        <ul class="fp-links">
+          <li><a class="tlink" href={u.track === 'garden' ? '/downloads/rumah-marton-residence-01-garden.pdf' : '/downloads/rumah-marton-residence-03-penthouse.pdf'} data-track="residence_brochure_click" data-item={u.track} data-gate={`Residence brochure · ${P.name}`} data-gate-kind="res">{tx.plan.brochure}<Fragment set:html={NE} /></a></li>
+          {u.virtualTour && <li><a class="tlink" href={u.virtualTour} {...ext} data-track="virtual_tour_click" data-item={u.track}>{tx.plan.tour}<Fragment set:html={NE} /></a></li>}
+          <li><a class="tlink quiet" href="#enquire" data-enquire={u.interest} data-close-fp data-track="request_details_click" data-item={u.track}>{tx.plan.enquire}<Fragment set:html={RA} /></a></li>
+        </ul>
+      </div>
+      <button class="fp-x" type="button" aria-label={tx.plan.close}>×</button>
+    </div>
+  </dialog>); })}
+
+  <!-- EMAIL BEFORE A DOCUMENT OPENS -->
+  <dialog class="gate" id="gate" aria-labelledby="gate-lead">
+    <form name={`documents-${lang}`} method="POST" action={S.forms.endpoint} novalidate>
+      <input type="hidden" name="subject" value="Rumah Márton · brochure request" />
+      <input type="hidden" name="from_name" value="Rumah Márton website" />
+      <input type="hidden" name="document" />
+      <input type="hidden" name="language" value={lang} />
+      <input type="hidden" name="source" data-src />
+      <input type="hidden" name="campaign" data-camp />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <h2 class="gate-title" id="gate-lead" data-res={tx.gate.resTitle} data-proj={tx.gate.projTitle}>{tx.gate.resTitle}</h2>
+      <p class="gate-text" data-res={tx.gate.resLead} data-proj={tx.gate.projLead}>{tx.gate.resLead}</p>
+      <div class="msg-line"><label class="sr" for="g-email">{tx.gate.ph}</label><input id="g-email" name="email" type="email" autocomplete="email" placeholder={tx.gate.ph} required /></div>
+      <div><button class="btn fill gate-go" type="submit" data-res={tx.gate.resGo} data-proj={tx.gate.projGo}>{tx.gate.resGo}</button></div>
+      <p class="consent-note">{tx.gate.note}<a href={path(lang, 'privacy')} target="_blank" rel="noopener">{tx.gate.noteLink}</a>{tx.gate.noteAfter}</p>
+      <p class="form-msg" id="g-state" role="status" aria-live="polite"></p>
+      <button class="gate-x" type="button" id="gate-x" aria-label={tx.gate.close}>×</button>
+    </form>
+  </dialog>
+</main>
+<Footer lang={lang} />
+<Tracking lang={lang} />
+</Base>

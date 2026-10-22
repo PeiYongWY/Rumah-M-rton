@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import settings from '../content/settings.json';
+import { enabled, path, abs, t, languages } from '../lib/i18n';
+interface Props { lang: string; page?: string; title: string; description: string; solidHeader?: boolean; noindex?: boolean; ld?: object }
+const { lang, page = '', title, description, solidHeader = false, noindex = false, ld } = Astro.props;
+const L = languages.find((l) => l.code === lang)!;
+const tx = t(lang);
+const canonical = abs(path(lang, page));
+const share = abs(settings.images.share);
+const A = settings.analytics;
+---
+<!doctype html>
+<html lang={L.htmlLang}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>{title}</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <meta name="description" content={description}>
+  {noindex && <meta name="robots" content="noindex">}
+  <link rel="canonical" href={canonical}>
+  {!noindex && enabled.map((l) => <link rel="alternate" hreflang={l.htmlLang} href={abs(path(l.code, page))} />)}
+  {!noindex && <link rel="alternate" hreflang="x-default" href={abs(path(settings.defaultLanguage, page))} />}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rumah Márton">
+  <meta property="og:locale" content={L.locale}>
+  {enabled.filter((l) => l.code !== lang).map((l) => <meta property="og:locale:alternate" content={l.locale} />)}
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={share}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F4EFE7">
+  {A.searchConsoleVerification && <meta name="google-site-verification" content={A.searchConsoleVerification} />}
+  <link rel="icon" href="/media/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
+  {ld && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
+  <!-- Consent Mode v2: everything denied until the visitor accepts -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+  </script>
+</head>
+<body class={solidHeader ? 'scrolled solid' : ''}>
+  <a class="skip" href="#main">{tx.nav.skip}</a>
+  <header class="head">
+    <div class="wrap">
+      <a class="brand" href={page ? path(lang) : '#top'} aria-label={tx.nav.home} data-top><span class="word">Rumah Márton</span></a>
+      <nav class="nav" aria-label="Main">
+        <a class="opt" href={`${path(lang)}#residences`}>{tx.nav.residences}</a>
+        {enabled.length > 1 && (
+          <span class="langs" role="group" aria-label={tx.nav.language}>
+            {enabled.map((l) => <a href={path(l.code, page)} hreflang={l.htmlLang} lang={l.htmlLang} aria-current={l.code === lang ? 'page' : undefined}>{l.label}</a>)}
+          </span>
+        )}
+        <a class="enq" href={`${path(lang)}#enquire`} data-enquire="">{tx.nav.enquire}</a>
+      </nav>
+    </div>
+  </header>
+  <slot />
+</body>
+</html>

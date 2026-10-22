@@ -1,0 +1,22 @@
+---
+/* Responsive image from src/assets/images. Pass the file name without extension.
+   Real build: AVIF + WebP at several widths. Preview build (PREVIEW=1): one WebP, for the Claude preview. */
+import { Picture, Image } from 'astro:assets';
+import { image } from '../lib/images';
+interface Props { name: string; alt: string; sizes?: string; eager?: boolean; class?: string; ratio?: string; max?: number }
+const { name, alt, sizes = '100vw', eager = false, class: cls = '', ratio, max = 3000 } = Astro.props;
+const preview = process.env.PREVIEW === '1';
+const src = image(name);
+const widths = [800, 1280, 1672, 2200, 3000].filter((w) => w <= Math.min(src.width, max));
+if (!widths.includes(Math.min(src.width, max)) && src.width <= max) widths.push(src.width);
+if (!widths.length) widths.push(src.width);
+const style = ratio ? `aspect-ratio:${ratio}` : undefined;
+const loading = eager ? 'eager' : 'lazy';
+---
+{preview ? (
+  <Image src={src} alt={alt} width={Math.min(src.width, max, 2400)} format="webp" quality={86}
+    loading={loading} decoding="async" class={cls} style={style} fetchpriority={eager ? 'high' : 'auto'} />
+) : (
+  <Picture src={src} alt={alt} widths={widths} sizes={sizes} formats={['avif', 'webp']} fallbackFormat="jpg"
+    quality={86} loading={loading} decoding="async" class={cls} style={style} fetchpriority={eager ? 'high' : 'auto'} />
+)}

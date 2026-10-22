@@ -1,0 +1,248 @@
+---
+/* Page behaviour: header, film, enquiry form, consent banner and conversion events.
+   Events pushed to dataLayer (and to GA4 / Google Ads / Meta once consent is given):
+   enquiry_submit, private_presentation_request, brochure_click, floor_plan_click, virtual_tour_click,
+   request_details_click, wy_design_click, interview_click, press_click. Links carry data-item (garden / penthouse / brochure …). */
+import settings from '../content/settings.json';
+import { t } from '../lib/i18n';
+interface Props { lang: string }
+const { lang } = Astro.props;
+const tx = t(lang);
+const cfg = {
+  a: settings.analytics,
+  f: settings.forms,
+  email: settings.contact.email,
+  e: { prefill: tx.enquiry.prefill, name: tx.enquiry.errName, mail: tx.enquiry.errEmail, consent: tx.enquiry.errConsent, sending: tx.enquiry.sending, error: tx.enquiry.error },
+  gate: { err: tx.gate.err },
+  film: { play: tx.film.play, pause: tx.film.pause, on: tx.film.soundOn, off: tx.film.soundOff },
+};
+---
+<div class="cookie" id="cookie" hidden role="region" aria-label={tx.cookies.settings}>
+  <p>{tx.cookies.text}</p>
+  <div class="row"><button class="btn dark" type="button" id="ck-yes">{tx.cookies.accept}</button><button class="tlink" type="button" id="ck-no">{tx.cookies.decline}</button></div>
+</div>
+
+<script is:inline define:vars={{ cfg }}>
+(function () {
+  var A = cfg.a, KEY = 'rm-consent', loaded = false;
+  /* ---------- consent and tags ---------- */
+  function hasTags() { return !!(A.ga4 || A.googleAds || A.metaPixel); }
+  function load() {
+    if (loaded) return; loaded = true;
+    gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+    var id = A.ga4 || A.googleAds;
+    if (id) {
+      var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.appendChild(s);
+      gtag('js', new Date());
+      if (A.ga4) gtag('config', A.ga4);
+      if (A.googleAds) gtag('config', A.googleAds);
+    }
+    if (A.metaPixel) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', A.metaPixel); fbq('track', 'PageView');
+    }
+  }
+  var bar = document.getElementById('cookie');
+  function choose(v) { try { localStorage.setItem(KEY, v); } catch (e) {} bar.hidden = true; if (v === 'yes') load(); else if (loaded) location.reload(); }
+  document.getElementById('ck-yes').onclick = function () { choose('yes'); };
+  document.getElementById('ck-no').onclick = function () { choose('no'); };
+  var saved = ''; try { saved = localStorage.getItem(KEY) || ''; } catch (e) {}
+  if (hasTags()) { if (saved === 'yes') load(); else if (!saved) bar.hidden = false; }
+  document.querySelectorAll('[data-cookie-settings]').forEach(function (b) {
+    if (!hasTags()) { b.hidden = true; var p = b.previousSibling; if (p && p.nodeType === 3) p.textContent = p.textContent.replace(/ · $/, ' '); return; }
+    b.addEventListener('click', function () { bar.hidden = false; document.getElementById('ck-yes').focus(); });
+  });
+
+  /* forms are delivered by Web3Forms to the email registered with the access key */
+  var send = function (fd, keep) {
+    fd.set('access_key', cfg.f.web3formsKey);
+    var o = {}; fd.forEach(function (v, k) { if (k !== 'botcheck' || v) o[k] = v; });
+    return fetch(cfg.f.endpoint, { method: 'POST', keepalive: !!keep, headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(o) })
+      .then(function (r) { return r.json(); }).then(function (j) { if (!j.success) throw new Error(j.message || 'failed'); });
+  };
+  var okMail = function (s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); };
+  /* ---------- events ---------- */
+  window.rmTrack = function (name, data) {
+    data = data || {};
+    dataLayer.push(Object.assign({ event: name }, data));
+    if (!loaded) return;
+    try { if (A.ga4) gtag('event', name, data); } catch (e) {}
+    try {
+      if (A.googleAds && name === 'enquiry_submit' && A.googleAdsLeadLabel) gtag('event', 'conversion', { send_to: A.googleAds + '/' + A.googleAdsLeadLabel });
+      if (A.googleAds && name === 'private_presentation_request' && A.googleAdsViewingLabel) gtag('event', 'conversion', { send_to: A.googleAds + '/' + A.googleAdsViewingLabel });
+    } catch (e) {}
+    try { if (window.fbq) { if (name === 'enquiry_submit') fbq('track', 'Lead'); else if (name === 'private_presentation_request') fbq('track', 'Schedule'); else fbq('trackCustom', name, data); } } catch (e) {}
+  };
+  document.querySelectorAll('[data-track]').forEach(function (a) {
+    a.addEventListener('click', function () { rmTrack(a.dataset.track, { item: a.dataset.item || '', link_url: a.href }); });
+  });
+
+  /* ---------- ad source, sent with the enquiry ---------- */
+  var q = new URLSearchParams(location.search), src = '', camp = '';
+  try {
+    src = q.get('utm_source') || (q.get('gclid') ? 'google-ads' : q.get('fbclid') ? 'meta-ads' : '') || sessionStorage.getItem('rm-src') ||
+      (document.referrer && new URL(document.referrer).host !== location.host ? new URL(document.referrer).host : '') || 'direct';
+    camp = q.get('utm_campaign') || sessionStorage.getItem('rm-camp') || '';
+    sessionStorage.setItem('rm-src', src); sessionStorage.setItem('rm-camp', camp);
+  } catch (e) {}
+  document.querySelectorAll('[data-src]').forEach(function (i) { i.value = src; });
+  document.querySelectorAll('[data-camp]').forEach(function (i) { i.value = camp; });
+
+  /* ---------- the name in the header returns to the top ---------- */
+  document.querySelectorAll('[data-top]').forEach(function (a) {
+    if (a.getAttribute('href') !== '#top') return;
+    a.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
+  });
+
+  /* ---------- header turns solid after the hero ---------- */
+  var hero = document.querySelector('.hero');
+  if (hero && !document.body.classList.contains('solid')) {
+    new IntersectionObserver(function (es) { document.body.classList.toggle('scrolled', !es[0].isIntersecting); }, { rootMargin: '-72px 0px 0px 0px' }).observe(hero);
+  }
+
+  /* ---------- film: plays muted while in view, pauses out of view; discreet pause; still with reduced motion ---------- */
+  var v = document.getElementById('film');
+  if (v) {
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var btn = document.getElementById('film-play'), lbl = btn.querySelector('[data-lbl]'), userPaused = false;
+    var want = matchMedia('(max-width: 700px)').matches ? v.dataset.srcSmall : v.dataset.srcLarge, loading = null;
+    function ensureSrc() {
+      if (v.getAttribute('src') || loading) return;
+      // the preview's media store does not serve byte ranges, which Safari needs; there the film is fetched whole first
+      if (v.hasAttribute('data-blob')) { loading = fetch(want).then(function (r) { return r.blob(); }).then(function (b) { v.src = URL.createObjectURL(b); if (inView && !reduce && !userPaused) v.play().catch(function () {}); }).catch(function () {}); return; }
+      v.src = want;
+    }
+    var inView = false;
+    ensureSrc();
+    function sync() { var on = !v.paused; lbl.textContent = on ? cfg.film.pause : cfg.film.play; btn.setAttribute('aria-pressed', on ? 'false' : 'true'); btn.classList.toggle('is-paused', !on); }
+    v.addEventListener('play', sync); v.addEventListener('pause', sync); sync();
+    btn.addEventListener('click', function () { ensureSrc(); if (v.paused) { userPaused = false; v.play().catch(function () {}); } else { userPaused = true; v.pause(); } });
+    new IntersectionObserver(function (es) {
+      inView = es[0].isIntersecting;
+      if (!inView) { v.pause(); return; }
+      if (!reduce && !userPaused) { ensureSrc(); v.play().catch(function () {}); }
+    }, { threshold: 0.4 }).observe(v);
+    document.addEventListener('visibilitychange', function () { if (document.hidden) v.pause(); });
+    var snd = document.getElementById('film-sound');
+    if (snd) {
+      var sl = snd.querySelector('[data-lbl]');
+      snd.addEventListener('click', function () {
+        v.muted = !v.muted;
+        sl.textContent = v.muted ? cfg.film.on : cfg.film.off; snd.setAttribute('aria-pressed', v.muted ? 'false' : 'true'); snd.classList.toggle('is-on', !v.muted);
+        if (v.paused) { userPaused = false; ensureSrc(); v.play().catch(function () {}); }
+      });
+    }
+  }
+
+  /* ---------- documents: an email first, asked once, then every document opens ---------- */
+  var gate = document.getElementById('gate');
+  if (gate) {
+    var gf = gate.querySelector('form'), gs = document.getElementById('g-state'), EK = 'rm-email', pending = null;
+    var known = function () { try { return localStorage.getItem(EK) || ''; } catch (e) { return ''; } };
+    var record = function (doc, email) {
+      var fd = new FormData(gf); fd.set('document', doc); fd.set('email', email);
+      try { send(fd, true).catch(function () {}); } catch (e) {}
+    };
+    var openDoc = function (a) {
+      var href = a.getAttribute('href');
+      if (href.indexOf('/_blob/') === 0) {   // Claude preview only: the file is handed over to save
+        fetch(href).then(function (r) { return r.blob(); }).then(function (b) {
+          return window.claude && claude.use('downloads').then(function (d) { if (d) return d.save({ filename: (a.dataset.gate || 'document').replace(/[^\w]+/g, '-') + '.pdf', data: b }); });
+        }).catch(function () {});
+        return;
+      }
+      window.open(href, '_blank', 'noopener');
+    };
+    document.querySelectorAll('[data-gate]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var em = known();
+        if (em) { record(a.dataset.gate, em); openDoc(a); return; }
+        pending = a; gs.textContent = ''; gs.className = 'form-msg';
+        var kind = a.dataset.gateKind || 'res';
+        gate.querySelectorAll('[data-res]').forEach(function (el) { el.textContent = el.dataset[kind]; });
+        if (gate.showModal) gate.showModal(); else gate.setAttribute('open', '');
+        setTimeout(function () { gf.email.focus(); }, 30);
+      });
+    });
+    gf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var em = gf.email.value.trim();
+      if (!okMail(em)) { gs.className = 'form-msg err'; gs.textContent = cfg.gate.err; gf.email.focus(); return; }
+      try { localStorage.setItem(EK, em); } catch (x) {}
+      if (pending) { record(pending.dataset.gate, em); openDoc(pending); rmTrack('document_lead', { item: pending.dataset.item || '' }); }
+      gate.close ? gate.close() : gate.removeAttribute('open');
+    });
+    document.getElementById('gate-x').addEventListener('click', function () { gate.close ? gate.close() : gate.removeAttribute('open'); });
+    gate.addEventListener('click', function (e) { if (e.target === gate) gate.close(); });
+  }
+
+  /* Claude preview only: stored files are handed over to save instead of opening in a tab */
+  document.querySelectorAll('a[href^="/_blob/"]:not([data-gate]):not([data-plan])').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      fetch(a.getAttribute('href')).then(function (r) { return r.blob(); }).then(function (b) {
+        return window.claude && claude.use('downloads').then(function (d) { if (d) return d.save({ filename: (a.textContent || 'document').trim().replace(/[^\w]+/g, '-') + '.pdf', data: b }); });
+      }).catch(function () {});
+    });
+  });
+
+  /* ---------- floor plan pop-ups: open freely, tabs, tap to zoom ---------- */
+  document.querySelectorAll('[data-plan]').forEach(function (a) {
+    var dlg = document.getElementById('fp-' + a.dataset.plan); if (!dlg) return;
+    a.addEventListener('click', function (e) { e.preventDefault(); dlg.showModal ? dlg.showModal() : dlg.setAttribute('open', ''); });
+  });
+  document.querySelectorAll('dialog.fp').forEach(function (dlg) {
+    var close = function () { dlg.close ? dlg.close() : dlg.removeAttribute('open'); };
+    dlg.querySelector('.fp-x').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    dlg.querySelectorAll('[data-close-fp]').forEach(function (x) { x.addEventListener('click', close); });
+    dlg.querySelectorAll('[data-tab]').forEach(function (t) {
+      t.addEventListener('click', function () {
+        var i = t.dataset.tab;
+        dlg.querySelectorAll('[data-tab]').forEach(function (o) { o.setAttribute('aria-selected', o === t ? 'true' : 'false'); });
+        dlg.querySelectorAll('[data-pane]').forEach(function (p) { p.hidden = p.dataset.pane !== i; });
+      });
+    });
+    dlg.querySelectorAll('.fp-zoom').forEach(function (z) {
+      z.addEventListener('click', function (e) {
+        var r = z.getBoundingClientRect(), fx = (e.clientX - r.left + z.scrollLeft) / z.scrollWidth, fy = (e.clientY - r.top + z.scrollTop) / z.scrollHeight;
+        z.classList.toggle('is-zoomed');
+        if (z.classList.contains('is-zoomed')) { z.scrollLeft = fx * z.scrollWidth - r.width / 2; z.scrollTop = fy * z.scrollHeight - r.height / 2; }
+      });
+    });
+  });
+
+  /* ---------- enquiry ---------- */
+  var form = document.querySelector('form[name^="enquiry"]');
+  if (form) {
+    var state = document.getElementById('f-state'), done = document.getElementById('f-done');
+    var okEmail = function (s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); };
+    function bad(el, msg) { el.setAttribute('aria-invalid', 'true'); state.className = 'form-msg err'; state.textContent = msg; el.focus(); return false; }
+    form.addEventListener('input', function (e) { if (e.target.removeAttribute) e.target.removeAttribute('aria-invalid'); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!okEmail(form.email.value.trim())) return bad(form.email, cfg.e.mail);
+      var btn = form.querySelector('[type=submit]'), label = btn.innerHTML;
+      btn.disabled = true; btn.textContent = cfg.e.sending; state.className = 'form-msg'; state.textContent = '';
+      send(new FormData(form))
+        .then(function () {
+          form.hidden = true; done.hidden = false; done.focus();
+          rmTrack('enquiry_submit', { residence: form.interest.value || 'none' });
+        })
+        .catch(function () {
+          state.className = 'form-msg err'; state.textContent = cfg.e.error + ' ';
+          var a = document.createElement('a'); a.href = 'mailto:' + cfg.email; a.textContent = cfg.email; state.append(a, '.');
+        })
+        .finally(function () { btn.disabled = false; btn.innerHTML = label; });
+    });
+    document.querySelectorAll('[data-enquire]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var n = a.getAttribute('data-enquire');
+        if (n) { form.interest.value = n; var m = form.message; if (!m.value.trim()) m.value = cfg.e.prefill.replace('{r}', n); }
+        setTimeout(function () { form.email.focus({ preventScroll: true }); }, 650);
+      });
+    });
+  }
+})();
+</script>
