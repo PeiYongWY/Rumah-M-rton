@@ -202,7 +202,7 @@ def cover(doc):
 
 def points():
     li = "".join(f'<li><p class="lead">{a}</p>{f"<p class=det>{b}</p>" if b else ""}</li>' for a, b in POINTS)
-    return f'<div class="page pts"><p class="eyebrow">{EYEBROW}</p><h2 style="margin:5mm 0 1.5mm;font-size:26pt">{t("pts_head", "A curated way of living")}</h2><p class="det" style="font-size:9pt;max-width:120mm;margin:0 0 3mm">{t("pts_sub", "Conceived by an award-winning team with a thoughtful approach to design and uncompromising attention to detail.")}</p><ol>{li}</ol></div>'
+    return f'<div class="page pts"><p class="eyebrow">{EYEBROW}</p><h2 style="margin:5mm 0 1.5mm;font-size:26pt">{t("pts_head", "A considered way of living")}</h2><p class="det" style="font-size:9pt;max-width:120mm;margin:0 0 3mm">{t("pts_sub", "Conceived by an award-winning team with a thoughtful approach to design and uncompromising attention to detail.")}</p><ol>{li}</ol></div>'
 
 def mappage(doc):
     return f'''<div class="page map">{B.map_block(234)}<p class="cap">{t("map_cap", "The neighbourhood · approximate travel times")}</p></div>'''

@@ -318,7 +318,7 @@ def render(html, path):
     css = CSS
     if LANG == "zh":   # Chinese: Noto CJK beside the Latin faces
         css = css.replace("'Newsreader',serif", "'Newsreader','Noto Serif CJK SC',serif").replace("'Albert Sans',sans-serif", "'Albert Sans','Noto Sans CJK SC',sans-serif").replace("font-family:Newsreader", "font-family:Newsreader,'Noto Serif CJK SC'")
-        css += "body{line-break:strict;word-break:normal} h1,h2{word-break:keep-all} .text h1{font-size:27pt;line-height:1.25} .eyebrow,.cap,.facts dt,.closing .links a,.inc h3,.spec h4,.cl4 h3,.cl4 .links a{letter-spacing:.1em}"
+        css += "body{line-break:strict;word-break:normal} h1,h2{word-break:keep-all} .cl4 .a p.form{font-size:11pt;margin:1mm 0 4mm} .text h1{font-size:27pt;line-height:1.25} .eyebrow,.cap,.facts dt,.closing .links a,.inc h3,.spec h4,.cl4 h3,.cl4 .links a{letter-spacing:.1em}"
     doc = f'<!doctype html><html><head><meta charset="utf-8"><style>{css}</style></head><body>{html}</body></html>'
     with sync_playwright() as pw:
         b = pw.chromium.launch(); pg = b.new_page(); pg.set_content(doc, wait_until="load"); pg.wait_for_timeout(400)

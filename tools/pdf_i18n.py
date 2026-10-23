@@ -1,7 +1,7 @@
 """Chinese and Hungarian wording for all Rumah Márton PDFs (residence brochures, floor plans, project brochure).
 
 English lives in build.py / brochure.py. Each language below overrides it. Chinese follows the client's own
-Chinese brochure terminology (玛墩山邸, 花园宅邸, 顶层宅邸, 玛顿山, 布达城堡, 盖勒特山 …).
+Chinese brochure terminology (玛顿山邸, 花园宅邸, 顶层宅邸, 玛顿山, 布达城堡, 盖勒特山 …).
 Run:  python3 build_lang.py hu   |   python3 build_lang.py zh
 """
 
@@ -12,8 +12,8 @@ ROOMS = {
         "Master suite": "Fő hálószoba", "Master closet": "Gardrób", "Master bath": "Fő fürdőszoba", "Bedroom 03 / study": "Hálószoba 03 / dolgozószoba"},
  "zh": {"Private lobby": "私人电梯前厅", "Entrance hall": "入户门厅", "Study": "书房", "Foyer": "玄关",
         "Powder room": "客用盥洗室", "Kitchen and dining": "厨房与餐厅", "Living": "起居室", "Corridor": "走廊",
-        "Bedroom 01": "卧室一", "Bedroom 02": "卧室二", "Bathroom": "卫浴", "Entrance foyer": "玄关",
-        "Master suite": "主卧套房", "Master closet": "主卧更衣间", "Master bath": "主卧卫浴", "Bedroom 03 / study": "卧室三 / 书房"},
+        "Bedroom 01": "卧室 01", "Bedroom 02": "卧室 02", "Bathroom": "卫浴", "Entrance foyer": "玄关",
+        "Master suite": "主卧套房", "Master closet": "主卧更衣间", "Master bath": "主卧卫浴", "Bedroom 03 / study": "卧室 03 / 书房"},
 }
 TOTALS = {
  "hu": {"Interior": "Belső alapterület", "Terrace": "Terasz", "Terraces": "Teraszok", "Weighted area": "Súlyozott alapterület",
@@ -81,27 +81,27 @@ T = {
        "Hegyvidék Shopping Centre": "Hegyvidék Bevásárlóközpont", "MOM Park": "MOM Park", "Citadella": "Citadella", "Castle Hill": "Budai Vár",
        "Parliament": "Országház", "Margaret Island": "Margitsziget", "Andrássy út": "Andrássy út", "Villa Bagatelle": "Villa Bagatelle"},
   # project brochure
-  cover_title="Rumah Márton", pts_head="Gondosan megkomponált életforma",
+  cover_title="Rumah Márton", pts_head="Átgondolt életforma",
   pts_sub="Díjnyertes csapat alkotása – átgondolt tervezési szemlélettel és megalkuvás nélküli részletgazdagsággal.",
   spec_title="Műszaki tartalom", get_in_touch="Lépjen kapcsolatba velünk", recognition="Válogatott elismerések",
   online="Vagy írjon nekünk online", meta="Mártonvölgyi út, Budapest XII. · Átadás 2028 III. negyedév",
   doc_title="Rumah Márton · Mártonhegy, Budapest"),
  "zh": dict(
-  eyebrow="玛墩山邸 Rumah Márton<br>布达佩斯 · 玛顿山", areas_note="面积单位为平方米，依据已获批图纸。",
-  be_in_touch="联系我们", l_vr="360° 探索宅邸", l_site="访问玛墩山邸网站", l_wy="探索 WY Design", l_pei="开发者 Pei Yong — 人物专访",
-  addr="玛墩山邸 Rumah Márton<br>布达佩斯第十二区 Mártonvölgyi út", done="计划竣工 — 2028年第三季度",
-  included="每户标配", map_cap="周边环境 · 大致车程", mins="分钟", doc_prefix="玛墩山邸 Rumah Márton",
+  eyebrow="玛顿山邸 Rumah Márton<br>布达佩斯 · 玛顿山", areas_note="面积单位为平方米，依据已获批图纸。",
+  be_in_touch="联系我们", l_vr="360° 探索宅邸", l_site="访问玛顿山邸网站", l_wy="探索 WY Design", l_pei="开发者 Pei Yong — 人物专访",
+  addr="玛顿山邸 Rumah Márton<br>布达佩斯第十二区 Mártonvölgyi út", done="计划竣工 — 2028年第三季度",
+  included="每户标配", map_cap="周边环境 · 大致车程", mins="分钟", doc_prefix="玛顿山邸 Rumah Márton",
   tabs={"penthouse-plan-3-bedrooms": "三房", "penthouse-plan-2-bedrooms": "两房", "penthouse-roof-terrace-plan": "屋顶露台", "garden-residence-plan": "首层"},
   map={"Normafa": "诺尔马法森林公园", "American International School (AISB)": "美国国际学校 AISB",
        "The British International School (BISB)": "英国国际学校 BISB", "Britannica International School": "Britannica 国际学校",
        "Hegyvidék Shopping Centre": "Hegyvidék 购物中心", "MOM Park": "MOM Park 商业中心", "Citadella": "盖勒特山 Citadella", "Castle Hill": "布达城堡",
        "Parliament": "议会大厦", "Margaret Island": "玛格丽特岛", "Andrássy út": "安德拉什大街", "Villa Bagatelle": "Villa Bagatelle 咖啡馆",
-       "Rumah Márton": "玛墩山邸"},
-  cover_title="玛墩山邸", pts_head="臻选生活方式",
+       "Rumah Márton": "玛顿山邸"},
+  cover_title="玛顿山邸", pts_head="匠心考量，从容生活",
   pts_sub="由屡获殊荣的团队以深思的设计理念与对细节的极致追求倾心打造。",
   spec_title="建筑居住配置总览", get_in_touch="联系我们", recognition="媒体报道与奖项",
   online="或在线给我们留言", meta="布达佩斯第十二区 Mártonvölgyi út · 2028年第三季度竣工",
-  doc_title="玛墩山邸 Rumah Márton · 布达佩斯玛顿山"),
+  doc_title="玛顿山邸 Rumah Márton · 布达佩斯玛顿山"),
 }
 
 RES = {
@@ -133,7 +133,7 @@ RES = {
   BESPOKE=("专属室内定制", "我们乐于与您共同打造全套精装与家具配置的专属室内。欢迎与我们联系，探索更多可能。"),
   SMALL_PRINT="图片均为建筑效果图。面积、技术规格、户型方案及竣工日期以最终买卖文件确认为准。",
   LOCATION_SHORT=dict(title="布达佩斯第十二区<br>玛顿山", body=[
-      "玛墩山邸位于布达佩斯第十二区 Hegyvidék——布达佩斯最古老、最尊贵的住宅区之一，以别墅、森林丘陵与恒久优雅著称。",
+      "玛顿山邸位于布达佩斯第十二区 Hegyvidék——布达佩斯最古老、最尊贵的住宅区之一，以别墅、森林丘陵与恒久优雅著称。",
       "宅邸隐于玛顿山坡地上一条宁静的单行道，远眺布达城堡与盖勒特山。诺尔马法森林与布达山近在咫尺，国际学校、Villa Bagatelle、MOM Park 与市中心均交通便利。"])),
 }
 
@@ -190,15 +190,15 @@ BRO = {
   LINK_LABELS=["A Kertes rezidencia 360°-ban", "A Penthouse 360°-ban", "A Rumah Márton weboldala", "A WY Design bemutatkozása", "Ismerje meg Pei Yongot — interjú"],
   PRESS_LABELS=["Designboom", "EDGE International Award", "BIG SEE Architecture Award", "BIG SEE Interior Award"]),
  "zh": dict(
-  EYEBROW="玛墩山邸 Rumah Márton<br>布达佩斯 · 玛顿山",
+  EYEBROW="玛顿山邸 Rumah Márton<br>布达佩斯 · 玛顿山",
   COVER_lede="一座匠造的静奢之居，<br>隐于布达佩斯玛顿山间。",
   COVER_facts=[("地址", "布达佩斯第十二区 Mártonvölgyi út"), ("项目进展", "已获建筑许可<br>公寓分户产权已登记"), ("竣工", "计划于 2028 年第三季度")],
   INTRO=dict(title="细腻空间。<br>触感材质。<br>永恒气韵。", body=[
-   "玛墩山邸坐落于布达佩斯最令人向往的玛顿山宁静坡地，呈现三户稀有宅邸，每一户皆以独立私邸为构想。一层一户，电梯直达，阳光自然洒入；宽阔露台延伸至私家花园或屋顶景观，并预留户外厨房。别墅般的私密，与度假居所般的雅致氛围在此交织，开启公寓生活的全新方式。",
+   "坐落于布达佩斯令人向往的玛顿山静谧坡地，玛顿山邸仅呈献三席珍稀宅邸，一层一户，独享私密空间。电梯直达专属前厅，自然光线洒入室内，宽阔露台延伸至私家花园或屋顶观景空间，亦可按需设置户外厨房。在这里，每一处细节皆经过悉心考量，成就一种从容而讲究的生活方式。别墅般的空间、品质与私密，与精品公寓的舒适便利，在此相得益彰。",
    "这超越寻常开发项目，是一场由获奖团队深思熟虑打造的匠心居住体验。优雅的空间布局与和谐比例引领建筑，让每一次转角皆化作风景。细纹橡木、柔和石灰石与天然矿物灰泥，搭配定制花槽阳台及极简边框三层玻璃幕墙，尽显对静谧恒久奢华的承诺。",
-   "作为 WY Rumah 系列第二章，玛墩山邸传承“用心 · 触感 · 永恒”的理念，以真挚之心设计与建造。"]),
+   "作为 WY Rumah 系列第二章，玛顿山邸传承“用心 · 触感 · 永恒”的理念，以真挚之心设计与建造。"]),
   LOCATION=dict(title="隐栖于布达佩斯的尊贵秘境", body=[
-   "玛墩山邸静卧于布达佩斯第十二区的核心地带。这片被称为 Hegyvidék 的历史社区，是布达佩斯最古老、最尊贵的住宅区之一，以贵族别墅、森林丘陵与恒久优雅著称，自然之美、文化底蕴与现代便利在此交汇。",
+   "玛顿山邸静卧于布达佩斯第十二区的核心地带。这片被称为 Hegyvidék 的历史社区，是布达佩斯最古老、最尊贵的住宅区之一，以贵族别墅、森林丘陵与恒久优雅著称，自然之美、文化底蕴与现代便利在此交汇。",
    "宅邸隐于宁静的单行道，稳踞于约 1,100 平方米的缓坡之上，低调而私密。居高远望，布达城堡与盖勒特山（自由女神像）尽收眼底。环绕四周的绿意带来清新空气与宁静，更带来一份隐逸之感——而城市中心仅数分钟之遥。",
    "周边汇聚国际与本地知名学府、Villa Bagatelle 等雅致咖啡馆，以及 Hegyvidék 购物中心、MOM Park 与 Mammut 等购物地标。从诺尔马法森林到布达山，文化地标与自然休闲胜境近在咫尺。"]),
   POINTS=[("一层一户，独享私密。", "两套公寓与一套顶层别墅式宅邸，臻稀呈现。"),
@@ -208,7 +208,7 @@ BRO = {
           ("低调洗练，静谧奢华。", ""),
           ("思衡雅致 · 精筑呈献。", "WY Design 限量系 · 第二作。")],
   TEAM=dict(title="屡获殊荣的团队", body=[
-   "玛墩山邸由屡获殊荣的团队共同呈现——WY Design、Kettőpera 建筑事务所与值得信赖的本地建造团队，凝聚于对品质、深思设计与持久工艺的共同承诺。",
+   "玛顿山邸由屡获殊荣的团队共同呈现——WY Design、Kettőpera 建筑事务所与值得信赖的本地建造团队，凝聚于对品质、深思设计与持久工艺的共同承诺。",
    "团队以对空间如何被居住、被制造与被建造的敏锐理解为指引，在每一个决策中注入关怀：从建筑意图到材料甄选，再到施工精度。每一处细节皆以长远视野考量——让建筑随岁月优雅沉淀，为日常生活带来舒适，并承载一份静谧的恒久。",
    "这是一处不以张扬定义、而以内涵立身的居所——品质既体现在建造之中，也延续于岁月流转之间。"]),
   SPEC=[
@@ -234,9 +234,9 @@ BRO = {
      ("", "厨电与电气", ["厨房及洗衣设备均预留合理布局的给排水与电气接口", "Gaggenau、Miele 或同等级品牌的精选电器套装，可作为选配方案", "标配 Berker 或同等级品牌的精致电气插座；Loxone 智能控制可通过选配智能家居套装实现"]),
      ("", "室内照明", ["结合直接与间接光源的照明设计，融入嵌入式 LED 灯带", "预留高级照明控制系统，可实现场景设置与亮度调节", "预留台灯与落地灯接入选配照明控制系统的条件"])]]],
   SPEC_NOTE="最终技术规格将根据双方协商一致的购买价格及所选升级配置进行调整，并以各户专属技术规格文件为准。",
-  CLOSING=["我们期待带您亲临现场，并为您详细介绍玛墩山邸的设计与规划。",
+  CLOSING=["我们期待带您亲临现场，并为您详细介绍玛顿山邸的设计与规划。",
            "如您愿意，我们的获奖建筑团队也可与您共同探讨，如何根据您的需求定制饰面、配置与空间（以设计及施工可行性为前提）。",
            "详细技术规格、价格、付款阶段与条款，以及工程进度计划，均可应要求提供。"],
-  LINK_LABELS=["360° 探索花园宅邸", "360° 探索顶层宅邸", "访问玛墩山邸网站", "探索 WY Design", "开发者 Pei Yong — 人物专访"],
+  LINK_LABELS=["360° 探索花园宅邸", "360° 探索顶层宅邸", "访问玛顿山邸网站", "探索 WY Design", "开发者 Pei Yong — 人物专访"],
   PRESS_LABELS=["Designboom 媒体报道", "EDGE 国际奖", "BIG SEE 建筑奖", "BIG SEE 室内设计奖"]),
 }
