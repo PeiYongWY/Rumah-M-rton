@@ -37,7 +37,7 @@ const ld = {
   ],
 };
 ---
-<Base lang={lang} title={tx.meta.title} description={tx.meta.description} ld={ld}>
+<Base lang={lang} title={tx.meta.title} description={tx.meta.description} ogTitle={(tx.meta as any).ogTitle} ogDescription={(tx.meta as any).ogDescription} ld={ld}>
 <main id="main">
 
   <!-- HERO -->

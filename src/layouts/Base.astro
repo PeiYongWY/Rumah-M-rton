@@ -2,8 +2,8 @@
 import '../styles/global.css';
 import settings from '../content/settings.json';
 import { enabled, path, abs, t, languages } from '../lib/i18n';
-interface Props { lang: string; page?: string; title: string; description: string; solidHeader?: boolean; noindex?: boolean; ld?: object }
-const { lang, page = '', title, description, solidHeader = false, noindex = false, ld } = Astro.props;
+interface Props { lang: string; page?: string; title: string; description: string; ogTitle?: string; ogDescription?: string; solidHeader?: boolean; noindex?: boolean; ld?: object }
+const { lang, page = '', title, description, ogTitle = title, ogDescription = description, solidHeader = false, noindex = false, ld } = Astro.props;
 const L = languages.find((l) => l.code === lang)!;
 const tx = t(lang);
 const canonical = abs(path(lang, page));
@@ -26,13 +26,16 @@ const A = settings.analytics;
   <meta property="og:site_name" content="Rumah Márton">
   <meta property="og:locale" content={L.locale}>
   {enabled.filter((l) => l.code !== lang).map((l) => <meta property="og:locale:alternate" content={l.locale} />)}
-  <meta property="og:title" content={title}>
-  <meta property="og:description" content={description}>
+  <meta property="og:title" content={ogTitle}>
+  <meta property="og:description" content={ogDescription}>
   <meta property="og:url" content={canonical}>
   <meta property="og:image" content={share}>
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={ogTitle}>
+  <meta name="twitter:description" content={ogDescription}>
+  <meta name="twitter:image" content={share}>
   <meta name="theme-color" content="#F4EFE7">
   {A.searchConsoleVerification && <meta name="google-site-verification" content={A.searchConsoleVerification} />}
   <link rel="icon" href="/media/favicon.svg" type="image/svg+xml">
