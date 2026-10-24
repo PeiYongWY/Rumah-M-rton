@@ -15,7 +15,7 @@ Static site built with Astro. One page per language at /en/, /hu/ and /zh/, plus
 ## Switching on a language
 1. Translate `src/content/i18n/hu.json` (every value; keep the keys).
 2. In `settings.json` set `"enabled": true` for `hu`.
-3. In `netlify.toml`, uncomment the Hungarian browser redirect.
+3. To send Hungarian browsers to /hu/, ask Claude to add a language redirect (Cloudflare: a Redirect Rule or a small Pages function).
 4. Rebuild. The language switch, hreflang links and sitemap update themselves.
 
 ## Commands
