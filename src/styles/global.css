@@ -727,3 +727,16 @@ html[lang^="zh"] .label { letter-spacing: .14em }
 
 /* keep arrows as plain text glyphs, never emoji (iOS) */
 body { font-variant-emoji: text }
+
+/* floor plan pop-up: the plan always fits its frame, at any window size (scaled to whichever runs out first, width or height) */
+@media (min-width: 861px) {
+  .fp-zoom { container-type: size }
+  .fp-zoom:not(.is-zoomed) .fp-img { width: min(calc(100cqw - 40px), calc((100cqh - 6px) * var(--r))); max-width: none; max-height: none; margin-right: 40px; flex: none }
+  .fp-zoom:not(.is-zoomed) .fp-img img { width: 100%; height: auto; max-width: none; max-height: none }
+}
+@media (max-width: 860px) {
+  .fp-plan { min-height: auto }
+  .fp-zoom { flex: none; min-height: 0 }
+  .fp-zoom:not(.is-zoomed) .fp-img { width: min(calc(100vw - 54px), calc(62svh * var(--r))); max-width: none; margin-right: 30px; flex: none }
+  .fp-zoom:not(.is-zoomed) .fp-img img { width: 100%; height: auto; max-width: none; max-height: none }
+}
