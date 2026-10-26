@@ -67,6 +67,7 @@
     "interior": "室内",
     "outdoor": "户外",
     "bedrooms": "卧室",
+    "price": "售价",
     "available": "在售",
     "sold": "已售",
     "floorPlan": "查看平面图",
@@ -82,7 +83,8 @@
         "interior": "约 86 m²",
         "outdoor": "61 m² 露台 · 232 m² 专属前花园",
         "bedrooms": "2 间卧室及 1 间书房",
-        "interest": "Garden Residence"
+        "interest": "Garden Residence",
+        "price": "3.99亿福林"
       },
       {
         "name": "二层宅邸",
@@ -96,7 +98,8 @@
         "interior": "约 100 m²",
         "outdoor": "21 m² 阳台 · 39 m² 屋顶露台",
         "bedrooms": "3",
-        "interest": "Penthouse"
+        "interest": "Penthouse",
+        "price": "5.59亿福林"
       }
     ],
     "brochure": "下载宅邸手册"

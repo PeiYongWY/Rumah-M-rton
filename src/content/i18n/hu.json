@@ -67,6 +67,7 @@
     "interior": "Belső alapterület",
     "outdoor": "Kültér",
     "bedrooms": "Hálószobák",
+    "price": "Irányár",
     "available": "Eladó",
     "sold": "Elkelt",
     "floorPlan": "Alaprajz megtekintése",
@@ -82,7 +83,8 @@
         "interior": "86 m²",
         "outdoor": "61 m² terasz · 232 m² privát kert",
         "bedrooms": "2 + dolgozószoba",
-        "interest": "Garden Residence"
+        "interest": "Garden Residence",
+        "price": "399M HUF"
       },
       {
         "name": "Első emeleti rezidencia",
@@ -96,7 +98,8 @@
         "interior": "100 m²",
         "outdoor": "21 m² erkély · 39 m² tetőterasz",
         "bedrooms": "3",
-        "interest": "Penthouse"
+        "interest": "Penthouse",
+        "price": "559M HUF"
       }
     ],
     "brochure": "Lakásismertető letöltése"

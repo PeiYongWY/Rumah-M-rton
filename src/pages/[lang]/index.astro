@@ -124,6 +124,7 @@ const ld = {
                 <div><dt>{tx.residences.interior}</dt><dd>{u.interior}</dd></div>
                 <div><dt>{tx.residences.outdoor}</dt><dd>{u.outdoor}</dd></div>
                 <div><dt>{tx.residences.bedrooms}</dt><dd>{u.bedrooms}</dd></div>
+                {u.price && <div><dt>{(tx.residences as any).price}</dt><dd>{u.price}</dd></div>}
               </dl>
               <ul class="unit-links">
                 {u.floorPlan && <li><a class="tlink" href={fresh((plans as any)[u.track]?.plans[0].pdf || u.floorPlan)} data-plan={u.track} data-track="floor_plan_click" data-item={u.track}>{tx.residences.floorPlan}<Fragment set:html={RA} /></a></li>}
@@ -220,7 +221,7 @@ const ld = {
       <div class="fp-info">
         <p class="fp-status">{tx.plan.available}</p>
         <h3 id={`fp-${u.track}-h`}>{P.name}</h3>
-        <dl class="fp-facts">{P.facts.map((f: any) => <div><dt>{f[0]}</dt><dd>{f[1]}</dd></div>)}</dl>
+        <dl class="fp-facts">{P.facts.map((f: any) => <div><dt>{f[0]}</dt><dd>{f[1]}</dd></div>)}{u.price && <div><dt>{(tx.residences as any).price}</dt><dd>{u.price}</dd></div>}</dl>
         {P.plans.map((p: any, i: number) => (
           <div class="fp-sched" data-pane={i} hidden={i > 0}>
             <p class="fp-title">{p.title}</p>

@@ -69,6 +69,7 @@
     "interior": "Interior",
     "outdoor": "Outdoor",
     "bedrooms": "Bedrooms",
+    "price": "Asking price",
     "available": "Available",
     "sold": "Sold",
     "floorPlan": "View floor plan",
@@ -84,7 +85,8 @@
         "interior": "86 m²",
         "outdoor": "61 m² terraces · 232 m² private garden",
         "bedrooms": "2 and a study",
-        "interest": "Garden Residence"
+        "interest": "Garden Residence",
+        "price": "399M HUF"
       },
       {
         "name": "First Floor Residence",
@@ -98,7 +100,8 @@
         "interior": "100 m²",
         "outdoor": "21 m² balconies · 39 m² rooftop terrace",
         "bedrooms": "3",
-        "interest": "Penthouse"
+        "interest": "Penthouse",
+        "price": "559M HUF"
       }
     ],
     "brochure": "Download residence brochure"
