@@ -271,7 +271,7 @@ def closing_page(u):
     return f'''<div class="page closing"><div class="c">
   <p class="eyebrow">{t("eyebrow", EYE)}</p><h2 style="font-size:28pt;margin:6mm 0 6mm">{t("be_in_touch", "Be in touch")}</h2>{left}
   <ul class="links">
-    <li><a href="{u["vr"]}">{t("l_vr", "Explore the Residence in 360°")} <span>↗</span></a></li>
+    {f'<li><a href="{u["vr"]}">{t("l_vr", "Explore the Residence in 360°")} <span>↗</span></a></li>' if u.get("vr") else ""}
     <li><a href="{SITE}{'' if LANG == 'en' else LANG + '/'}">{t("l_site", "Visit the Rumah Márton website")} <span>↗</span></a></li>
     <li><a href="https://www.wy-design.com/">{t("l_wy", "Explore WY Design")} <span>↗</span></a></li>
     <li><a href="https://roadster.hu/peiyee-yong-interju">{t("l_pei", "Meet Pei Yong — Read the Interview")} <span>↗</span></a></li>
