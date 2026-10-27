@@ -5,7 +5,7 @@ Output: out/Rumah-Marton-Garden-Residence.pdf, out/Rumah-Marton-Penthouse-Reside
         out/plans/*.pdf (standalone floor plans) and out/plans/*.png (for the website).
 Needs: Python 3, playwright (chromium), pymupdf, pillow, qrcode; the brochure PDF and fonts below.
 """
-import base64, io, json, pathlib
+import base64, io, json, pathlib, re
 import fitz
 from PIL import Image, ImageFilter
 from playwright.sync_api import sync_playwright
@@ -223,7 +223,7 @@ def plan_image(pno):
         for l in b.get("lines", []):
             for s in l["spans"]:
                 tx = s["text"].strip()
-                if len(tx) <= 3 and s["bbox"][0] > rect[0] and s["bbox"][2] < rect[2] and s["bbox"][1] > rect[1] and s["bbox"][3] < rect[3]:
+                if re.fullmatch(r"\d{2}|[TB]\d", tx) and s["bbox"][0] > rect[0] and s["bbox"][2] < rect[2] and s["bbox"][1] > rect[1] and s["bbox"][3] < rect[3]:
                     cx, cy = (s["bbox"][0] + s["bbox"][2]) / 2, (s["bbox"][1] + s["bbox"][3]) / 2
                     dx, dy = NUDGE.get((pno, tx), (0, 0))   # small hand adjustments so a number clears the drawing
                     labels.append((tx, (cx - rect[0]) / (rect[2] - rect[0]) + dx, (cy - rect[1]) / (rect[3] - rect[1]) + dy))
