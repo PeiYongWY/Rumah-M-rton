@@ -24,6 +24,7 @@ const S = settings; const c = S.contact;
 const preview = process.env.PREVIEW === '1';
 const filmPoster = await getImage({ src: image(S.media.filmPoster), width: 1600, format: 'webp', quality: 86 });
 const NE = '<span aria-hidden="true"> ↗︎</span>';
+const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const RA = '<span aria-hidden="true"> →</span>';
 const ARROW = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" stroke-width="1"/></svg>';
 const units = S.residences.map((r, i) => ({ ...r, ...tx.residences.items[i] }));
@@ -71,7 +72,7 @@ const ld = {
       <h2 class="sr" id="points-h">{tx.points.heading}</h2>
       <ol class="stmts rise">
         {tx.points.items.map((p: any) => (
-          <li><p class="lead">{p.lead}</p>{p.detail && <p class="detail">{p.detail}</p>}</li>
+          <li><p class="lead">{p.lead}</p>{p.detail && <p class="detail"><Fragment set:html={esc(p.detail).replace('Kettőpera', '<a href="https://www.kettopera.net/" target="_blank" rel="noopener" data-track="kettopera_click">Kettőpera</a>')} /></p>}</li>
         ))}
       </ol>
     </div>
