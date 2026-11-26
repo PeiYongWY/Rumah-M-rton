@@ -7,6 +7,9 @@ import settings from '../../content/settings.json';
 import plansEn from '../../content/plans.json';
 import plansHu from '../../content/plans-hu.json';
 import plansZh from '../../content/plans-zh.json';
+import nbEn from '../../content/neighbourhood/en.json';
+import nbHu from '../../content/neighbourhood/hu.json';
+import nbZh from '../../content/neighbourhood/zh.json';
 import { getImage } from 'astro:assets';
 import sharp from 'sharp';
 import { image } from '../../lib/images';
@@ -14,6 +17,7 @@ import { enabled, t, path, abs } from '../../lib/i18n';
 export function getStaticPaths() { return enabled.map((l) => ({ params: { lang: l.code } })); }
 const { lang } = Astro.params as { lang: string };
 const tx = t(lang);
+const nb: any = ({ en: nbEn, hu: nbHu, zh: nbZh } as any)[lang] || nbEn;
 const plans: any = ({ en: plansEn, hu: plansHu, zh: plansZh } as any)[lang] || plansEn;
 const BUILD = Date.now().toString(36);   // changes every publish, so browsers never show an old plan image or PDF
 const fresh = (f: string) => `${f}?v=${BUILD}`;
@@ -159,6 +163,20 @@ const ld = {
         </div>
         <figure class="pair-c rise"><Img name={S.images.living} alt={tx.living.alt} sizes="(max-width: 700px) 100vw, 72vw" /></figure>
       </div>
+    </div>
+  </section>
+
+  <!-- NEIGHBOURHOOD: same map and places as page 6 of the Buyer's Guide (the guide links here) -->
+  <section class="nb" id="neighbourhood" aria-labelledby="nb-h">
+    <div class="wrap">
+      <div class="nb-head rise">
+        <p class="label">{nb.label}</p>
+        <h2 class="nb-title" id="nb-h">{nb.h2}</h2>
+        <p class="nb-intro">{nb.intro}</p>
+      </div>
+      <figure class="nb-map rise" set:html={nb.svg} />
+      <div class="nb-keys" set:html={nb.keys} />
+      <p class="nb-note">{nb.note}</p>
     </div>
   </section>
 
