@@ -175,9 +175,16 @@ const ld = {
         <p class="nb-intro">{nb.intro}</p>
       </div>
       <figure class="nb-map rise"><div class="nb-canvas"><Fragment set:html={nb.svg} /><div class="nb-tip" aria-hidden="true"><span class="nb-tip-n"></span><span class="nb-tip-d"></span></div></div></figure>
-      <p class="nb-hint">{nb.hint}</p>
-      <div class="nb-keys" set:html={nb.keys} />
-      <p class="nb-note">{nb.note}</p>
+      <div class="nb-bar">
+        <div class="nb-groups" role="group">
+          {nb.groups.map(([c, t]: string[]) => <button type="button" class="nb-filter" data-cat={c} aria-pressed="false" aria-controls="nb-panel"><span class={`dot ${c}`} aria-hidden="true"></span>{t}</button>)}
+        </div>
+        <button type="button" class="nb-all" aria-expanded="false" aria-controls="nb-panel" data-all={nb.all} data-hide={nb.hide}>{nb.all}<span aria-hidden="true" class="nb-all-arr"> ↓</span></button>
+      </div>
+      <div class="nb-panel" id="nb-panel"><div class="nb-panel-in">
+        <div class="nb-keys" set:html={nb.keys} />
+        <p class="nb-note">{nb.note}</p>
+      </div></div>
     </div>
     <script is:inline>
     (function () {
@@ -208,7 +215,7 @@ const ld = {
         p.addEventListener('mouseleave', function () { show(null); });
         p.addEventListener('focus', function () { show(n, true); });
         p.addEventListener('blur', function () { show(null); });
-        p.addEventListener('click', function (e) { e.stopPropagation(); show(n, true); });
+        p.addEventListener('click', function (e) { e.stopPropagation(); if (nb.dataset.filter !== 'all' && nb.dataset.filter !== p.dataset.cat) setMode(p.dataset.cat); show(n, true); });
       });
       document.addEventListener('click', function (e) { if (!e.target.closest || !e.target.closest('.pin')) { if (!e.target.closest('.k')) show(null); } });
       Object.keys(rows).forEach(function (n) {
@@ -216,14 +223,20 @@ const ld = {
         r.addEventListener('mouseenter', function () { show(n, false); });
         r.addEventListener('mouseleave', function () { show(null); });
       });
+      var allBtn = nb.querySelector('.nb-all');
+      function setMode(m) {
+        if (m) nb.dataset.filter = m; else delete nb.dataset.filter;
+        nb.querySelectorAll('.nb-filter').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.cat === m)); });
+        var all = m === 'all';
+        allBtn.setAttribute('aria-expanded', String(!!m));
+        allBtn.firstChild.textContent = all ? allBtn.dataset.hide : allBtn.dataset.all;
+        allBtn.querySelector('.nb-all-arr').textContent = all ? ' ↑' : ' ↓';
+        show(null);
+      }
       nb.querySelectorAll('.nb-filter').forEach(function (b) {
-        b.addEventListener('click', function () {
-          var on = nb.dataset.filter === b.dataset.cat;
-          if (on) delete nb.dataset.filter; else nb.dataset.filter = b.dataset.cat;
-          nb.querySelectorAll('.nb-filter').forEach(function (x) { x.setAttribute('aria-pressed', String(!on && x === b)); });
-          show(null);
-        });
+        b.addEventListener('click', function () { setMode(nb.dataset.filter === b.dataset.cat ? null : b.dataset.cat); });
       });
+      allBtn.addEventListener('click', function () { setMode(nb.dataset.filter === 'all' ? null : 'all'); });
     })();
     </script>
   </section>
