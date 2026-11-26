@@ -24,7 +24,7 @@ const MAIL = {
       { link, label: 'Open your Buyer’s Guide', before: 'Open your guide here:' },
       'If you have any follow-up questions, or would like to talk about the next steps, simply reply to this email. We would be more than happy to talk with you further!',
     ],
-    sign: ['Warm regards,', 'Pei', 'Architect & Developer', 'rumahmarton.com'],
+    sign: ['Warmest regards,', 'Pei', 'Architect & Developer', 'rumahmarton.com'],
   }),
   hu: (name, link) => ({
     subject: 'Az Ön Rumah Márton vásárlói útmutatója',
