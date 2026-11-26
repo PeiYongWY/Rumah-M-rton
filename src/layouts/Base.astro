@@ -50,6 +50,13 @@ const A = settings.analytics;
     function gtag(){ dataLayer.push(arguments); }
     gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
   </script>
+  <!-- Arriving with #section (e.g. from the Buyer's Guide): land on it again once images above have loaded -->
+  <script is:inline>
+    if (location.hash.length > 1) addEventListener('load', function () {
+      var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (el) setTimeout(function () { el.scrollIntoView({ behavior: 'instant', block: 'start' }); }, 120);
+    });
+  </script>
 </head>
 <body class={solidHeader ? 'scrolled solid' : ''}>
   <a class="skip" href="#main">{tx.nav.skip}</a>
