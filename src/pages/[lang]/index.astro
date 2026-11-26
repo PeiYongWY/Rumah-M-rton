@@ -162,6 +162,39 @@ const ld = {
     </div>
   </section>
 
+  <!-- BUYER'S GUIDE: emailed to the visitor, in the language they choose -->
+  <section class="guide" id="buyers-guide" aria-labelledby="guide-h">
+    <div class="wrap">
+      <div class="guide-head rise">
+        <h2 class="label" id="guide-h">{tx.guide.label}</h2>
+        <p class="guide-invite">{tx.guide.invite}</p>
+        <div class="guide-text">{tx.guide.body.map((p: string) => <p>{p}</p>)}</div>
+      </div>
+      <div class="guide-form">
+        <form name={`guide-${lang}`} method="POST" action="/api/guide" novalidate>
+          <input type="hidden" name="subject" value="Rumah Márton · Buyer’s Guide request" />
+          <input type="hidden" name="from_name" value="Rumah Márton website" />
+          <input type="hidden" name="source" data-src />
+          <input type="hidden" name="campaign" data-camp />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="field"><label for="g2-name">{tx.guide.name}</label><input id="g2-name" name="name" type="text" autocomplete="name" /></div>
+          <div class="field"><label for="g2-email">{tx.guide.email}</label><input id="g2-email" name="email" type="email" autocomplete="email" required /></div>
+          <fieldset class="lang-pick">
+            <legend>{tx.guide.langLabel}</legend>
+            {[['en', 'English'], ['hu', 'Magyar'], ['zh', '中文']].map(([v, l]) => <label><input type="radio" name="guide_language" value={v} checked={v === lang} /> <span lang={v === 'zh' ? 'zh-Hans' : v}>{l}</span></label>)}
+          </fieldset>
+          <div><button class="btn fill" type="submit">{tx.guide.send}<span aria-hidden="true"> →</span></button></div>
+          <p class="consent-note">{tx.guide.consentBefore}<a href={path(lang, 'privacy')} target="_blank" rel="noopener">{tx.guide.consentLink}</a>{tx.guide.consentAfter}</p>
+          <p class="form-msg" id="g2-state" role="status" aria-live="polite"></p>
+        </form>
+        <div class="form-done" id="g2-done" hidden tabindex="-1">
+          <p class="display d3" data-msg={tx.guide.success}></p>
+          <p class="guide-help">{tx.guide.success2} <a href={`mailto:${c.email}`}>{c.email}</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ENQUIRY -->
   <section class="enquiry" id="enquire" aria-labelledby="enq-h">
     <div class="wrap">

@@ -14,6 +14,7 @@ const cfg = {
   email: settings.contact.email,
   e: { prefill: tx.enquiry.prefill, name: tx.enquiry.errName, mail: tx.enquiry.errEmail, consent: tx.enquiry.errConsent, sending: tx.enquiry.sending, error: tx.enquiry.error },
   gate: { err: tx.gate.err },
+  guide: { mail: tx.guide.errEmail, sending: tx.guide.sending, error: tx.guide.error },
   film: { play: tx.film.play, pause: tx.film.pause, on: tx.film.soundOn, off: tx.film.soundOff },
 };
 ---
@@ -220,6 +221,35 @@ const cfg = {
       });
     });
   });
+
+  /* ---------- buyer's guide: our function emails the guide; Web3Forms tells Pei ---------- */
+  var gform = document.querySelector('form[name^="guide"]');
+  if (gform) {
+    var gst = document.getElementById('g2-state'), gdone = document.getElementById('g2-done');
+    gform.addEventListener('input', function (e) { if (e.target.removeAttribute) e.target.removeAttribute('aria-invalid'); });
+    gform.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var em = gform.email.value.trim();
+      if (!okMail(em)) { gform.email.setAttribute('aria-invalid', 'true'); gst.className = 'form-msg err'; gst.textContent = cfg.guide.mail; gform.email.focus(); return; }
+      var lg = (gform.querySelector('input[name=guide_language]:checked') || {}).value || 'en';
+      var btn = gform.querySelector('[type=submit]'), label = btn.innerHTML;
+      btn.disabled = true; btn.textContent = cfg.guide.sending; gst.className = 'form-msg'; gst.textContent = '';
+      fetch('/api/guide', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: gform.querySelector('[name=name]').value.trim(), email: em, lang: lg, botcheck: gform.botcheck.checked ? '1' : '' }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) throw new Error(j.error || 'failed'); }); })
+        .then(function () {
+          var fd = new FormData(gform); fd.set('guide_language', lg); try { send(fd, true).catch(function () {}); } catch (x) {}
+          var m = gdone.querySelector('[data-msg]'); m.textContent = m.dataset.msg.replace('{email}', em);
+          gform.hidden = true; gdone.hidden = false; gdone.focus();
+          rmTrack('guide_request', { language: lg });
+        })
+        .catch(function () {
+          gst.className = 'form-msg err'; gst.textContent = cfg.guide.error + ' ';
+          var a = document.createElement('a'); a.href = 'mailto:' + cfg.email; a.textContent = cfg.email; gst.append(a, '.');
+        })
+        .finally(function () { btn.disabled = false; btn.innerHTML = label; });
+    });
+  }
 
   /* ---------- enquiry ---------- */
   var form = document.querySelector('form[name^="enquiry"]');
