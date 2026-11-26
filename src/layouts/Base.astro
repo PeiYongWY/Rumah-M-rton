@@ -52,9 +52,19 @@ const A = settings.analytics;
   </script>
   <!-- Arriving with #section (e.g. from the Buyer's Guide): land on it again once images above have loaded -->
   <script is:inline>
-    if (location.hash.length > 1) addEventListener('load', function () {
+    // Images above load lazily and change the page height, so keep the section in place
+    // until the layout settles (about 2.5 s), unless the visitor starts scrolling themselves.
+    if (location.hash.length > 1) addEventListener('DOMContentLoaded', function () {
       var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      if (el) [120, 700].forEach(function (t) { setTimeout(function () { el.scrollIntoView({ behavior: 'instant', block: 'start' }); }, t); });
+      if (!el) return;
+      var stop = false, n = 0, off = function () { stop = true; };
+      ['wheel', 'touchstart', 'keydown'].forEach(function (e) { addEventListener(e, off, { once: true, passive: true }); });
+      (function pin() {
+        if (stop || n++ > 25) return;
+        var y = el.getBoundingClientRect().top - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
+        if (Math.abs(y) > 2) el.scrollIntoView({ behavior: 'instant', block: 'start' });
+        setTimeout(pin, 100);
+      })();
     });
   </script>
 </head>
