@@ -174,10 +174,58 @@ const ld = {
         <h2 class="nb-title" id="nb-h">{nb.h2}</h2>
         <p class="nb-intro">{nb.intro}</p>
       </div>
-      <figure class="nb-map rise" set:html={nb.svg} />
+      <figure class="nb-map rise"><div class="nb-canvas"><Fragment set:html={nb.svg} /><div class="nb-tip" aria-hidden="true"><span class="nb-tip-n"></span><span class="nb-tip-d"></span></div></div></figure>
+      <p class="nb-hint">{nb.hint}</p>
       <div class="nb-keys" set:html={nb.keys} />
       <p class="nb-note">{nb.note}</p>
     </div>
+    <script is:inline>
+    (function () {
+      var nb = document.getElementById('neighbourhood'); if (!nb) return;
+      var canvas = nb.querySelector('.nb-canvas'), tip = nb.querySelector('.nb-tip');
+      var tn = tip.querySelector('.nb-tip-n'), td = tip.querySelector('.nb-tip-d');
+      var rows = {}; nb.querySelectorAll('.k[data-place]').forEach(function (r) { rows[r.dataset.place] = r; });
+      var pins = {}; nb.querySelectorAll('.pin').forEach(function (p) { pins[p.dataset.place] = p; });
+      function show(n, withTip) {
+        nb.querySelectorAll('.is-on').forEach(function (e) { e.classList.remove('is-on'); });
+        if (!n) { tip.classList.remove('show'); return; }
+        if (rows[n]) rows[n].classList.add('is-on');
+        var p = pins[n]; if (!p) { tip.classList.remove('show'); return; }
+        p.classList.add('is-on');
+        if (!withTip) { tip.classList.remove('show'); return; }
+        var r = rows[n]; tn.textContent = r.querySelector('.kn').firstChild.textContent; td.textContent = r.querySelector('.kd').textContent;
+        var b = p.querySelector('.pin-dot').getBoundingClientRect(), c = canvas.getBoundingClientRect();
+        var x = b.left + b.width / 2 - c.left, y = b.top - c.top;
+        tip.style.left = x + 'px'; tip.style.top = y + 'px';
+        tip.classList.toggle('below', y < 70);
+        if (tip.classList.contains('below')) tip.style.top = (b.bottom - c.top) + 'px';
+        tip.classList.toggle('left', x > c.width - 150); tip.classList.toggle('right', x < 150);
+        tip.classList.add('show');
+      }
+      Object.keys(pins).forEach(function (n) {
+        var p = pins[n];
+        p.addEventListener('mouseenter', function () { show(n, true); });
+        p.addEventListener('mouseleave', function () { show(null); });
+        p.addEventListener('focus', function () { show(n, true); });
+        p.addEventListener('blur', function () { show(null); });
+        p.addEventListener('click', function (e) { e.stopPropagation(); show(n, true); });
+      });
+      document.addEventListener('click', function (e) { if (!e.target.closest || !e.target.closest('.pin')) { if (!e.target.closest('.k')) show(null); } });
+      Object.keys(rows).forEach(function (n) {
+        var r = rows[n];
+        r.addEventListener('mouseenter', function () { show(n, false); });
+        r.addEventListener('mouseleave', function () { show(null); });
+      });
+      nb.querySelectorAll('.nb-filter').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var on = nb.dataset.filter === b.dataset.cat;
+          if (on) delete nb.dataset.filter; else nb.dataset.filter = b.dataset.cat;
+          nb.querySelectorAll('.nb-filter').forEach(function (x) { x.setAttribute('aria-pressed', String(!on && x === b)); });
+          show(null);
+        });
+      });
+    })();
+    </script>
   </section>
 
   <!-- BUYER'S GUIDE: emailed to the visitor, in the language they choose -->

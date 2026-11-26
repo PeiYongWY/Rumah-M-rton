@@ -782,3 +782,36 @@ body { font-variant-emoji: text }
 .nb-keys .dot.local { background: #1E1C19 } .nb-keys .dot.intl { background: #6B5846 } .nb-keys .dot.daily { background: #A39684 }
 .nb-note { margin: 18px 0 0; font-size: 13px; color: var(--taupe); max-width: 60em }
 @media (max-width: 860px) { .nb-keys { grid-template-columns: minmax(0, 1fr) } }
+
+/* Neighbourhood: interaction (hover a place, filter by group) */
+.nb-canvas { position: relative; min-width: 640px }
+.nb-map { overflow-x: auto; overflow-y: visible; padding-top: 0 }
+.nb-map-svg { min-width: 0 }
+.nb .pin { cursor: pointer; outline: none; transition: opacity .45s var(--ease) }
+.nb .pin-dot { transition: transform .35s var(--ease) }
+.nb .pin.is-on .pin-dot, .nb .pin:focus-visible .pin-dot { transform: scale(1.45) }
+.nb .pin:focus-visible circle[r="2.1"] { stroke: #1E1C19; stroke-width: .35 }
+.nb .k { transition: opacity .45s var(--ease) }
+.nb-keys .kn { color: var(--ink); text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .45s var(--ease) }
+.nb-keys .kgo { color: var(--taupe); opacity: 0; transition: opacity .3s var(--ease); font-size: .85em }
+.nb-keys .k.is-on .kn, .nb-keys .kn:hover, .nb-keys .kn:focus-visible { background-size: 100% 1px }
+.nb-keys .k.is-on .kgo, .nb-keys .kn:hover .kgo, .nb-keys .kn:focus-visible .kgo { opacity: 1 }
+.nb-keys .dot { transition: transform .35s var(--ease) }
+.nb-keys .k.is-on .dot { transform: scale(1.18) }
+@media (hover: none) { .nb-keys .kgo { opacity: .7 } }
+.nb-filter { appearance: none; background: none; border: 0; padding: 0 0 6px; margin: 0 0 4px; cursor: pointer; font: inherit; color: var(--taupe); font-size: 11.5px; letter-spacing: .24em; text-transform: uppercase; border-bottom: 1px solid transparent; transition: color .3s var(--ease), border-color .3s var(--ease) }
+.nb-filter:hover { color: var(--ink) }
+.nb-filter[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink) }
+.nb[data-filter] .pin { opacity: .12 }
+.nb[data-filter="local"] .pin[data-cat="local"], .nb[data-filter="intl"] .pin[data-cat="intl"], .nb[data-filter="daily"] .pin[data-cat="daily"] { opacity: 1 }
+.nb[data-filter] .nb-col { opacity: .32; transition: opacity .45s var(--ease) }
+.nb[data-filter="local"] .nb-col[data-cat="local"], .nb[data-filter="intl"] .nb-col[data-cat="intl"], .nb[data-filter="daily"] .nb-col[data-cat="daily"] { opacity: 1 }
+.nb-col { transition: opacity .45s var(--ease) }
+.nb-hint { margin: 14px 0 0; font-size: 13px; color: var(--taupe); font-family: var(--display); font-style: italic; font-size: 15px }
+.nb-tip { position: absolute; left: 0; top: 0; transform: translate(-50%, calc(-100% - 14px)); pointer-events: none; opacity: 0; transition: opacity .25s var(--ease); background: var(--paper); padding: 10px 14px 11px; box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 8%, transparent), 0 10px 30px -12px color-mix(in srgb, var(--ink) 30%, transparent); white-space: nowrap; z-index: 2 }
+.nb-tip.below { transform: translate(-50%, 14px) }
+.nb-tip.left { transform: translate(calc(-100% + 24px), calc(-100% - 14px)) } .nb-tip.left.below { transform: translate(calc(-100% + 24px), 14px) }
+.nb-tip.right { transform: translate(-24px, calc(-100% - 14px)) } .nb-tip.right.below { transform: translate(-24px, 14px) }
+.nb-tip.show { opacity: 1 }
+.nb-tip-n { display: block; font-family: var(--display); font-size: 17px; font-weight: 300; line-height: 1.25; color: var(--ink) }
+.nb-tip-d { display: block; margin-top: 2px; font-size: 12.5px; letter-spacing: .02em; color: var(--earth) }
