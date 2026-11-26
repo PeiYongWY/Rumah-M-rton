@@ -62,8 +62,8 @@ function render(m) {
   const serif = m.zh ? SERIF_ZH : SERIF, sans = m.zh ? SANS_ZH : SANS;
   const ls = m.zh ? '.12em' : '.28em';
   const [greet, ...rest] = m.lines;
-  const para = (t) => `<p style="margin:0 0 18px;font-family:${sans};font-size:16px;line-height:1.75;font-weight:300;color:#2A2723">${esc(t)}</p>`;
-  const body = rest.map((l) => typeof l === 'string' ? para(l) :
+  const para = (t, mb = 18) => `<p style="margin:0 0 ${mb}px;font-family:${sans};font-size:16px;line-height:1.75;font-weight:300;color:#2A2723">${esc(t)}</p>`;
+  const body = rest.map((l, i) => typeof l === 'string' ? para(l, typeof rest[i + 1] === 'object' ? 4 : 18) :
     para(l.before) + `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 34px"><tr><td style="background:#1E1C19">`
     + `<a href="${esc(l.link)}" style="display:inline-block;padding:16px 30px;font-family:${sans};font-size:12px;font-weight:400;letter-spacing:${m.zh ? '.2em' : '.18em'};text-transform:uppercase;color:#FAF7F1;text-decoration:none">${esc(l.label)}&nbsp;&nbsp;&rarr;</a>`
     + `</td></tr></table>`).join('');
@@ -83,11 +83,11 @@ function render(m) {
     // paper panel
     + `<tr><td style="background:#FAF7F1;padding:46px 44px 44px">`
     + `<p style="margin:0 0 22px;font-family:${sans};font-size:11px;font-weight:400;letter-spacing:${ls};text-transform:uppercase;color:#8C7F70">${esc(m.eyebrow)}</p>`
-    + `<p style="margin:0 0 26px;font-family:${serif};font-size:26px;line-height:1.3;font-weight:300;color:#1E1C19">${esc(greet)}</p>`
+    + `<p style="margin:0 0 22px;font-family:${serif};font-size:21px;line-height:1.3;font-weight:300;color:#1E1C19">${esc(greet)}</p>`
     + body
     + `<table role="presentation" width="48" cellpadding="0" cellspacing="0" border="0" style="margin:34px 0 26px"><tr><td style="border-top:1px solid #CFC5B6;font-size:0;line-height:0">&nbsp;</td></tr></table>`
     + `<p style="margin:0 0 6px;font-family:${sans};font-size:15px;font-weight:300;color:#2A2723">${esc(bye)}</p>`
-    + `<p style="margin:0 0 4px;font-family:${serif};font-size:24px;font-style:${m.zh ? 'normal' : 'italic'};font-weight:300;color:#1E1C19">${esc(who)}</p>`
+    + `<p style="margin:0 0 4px;font-family:${serif};font-size:19px;font-style:${m.zh ? 'normal' : 'italic'};font-weight:300;color:#1E1C19">${esc(who)}</p>`
     + `<p style="margin:0;font-family:${sans};font-size:12px;font-weight:400;letter-spacing:${m.zh ? '.1em' : '.08em'};color:#8C7F70">${esc(role)}</p>`
     + `</td></tr>`
     // footer
