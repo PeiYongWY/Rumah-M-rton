@@ -58,6 +58,7 @@ const A = settings.analytics;
       <a class="brand" href={page ? path(lang) : '#top'} aria-label={tx.nav.home} data-top><span class="word">Rumah Márton</span></a>
       <nav class="nav" aria-label="Main">
         <a class="opt" href={`${path(lang)}#residences`}>{tx.nav.residences}</a>
+        <a class="opt" href={`${path(lang)}#buyers-guide`}>{tx.nav.guide}</a>
         {enabled.length > 1 && (
           <span class="langs" role="group" aria-label={tx.nav.language}>
             {enabled.map((l) => <a href={path(l.code, page)} hreflang={l.htmlLang} lang={l.htmlLang} aria-current={l.code === lang ? 'page' : undefined}>{l.label}</a>)}

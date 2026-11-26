@@ -13,7 +13,8 @@
     "residences": "Residences",
     "enquire": "Enquire",
     "language": "Language",
-    "home": "Rumah Márton, home"
+    "home": "Rumah Márton, home",
+    "guide": "Buyer’s Guide"
   },
   "hero": {
     "title": "Rumah Márton",
@@ -28,8 +29,9 @@
       "Timeless presence."
     ],
     "body": [
-      "Tucked into the tranquil hills of Mártonhegy, one of Budapest's most sought-after residential enclaves, Rumah Márton presents a rare opportunity to own a newly built home in this coveted neighbourhood.",
-      "An exclusive collection of just three residences, each conceived with the privacy, quality and character of a private villa. With one residence per floor, sun-filled interiors and expansive terraces opening onto private gardens or panoramic rooftop views, each with provision for an outdoor kitchen, every home combines the space, quality and privacy of a private villa with the ease of apartment living."
+      "Rumah means home in Malay — a word close to my heart. Nestled in the tranquil, leafy hills of Mártonhegy, one of Budapest’s most sought-after residential neighbourhoods, we hope to create thoughtfully designed homes that offer warmth, comfort and enduring quality.",
+      "Rumah Márton is an exclusive collection of just three residences, each conceived with the privacy, quality and character of a private villa. With one residence per floor, sun-filled interiors, generous terraces, private gardens or panoramic rooftop views, and provision for outdoor kitchens, each home combines the spaciousness of a villa with the ease of apartment living.",
+      "Each space has been sincerely considered, from its layout to the way it is lived in, balancing beauty with the needs of daily life."
     ]
   },
   "points": {
@@ -106,6 +108,26 @@
     ],
     "brochure": "Download residence brochure"
   },
+  "guide": {
+    "label": "Buyer’s Guide",
+    "invite": "Your guide to buying and owning a thoughtfully designed home at Rumah Márton, Budapest.",
+    "body": [
+      "Buying a home abroad naturally raises a few questions. We hope this short guide helps you understand who can buy property in Hungary, how the purchase process works, what costs to expect and how your purchase is protected. It also offers a glimpse into life on Mártonhegy.",
+      "Simply leave your details below, and we will send you the guide in your preferred language."
+    ],
+    "name": "Name",
+    "email": "Email",
+    "langLabel": "Guide language",
+    "send": "Send me the guide",
+    "sending": "Sending…",
+    "consentBefore": "We will use your details only to send you the guide and to reply to you. See our ",
+    "consentLink": "privacy policy",
+    "consentAfter": ".",
+    "success": "Thank you. Your guide is on its way to {email}.",
+    "success2": "If it hasn’t arrived within a few minutes, please check your spam folder or write to us at",
+    "errEmail": "Please check your email address.",
+    "error": "The guide could not be sent just now. Please try again, or write to us directly at"
+  },
   "enquiry": {
     "heading": "Rumah Márton",
     "name": "Name",
@@ -162,7 +184,7 @@
       },
       {
         "h": "What we collect, and why",
-        "p": "When you send an enquiry we receive your email address, your message, the residence you asked about if any, and how you found the site (for example the name of an advert). When you request a brochure we receive your email address and which brochure you opened. We use these details only to reply to you personally and to follow up on your interest in Rumah Márton. We do not add you to a mailing list or send automated marketing emails. The legal basis is your request and our legitimate interest in answering it."
+        "p": "When you send an enquiry we receive your email address, your message, the residence you asked about if any, and how you found the site (for example the name of an advert). When you request a brochure we receive your email address and which brochure you opened. When you request the Buyer’s Guide we receive your name, email address and chosen language, and email you a link to the guide. We use these details only to reply to you personally and to follow up on your interest in Rumah Márton. We do not add you to a mailing list or send automated marketing emails. The legal basis is your request and our legitimate interest in answering it."
       },
       {
         "h": "Cookies and measurement",
@@ -170,7 +192,7 @@
       },
       {
         "h": "Where your details are kept",
-        "p": "The website is hosted by Cloudflare. Enquiries and brochure requests are delivered to our email by the form service Web3Forms. We do not sell your details, and we share them only with those directly involved in the sale of Rumah Márton. We keep them while the residences are for sale and for up to two years afterwards."
+        "p": "The website is hosted by Cloudflare. Enquiries and brochure requests are delivered to our email by the form service Web3Forms, and the Buyer’s Guide is emailed to you through the email service Resend. We do not sell your details, and we share them only with those directly involved in the sale of Rumah Márton. We keep them while the residences are for sale and for up to two years afterwards."
       },
       {
         "h": "Your rights",

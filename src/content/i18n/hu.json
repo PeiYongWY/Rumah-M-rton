@@ -11,7 +11,8 @@
     "residences": "Lakások",
     "enquire": "Érdeklődés",
     "language": "Nyelv",
-    "home": "Rumah Márton, kezdőlap"
+    "home": "Rumah Márton, kezdőlap",
+    "guide": "Vásárlói útmutató"
   },
   "hero": {
     "title": "Rumah Márton",
@@ -26,8 +27,9 @@
       "Időtlen jelenlét."
     ],
     "body": [
-      "A Mártonhegy csendes dombjai között, Budapest egyik legkeresettebb lakókörnyékén a Rumah Márton ritka lehetőséget kínál: új építésű otthont ebben a különleges környezetben.",
-      "Mindössze három rezidenciából álló, exkluzív kollekció – mindegyik egy magánvilla intimitásával, minőségével és karakterével. Szintenként egy lakás, napfényes belső terek és tágas teraszok, amelyek privát kertre vagy panorámás tetőteraszra nyílnak, mindegyik kültéri konyha kiépítésének lehetőségével: minden otthon egy villa terét, minőségét és nyugalmát ötvözi a lakás kényelmével."
+      "A Rumah maláj nyelven otthont jelent – egy szó, amely különösen közel áll a szívemhez. A Mártonhegy csendes, zöldellő dombjai között, Budapest egyik legkeresettebb lakókörnyékén olyan átgondoltan megtervezett otthonokat szeretnénk létrehozni, amelyek melegséget, kényelmet és időtálló minőséget kínálnak.",
+      "A Rumah Márton mindössze három exkluzív rezidenciából áll, szintenként egy lakással. Közvetlenül a saját előtérbe érkező lift, napfényes belső terek, tágas teraszok, privát kertek vagy panorámás tetőteraszok, valamint kültéri konyha kialakításának lehetősége teszik különlegessé az otthonokat.",
+      "A térszervezéstől a legapróbb részletekig minden gondos tervezés eredménye, szem előtt tartva az esztétikát és a mindennapi élet igényeit. Minden otthon egy magánvilla tágasságát, minőségét és intimitását ötvözi a lakás kényelmével."
     ]
   },
   "points": {
@@ -104,6 +106,26 @@
     ],
     "brochure": "Lakásismertető letöltése"
   },
+  "guide": {
+    "label": "Vásárlói útmutató",
+    "invite": "Útmutató egy gondosan megtervezett otthon megvásárlásához és birtoklásához a Rumah Mártonban, Budapesten.",
+    "body": [
+      "A külföldi ingatlanvásárlás során természetesen számos kérdés merülhet fel. Reméljük, hogy rövid útmutatónk segít eligazodni abban, hogy ki vásárolhat ingatlant Magyarországon, hogyan zajlik a vásárlás, milyen költségekkel érdemes számolni, és milyen biztosítékok védik a vásárlót. Emellett betekintést nyújt a mártonhegyi életbe is.",
+      "Kérjük, adja meg elérhetőségét, és elküldjük Önnek az útmutatót az Ön által választott nyelven."
+    ],
+    "name": "Név",
+    "email": "E-mail",
+    "langLabel": "Az útmutató nyelve",
+    "send": "Kérem az útmutatót",
+    "sending": "Küldés…",
+    "consentBefore": "Adatait kizárólag az útmutató elküldésére és a válaszadásra használjuk. Részletek: ",
+    "consentLink": "adatvédelmi tájékoztató",
+    "consentAfter": ".",
+    "success": "Köszönjük! Az útmutatót elküldtük a(z) {email} címre.",
+    "success2": "Ha néhány percen belül nem érkezik meg, kérjük, nézze meg a levélszemét mappát, vagy írjon nekünk:",
+    "errEmail": "Kérjük, ellenőrizze az e-mail-címét.",
+    "error": "Az útmutatót most nem sikerült elküldeni. Kérjük, próbálja újra, vagy írjon nekünk közvetlenül:"
+  },
   "enquiry": {
     "heading": "Rumah Márton",
     "name": "Név",
@@ -160,7 +182,7 @@
       },
       {
         "h": "Milyen adatokat gyűjtünk, és miért",
-        "p": "Érdeklődés küldésekor megkapjuk az e-mail-címét, üzenetét, az esetlegesen megjelölt lakást, valamint azt, hogyan talált ránk (például egy hirdetés nevét). Ismertető kérésekor az e-mail-címét és a megnyitott ismertetőt kapjuk meg. Ezeket az adatokat kizárólag arra használjuk, hogy személyesen válaszoljunk, és felvegyük Önnel a kapcsolatot a Rumah Márton iránti érdeklődése kapcsán. Nem iratjuk fel levelezőlistára, és nem küldünk automatikus marketingleveleket. Az adatkezelés jogalapja az Ön kérése és a megválaszolásához fűződő jogos érdekünk."
+        "p": "Érdeklődés küldésekor megkapjuk az e-mail-címét, üzenetét, az esetlegesen megjelölt lakást, valamint azt, hogyan talált ránk (például egy hirdetés nevét). Ismertető kérésekor az e-mail-címét és a megnyitott ismertetőt kapjuk meg. A vásárlói útmutató kérésekor megkapjuk nevét, e-mail-címét és a választott nyelvet, és e-mailben elküldjük Önnek az útmutató hivatkozását. Ezeket az adatokat kizárólag arra használjuk, hogy személyesen válaszoljunk, és felvegyük Önnel a kapcsolatot a Rumah Márton iránti érdeklődése kapcsán. Nem iratjuk fel levelezőlistára, és nem küldünk automatikus marketingleveleket. Az adatkezelés jogalapja az Ön kérése és a megválaszolásához fűződő jogos érdekünk."
       },
       {
         "h": "Sütik és mérés",
@@ -168,7 +190,7 @@
       },
       {
         "h": "Hol tároljuk az adatokat",
-        "p": "A weboldal tárhelyszolgáltatója a Cloudflare. Az érdeklődéseket és ismertetőkéréseket a Web3Forms űrlapszolgáltatás továbbítja e-mail-címünkre. Adatait nem értékesítjük, és csak a Rumah Márton értékesítésében közvetlenül érintettekkel osztjuk meg. Az adatokat a lakások értékesítésének idejére és azt követően legfeljebb két évig őrizzük meg."
+        "p": "A weboldal tárhelyszolgáltatója a Cloudflare. Az érdeklődéseket és ismertetőkéréseket a Web3Forms űrlapszolgáltatás továbbítja e-mail-címünkre; a vásárlói útmutatót a Resend e-mail-szolgáltatáson keresztül küldjük el Önnek. Adatait nem értékesítjük, és csak a Rumah Márton értékesítésében közvetlenül érintettekkel osztjuk meg. Az adatokat a lakások értékesítésének idejére és azt követően legfeljebb két évig őrizzük meg."
       },
       {
         "h": "Az Ön jogai",
