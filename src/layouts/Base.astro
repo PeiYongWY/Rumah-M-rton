@@ -54,7 +54,7 @@ const A = settings.analytics;
   <script is:inline>
     if (location.hash.length > 1) addEventListener('load', function () {
       var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      if (el) setTimeout(function () { el.scrollIntoView({ behavior: 'instant', block: 'start' }); }, 120);
+      if (el) [120, 700].forEach(function (t) { setTimeout(function () { el.scrollIntoView({ behavior: 'instant', block: 'start' }); }, t); });
     });
   </script>
 </head>
