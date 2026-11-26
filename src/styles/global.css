@@ -836,3 +836,4 @@ body { font-variant-emoji: text }
 .nb[data-filter]:not([data-filter="all"]) .nb-colh { display: none }
 .nb-panel .nb-keys { margin-top: 8px }
 .nb-panel .nb-note { margin-bottom: 4px }
+.nb-bar { transition: border-color .4s var(--ease) } .nb[data-filter]:not([data-filter="all"]) .nb-bar { border-bottom-color: transparent }
