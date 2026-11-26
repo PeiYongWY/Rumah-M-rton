@@ -7,6 +7,9 @@ import settings from '../../content/settings.json';
 import plansEn from '../../content/plans.json';
 import plansHu from '../../content/plans-hu.json';
 import plansZh from '../../content/plans-zh.json';
+import nbEn from '../../content/neighbourhood/en.json';
+import nbHu from '../../content/neighbourhood/hu.json';
+import nbZh from '../../content/neighbourhood/zh.json';
 import { getImage } from 'astro:assets';
 import sharp from 'sharp';
 import { image } from '../../lib/images';
@@ -14,6 +17,7 @@ import { enabled, t, path, abs } from '../../lib/i18n';
 export function getStaticPaths() { return enabled.map((l) => ({ params: { lang: l.code } })); }
 const { lang } = Astro.params as { lang: string };
 const tx = t(lang);
+const nb: any = ({ en: nbEn, hu: nbHu, zh: nbZh } as any)[lang] || nbEn;
 const plans: any = ({ en: plansEn, hu: plansHu, zh: plansZh } as any)[lang] || plansEn;
 const BUILD = Date.now().toString(36);   // changes every publish, so browsers never show an old plan image or PDF
 const fresh = (f: string) => `${f}?v=${BUILD}`;
@@ -160,6 +164,81 @@ const ld = {
         <figure class="pair-c rise"><Img name={S.images.living} alt={tx.living.alt} sizes="(max-width: 700px) 100vw, 72vw" /></figure>
       </div>
     </div>
+  </section>
+
+  <!-- NEIGHBOURHOOD: same map and places as page 6 of the Buyer's Guide (the guide links here) -->
+  <section class="nb" id="neighbourhood" aria-labelledby="nb-h">
+    <div class="wrap">
+      <div class="nb-head rise">
+        <p class="label">{nb.label}</p>
+        <h2 class="nb-title" id="nb-h">{nb.h2}</h2>
+        <p class="nb-intro">{nb.intro}</p>
+      </div>
+      <figure class="nb-map rise"><div class="nb-canvas"><Fragment set:html={nb.svg} /><div class="nb-tip" aria-hidden="true"><span class="nb-tip-n"></span><span class="nb-tip-d"></span></div></div></figure>
+      <div class="nb-bar">
+        <div class="nb-groups" role="group">
+          {nb.groups.map(([c, t]: string[]) => <button type="button" class="nb-filter" data-cat={c} aria-pressed="false" aria-controls="nb-panel"><span class={`dot ${c}`} aria-hidden="true"></span>{t}</button>)}
+        </div>
+        <button type="button" class="nb-all" aria-expanded="false" aria-controls="nb-panel" data-all={nb.all} data-hide={nb.hide}>{nb.all}<span aria-hidden="true" class="nb-all-arr"> ↓</span></button>
+      </div>
+      <div class="nb-panel" id="nb-panel"><div class="nb-panel-in">
+        <p class="nb-lead">{nb.lead}</p>
+        <div class="nb-keys" set:html={nb.keys} />
+      </div></div>
+    </div>
+    <script is:inline>
+    (function () {
+      var nb = document.getElementById('neighbourhood'); if (!nb) return;
+      var canvas = nb.querySelector('.nb-canvas'), tip = nb.querySelector('.nb-tip');
+      var tn = tip.querySelector('.nb-tip-n'), td = tip.querySelector('.nb-tip-d');
+      var rows = {}; nb.querySelectorAll('.k[data-place]').forEach(function (r) { rows[r.dataset.place] = r; });
+      var pins = {}; nb.querySelectorAll('.pin').forEach(function (p) { pins[p.dataset.place] = p; });
+      function show(n, withTip) {
+        nb.querySelectorAll('.is-on').forEach(function (e) { e.classList.remove('is-on'); });
+        if (!n) { tip.classList.remove('show'); return; }
+        if (rows[n]) rows[n].classList.add('is-on');
+        var p = pins[n]; if (!p) { tip.classList.remove('show'); return; }
+        p.classList.add('is-on');
+        if (!withTip) { tip.classList.remove('show'); return; }
+        var r = rows[n]; tn.textContent = r.querySelector('.kn').firstChild.textContent; td.textContent = r.querySelector('.kd').textContent;
+        var b = p.querySelector('.pin-dot').getBoundingClientRect(), c = canvas.getBoundingClientRect();
+        var x = b.left + b.width / 2 - c.left, y = b.top - c.top;
+        tip.style.left = x + 'px'; tip.style.top = y + 'px';
+        tip.classList.toggle('below', y < 70);
+        if (tip.classList.contains('below')) tip.style.top = (b.bottom - c.top) + 'px';
+        tip.classList.toggle('left', x > c.width - 150); tip.classList.toggle('right', x < 150);
+        tip.classList.add('show');
+      }
+      Object.keys(pins).forEach(function (n) {
+        var p = pins[n];
+        p.addEventListener('mouseenter', function () { show(n, true); });
+        p.addEventListener('mouseleave', function () { show(null); });
+        p.addEventListener('focus', function () { show(n, true); });
+        p.addEventListener('blur', function () { show(null); });
+        p.addEventListener('click', function (e) { e.stopPropagation(); if (nb.dataset.filter !== 'all' && nb.dataset.filter !== p.dataset.cat) setMode(p.dataset.cat); show(n, true); });
+      });
+      document.addEventListener('click', function (e) { if (!e.target.closest || !e.target.closest('.pin')) { if (!e.target.closest('.k')) show(null); } });
+      Object.keys(rows).forEach(function (n) {
+        var r = rows[n];
+        r.addEventListener('mouseenter', function () { show(n, false); });
+        r.addEventListener('mouseleave', function () { show(null); });
+      });
+      var allBtn = nb.querySelector('.nb-all');
+      function setMode(m) {
+        if (m) nb.dataset.filter = m; else delete nb.dataset.filter;
+        nb.querySelectorAll('.nb-filter').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.cat === m)); });
+        var all = m === 'all';
+        allBtn.setAttribute('aria-expanded', String(!!m));
+        allBtn.firstChild.textContent = all ? allBtn.dataset.hide : allBtn.dataset.all;
+        allBtn.querySelector('.nb-all-arr').textContent = all ? ' ↑' : ' ↓';
+        show(null);
+      }
+      nb.querySelectorAll('.nb-filter').forEach(function (b) {
+        b.addEventListener('click', function () { setMode(nb.dataset.filter === b.dataset.cat ? null : b.dataset.cat); });
+      });
+      allBtn.addEventListener('click', function () { setMode(nb.dataset.filter === 'all' ? null : 'all'); });
+    })();
+    </script>
   </section>
 
   <!-- BUYER'S GUIDE: emailed to the visitor, in the language they choose -->

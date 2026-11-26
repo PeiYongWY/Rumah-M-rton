@@ -764,3 +764,79 @@ body { font-variant-emoji: text }
 .guide-help { margin: 14px 0 0; color: color-mix(in srgb, var(--ink) 80%, var(--ivory)) }
 .guide-help a { color: var(--ink) }
 @media (max-width: 960px) { .guide-head, .guide-form { grid-column: 1 / -1 } }
+
+/* Neighbourhood: the Buyer's Guide map and places */
+.nb { padding-top: var(--space); scroll-margin-top: calc(100px - var(--space)) }
+.nb .wrap { padding-top: clamp(44px, 5vw, 72px); border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent) }
+.nb-head { max-width: 46em }
+.nb-title { font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(28px, 3vw, 44px); line-height: 1.14; margin: clamp(22px, 2.6vw, 34px) 0 0; text-wrap: balance }
+.nb-intro { margin: 16px 0 0; max-width: 40em; line-height: 1.6; color: color-mix(in srgb, var(--ink) 80%, var(--ivory)); text-wrap: pretty }
+.nb-map { margin: clamp(32px, 4vw, 56px) 0 0; overflow-x: auto; -webkit-overflow-scrolling: touch }
+.nb-map-svg { width: 100%; height: auto; min-width: 640px }
+.nb-keys { display: grid; grid-template-columns: 1fr 1.25fr 1fr; column-gap: clamp(20px, 3vw, 48px); row-gap: 32px; margin-top: clamp(28px, 3vw, 44px) }
+.nb-keys .label { margin-bottom: 10px }
+.nb-keys .k { display: flex; gap: 12px; align-items: flex-start; border-top: 1px solid var(--stone); padding: 10px 0; font-size: 15px; line-height: 1.4 }
+.nb-keys .kn { display: block }
+.nb-keys .kd { display: block; color: var(--earth); font-size: 14px; margin-top: 2px }
+.nb-keys .dot { display: inline-block; width: 22px; height: 22px; border-radius: 50%; color: var(--ivory); font: 400 11px/22px var(--sans); text-align: center; flex: none; margin-top: 1px }
+.nb-keys .dot.local { background: #1E1C19 } .nb-keys .dot.intl { background: #6B5846 } .nb-keys .dot.daily { background: #A39684 }
+.nb-note { margin: 18px 0 0; font-size: 13px; color: var(--taupe); max-width: 60em }
+@media (max-width: 860px) { .nb-keys { grid-template-columns: minmax(0, 1fr) } }
+
+/* Neighbourhood: interaction (hover a place, filter by group) */
+.nb-canvas { position: relative; min-width: 640px }
+.nb-map { overflow-x: auto; overflow-y: visible; padding-top: 0 }
+.nb-map-svg { min-width: 0 }
+.nb .pin { cursor: pointer; outline: none; transition: opacity .45s var(--ease) }
+.nb .pin-dot { transition: transform .35s var(--ease) }
+.nb .pin.is-on .pin-dot, .nb .pin:focus-visible .pin-dot { transform: scale(1.45) }
+.nb .pin:focus-visible circle[r="2.1"] { stroke: #1E1C19; stroke-width: .35 }
+.nb .k { transition: opacity .45s var(--ease) }
+.nb-keys .kn { color: var(--ink); text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .45s var(--ease) }
+.nb-keys .kgo { color: var(--taupe); opacity: 0; transition: opacity .3s var(--ease); font-size: .85em }
+.nb-keys .k.is-on .kn, .nb-keys .kn:hover, .nb-keys .kn:focus-visible { background-size: 100% 1px }
+.nb-keys .k.is-on .kgo, .nb-keys .kn:hover .kgo, .nb-keys .kn:focus-visible .kgo { opacity: 1 }
+.nb-keys .dot { transition: transform .35s var(--ease) }
+.nb-keys .k.is-on .dot { transform: scale(1.18) }
+@media (hover: none) { .nb-keys .kgo { opacity: .7 } }
+.nb-filter { appearance: none; background: none; border: 0; padding: 0 0 6px; margin: 0 0 4px; cursor: pointer; font: inherit; color: var(--taupe); font-size: 11.5px; letter-spacing: .24em; text-transform: uppercase; border-bottom: 1px solid transparent; transition: color .3s var(--ease), border-color .3s var(--ease) }
+.nb-filter:hover { color: var(--ink) }
+.nb-filter[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink) }
+.nb[data-filter] .pin { opacity: .12 }
+.nb[data-filter="local"] .pin[data-cat="local"], .nb[data-filter="intl"] .pin[data-cat="intl"], .nb[data-filter="daily"] .pin[data-cat="daily"] { opacity: 1 }
+.nb[data-filter] .nb-col { opacity: .32; transition: opacity .45s var(--ease) }
+.nb[data-filter="local"] .nb-col[data-cat="local"], .nb[data-filter="intl"] .nb-col[data-cat="intl"], .nb[data-filter="daily"] .nb-col[data-cat="daily"] { opacity: 1 }
+.nb-col { transition: opacity .45s var(--ease) }
+.nb-hint { margin: 14px 0 0; font-size: 13px; color: var(--taupe); font-family: var(--display); font-style: italic; font-size: 15px }
+.nb-tip { position: absolute; left: 0; top: 0; transform: translate(-50%, calc(-100% - 14px)); pointer-events: none; opacity: 0; transition: opacity .25s var(--ease); background: var(--paper); padding: 10px 14px 11px; box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 8%, transparent), 0 10px 30px -12px color-mix(in srgb, var(--ink) 30%, transparent); white-space: nowrap; z-index: 2 }
+.nb-tip.below { transform: translate(-50%, 14px) }
+.nb-tip.left { transform: translate(calc(-100% + 24px), calc(-100% - 14px)) } .nb-tip.left.below { transform: translate(calc(-100% + 24px), 14px) }
+.nb-tip.right { transform: translate(-24px, calc(-100% - 14px)) } .nb-tip.right.below { transform: translate(-24px, 14px) }
+.nb-tip.show { opacity: 1 }
+.nb-tip-n { display: block; font-family: var(--display); font-size: 17px; font-weight: 300; line-height: 1.25; color: var(--ink) }
+.nb-tip-d { display: block; margin-top: 2px; font-size: 12.5px; letter-spacing: .02em; color: var(--earth) }
+
+/* Neighbourhood: compact list, opened by group or "See all" */
+.nb-hint { display: none }
+.nb-bar { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 14px 28px; margin-top: 22px; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent) }
+.nb-groups { display: flex; flex-wrap: wrap; gap: 10px clamp(18px, 2.6vw, 40px) }
+.nb-bar .nb-filter { display: inline-flex; align-items: center; gap: 10px; margin: 0; padding: 0 0 4px }
+.nb-bar .nb-filter .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none }
+.nb-bar .dot.local { background: #1E1C19 } .nb-bar .dot.intl { background: #6B5846 } .nb-bar .dot.daily { background: #A39684 }
+.nb-all { appearance: none; background: none; border: 0; padding: 0 0 4px; cursor: pointer; font-family: var(--display); font-style: italic; font-weight: 300; font-size: 17px; color: var(--earth); transition: color .3s var(--ease) }
+.nb-all:hover { color: var(--ink) }
+.nb-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease) }
+.nb-panel-in { overflow: hidden; min-height: 0 }
+.nb[data-filter] .nb-panel { grid-template-rows: 1fr }
+.nb[data-filter="all"] .pin { opacity: 1 }
+.nb[data-filter="all"] .nb-col { opacity: 1 }
+.nb[data-filter]:not([data-filter="all"]) .nb-col { display: none }
+.nb[data-filter="local"] .nb-col[data-cat="local"], .nb[data-filter="intl"] .nb-col[data-cat="intl"], .nb[data-filter="daily"] .nb-col[data-cat="daily"] { display: grid; grid-column: 1 / -1; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); column-gap: clamp(20px, 3vw, 48px) }
+.nb-keys .nb-colh { margin-bottom: 10px }
+.nb[data-filter]:not([data-filter="all"]) .nb-colh { display: none }
+.nb-panel .nb-keys { margin-top: 8px }
+.nb-panel .nb-note { margin-bottom: 4px }
+.nb-bar { transition: border-color .4s var(--ease) } .nb[data-filter]:not([data-filter="all"]) .nb-bar { border-bottom-color: transparent }
+
+.nb-lead { display: none; margin: 18px 0 4px; font-family: var(--display); font-style: italic; font-weight: 300; font-size: 19px; color: var(--ink) }
+.nb[data-filter="local"] .nb-lead { display: block }
