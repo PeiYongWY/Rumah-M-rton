@@ -17,6 +17,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 const MAIL = {
   en: (name, link) => ({
     subject: 'Your Rumah Márton Buyer’s Guide',
+    eyebrow: 'Buyer’s Guide', place: 'Mártonhegy · Budapest',
     lines: [
       name ? `Dear ${name},` : 'Hello,',
       'Thank you for your interest in Rumah Márton.',
@@ -27,6 +28,7 @@ const MAIL = {
   }),
   hu: (name, link) => ({
     subject: 'Az Ön Rumah Márton vásárlói útmutatója',
+    eyebrow: 'Vásárlói útmutató', place: 'Mártonhegy · Budapest',
     lines: [
       name ? `Kedves ${name}!` : 'Kedves Érdeklődő!',
       'Köszönjük érdeklődését a Rumah Márton iránt.',
@@ -37,6 +39,7 @@ const MAIL = {
   }),
   zh: (name, link) => ({
     subject: '您的玛顿山邸 Rumah Márton 购房指南',
+    eyebrow: '购房指南', place: '玛顿山 · 布达佩斯', zh: true,
     lines: [
       name ? `${name} 您好：` : '您好：',
       '感谢您关注玛顿山邸 Rumah Márton。',
@@ -47,13 +50,50 @@ const MAIL = {
   }),
 };
 
+// Typography follows the brochure: Newsreader (serif) and Albert Sans. Apple Mail and most phone
+// mail apps load them; Gmail and Outlook fall back to Georgia and Helvetica, which keep the same feel.
+const SERIF = "'Newsreader','Iowan Old Style','Palatino Linotype',Georgia,'Times New Roman',serif";
+const SANS = "'Albert Sans','Helvetica Neue',Helvetica,Arial,sans-serif";
+const SERIF_ZH = "'Newsreader','Songti SC','Noto Serif SC','STSong','SimSun',Georgia,serif";
+const SANS_ZH = "'Albert Sans','PingFang SC','Noto Sans SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif";
+const SITE = 'https://rumahmarton.com';
+
 function render(m) {
-  const p = (t) => `<p style="margin:0 0 16px">${t}</p>`;
-  const body = m.lines.map((l) => typeof l === 'string' ? p(esc(l)) :
-    p(esc(l.before)) + `<p style="margin:0 0 24px"><a href="${esc(l.link)}" style="display:inline-block;padding:13px 22px;background:#1E1C19;color:#FAF7F1;text-decoration:none;font-size:13px;letter-spacing:.14em;text-transform:uppercase">${esc(l.label)} →</a></p>`).join('');
-  const sign = `<p style="margin:24px 0 0">${m.sign.map((s, i) => i === m.sign.length - 1 ? `<a href="https://rumahmarton.com" style="color:#6B5846">${esc(s)}</a>` : esc(s)).join('<br>')}</p>`;
-  const html = `<!doctype html><html><body style="margin:0;background:#F4EFE7"><div style="max-width:560px;margin:0 auto;padding:40px 28px;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#1E1C19">`
-    + `<p style="margin:0 0 32px;font-family:Georgia,serif;letter-spacing:.24em;text-transform:uppercase;font-size:14px">Rumah Márton</p>${body}${sign}</div></body></html>`;
+  const serif = m.zh ? SERIF_ZH : SERIF, sans = m.zh ? SANS_ZH : SANS;
+  const ls = m.zh ? '.12em' : '.28em';
+  const [greet, ...rest] = m.lines;
+  const para = (t) => `<p style="margin:0 0 18px;font-family:${sans};font-size:16px;line-height:1.75;font-weight:300;color:#2A2723">${esc(t)}</p>`;
+  const body = rest.map((l) => typeof l === 'string' ? para(l) :
+    para(l.before) + `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 34px"><tr><td style="background:#1E1C19">`
+    + `<a href="${esc(l.link)}" style="display:inline-block;padding:16px 30px;font-family:${sans};font-size:12px;font-weight:400;letter-spacing:${m.zh ? '.2em' : '.18em'};text-transform:uppercase;color:#FAF7F1;text-decoration:none">${esc(l.label)}&nbsp;&nbsp;&rarr;</a>`
+    + `</td></tr></table>`).join('');
+  const [bye, who, role, site] = m.sign;
+  const html = `<!doctype html><html lang="${m.zh ? 'zh' : ''}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">`
+    + `<meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light">`
+    + `<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">`
+    + `<title>${esc(m.subject)}</title></head>`
+    + `<body style="margin:0;padding:0;background:#F4EFE7;-webkit-font-smoothing:antialiased">`
+    + `<div style="display:none;max-height:0;overflow:hidden;opacity:0">${esc(m.lines[1])}</div>`
+    + `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F4EFE7"><tr><td align="center" style="padding:44px 16px 56px">`
+    + `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px">`
+    // wordmark
+    + `<tr><td align="center" style="padding:0 0 30px"><a href="${SITE}" style="text-decoration:none;color:#1E1C19;font-family:${SERIF};font-size:21px;font-weight:300;letter-spacing:.34em;text-transform:uppercase">Rumah&nbsp;Márton</a></td></tr>`
+    // image
+    + `<tr><td><a href="${SITE}"><img src="${SITE}/media/email-guide.jpg" width="560" alt="Rumah Márton" style="display:block;width:100%;max-width:560px;height:auto;border:0"></a></td></tr>`
+    // paper panel
+    + `<tr><td style="background:#FAF7F1;padding:46px 44px 44px">`
+    + `<p style="margin:0 0 22px;font-family:${sans};font-size:11px;font-weight:400;letter-spacing:${ls};text-transform:uppercase;color:#8C7F70">${esc(m.eyebrow)}</p>`
+    + `<p style="margin:0 0 26px;font-family:${serif};font-size:26px;line-height:1.3;font-weight:300;color:#1E1C19">${esc(greet)}</p>`
+    + body
+    + `<table role="presentation" width="48" cellpadding="0" cellspacing="0" border="0" style="margin:34px 0 26px"><tr><td style="border-top:1px solid #CFC5B6;font-size:0;line-height:0">&nbsp;</td></tr></table>`
+    + `<p style="margin:0 0 6px;font-family:${sans};font-size:15px;font-weight:300;color:#2A2723">${esc(bye)}</p>`
+    + `<p style="margin:0 0 4px;font-family:${serif};font-size:24px;font-style:${m.zh ? 'normal' : 'italic'};font-weight:300;color:#1E1C19">${esc(who)}</p>`
+    + `<p style="margin:0;font-family:${sans};font-size:12px;font-weight:400;letter-spacing:${m.zh ? '.1em' : '.08em'};color:#8C7F70">${esc(role)}</p>`
+    + `</td></tr>`
+    // footer
+    + `<tr><td align="center" style="padding:30px 0 0;font-family:${sans};font-size:11px;font-weight:400;letter-spacing:${m.zh ? '.12em' : '.2em'};text-transform:uppercase;color:#8C7F70">`
+    + `${esc(m.place)}&nbsp;&nbsp;·&nbsp;&nbsp;<a href="${SITE}" style="color:#6B5846;text-decoration:none">${esc(site)}</a></td></tr>`
+    + `</table></td></tr></table></body></html>`;
   const text = m.lines.map((l) => typeof l === 'string' ? l : `${l.before}\n${l.link}`).join('\n\n') + '\n\n' + m.sign.join('\n');
   return { html, text };
 }
