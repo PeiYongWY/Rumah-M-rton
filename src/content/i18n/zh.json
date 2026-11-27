@@ -69,7 +69,6 @@
     "interior": "室内",
     "outdoor": "户外",
     "bedrooms": "卧室",
-    "weighted": "加权面积",
     "price": "售价",
     "available": "在售",
     "sold": "已售",
@@ -84,11 +83,15 @@
         "floor": "首层",
         "alt": "花园宅邸的露台、起居室与户外厨房，向花园敞开",
         "interior": "约 86 m²",
-        "outdoor": "61 m² 露台\n232 m² 专属前花园",
+        "outdoor": "61 m² 露台",
         "bedrooms": "2 间卧室及 1 间书房（可作三房）",
         "interest": "Garden Residence",
         "price": "3.99亿福林",
-        "weighted": "116.6 m²\n每平方米约 342万福林"
+        "beds": "2 间卧室及 1 间书房，可作三房",
+        "total": "116.6 m²",
+        "totalNote": "露台按 50% 计",
+        "ppm": "每平方米约 342万福林",
+        "garden": "232 m²"
       },
       {
         "name": "二层宅邸",
@@ -100,14 +103,19 @@
         "floor": "顶层",
         "alt": "顶层宅邸起居室，宽阔的窗景望向布达佩斯与盖勒特山",
         "interior": "约 100 m²",
-        "outdoor": "21 m² 阳台\n39 m² 屋顶露台",
+        "outdoor": "59 m² 阳台及屋顶露台",
         "bedrooms": "3",
         "interest": "Penthouse",
         "price": "5.59亿福林",
-        "weighted": "129.9 m²\n每平方米约 430万福林"
+        "beds": "3 间卧室",
+        "total": "129.9 m²",
+        "totalNote": "阳台及屋顶露台按 50% 计",
+        "ppm": "每平方米约 430万福林"
       }
     ],
-    "brochure": "下载宅邸手册"
+    "brochure": "下载宅邸手册",
+    "total": "总面积",
+    "garden": "专属花园"
   },
   "guide": {
     "label": "购房指南",

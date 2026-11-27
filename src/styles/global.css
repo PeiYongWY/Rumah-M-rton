@@ -854,3 +854,7 @@ body { font-variant-emoji: text }
 
 /* residence facts: a value may run on to a second line (e.g. terraces / garden, area / price per m²) */
 .facts dd { white-space: pre-line }
+
+/* residence facts: quiet notes under the total area and beside the price */
+.facts .fnote { display: block; font-size: 12px; color: var(--taupe); margin-top: 2px }
+.facts .fppm { font-size: 13px; color: var(--taupe); white-space: nowrap }
