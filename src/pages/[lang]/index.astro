@@ -195,25 +195,27 @@ const ld = {
       var fig = nb.querySelector('.nb-map'), svg = nb.querySelector('.nb-map-svg');
       var phone = matchMedia('(max-width: 700px)').matches;
       if (phone && svg) {
-        var NS = 'http://www.w3.org/2000/svg';
+        // Chinese characters fill the whole em, so they are set a little smaller and sit lower under the icons
+        var zh = /^zh/.test(document.documentElement.lang), LS = zh ? '2.85' : '3.3', TS = zh ? '2.5' : '2.9', GAP = zh ? 3.3 : 3.5, DROP = zh ? 0.9 : 0;
         svg.querySelectorAll('text').forEach(function (t) {
           var f = t.getAttribute('font-size');
-          if (f === '2.4') { t.setAttribute('font-size', '3.3'); var nx = t.nextElementSibling;
-            if (nx && nx.tagName === 'text' && nx.getAttribute('font-size') === '2.2') { nx.setAttribute('font-size', '2.9'); nx.setAttribute('y', (parseFloat(t.getAttribute('y')) + 3.5).toFixed(1)); } }
+          if (f === '2.4') { t.setAttribute('font-size', LS); if (t.getAttribute('text-anchor') === 'middle') t.setAttribute('y', (parseFloat(t.getAttribute('y')) + DROP).toFixed(1));
+            var nx = t.nextElementSibling;
+            if (nx && nx.tagName === 'text' && nx.getAttribute('font-size') === '2.2') { nx.setAttribute('font-size', TS); nx.setAttribute('y', (parseFloat(t.getAttribute('y')) + GAP).toFixed(1)); } }
           if (f === '4') { t.setAttribute('font-size', '4.6'); var hb = t.getBBox(); if (hb.x < 35) t.setAttribute('font-size', (4.6 * (hb.x + hb.width - 35) / hb.width).toFixed(2)); }
         });
         svg.querySelectorAll('.pin-dot').forEach(function (g) { g.classList.add('big'); });
         // Buda Castle: label under its icon, clear of places 13 and 14
-        var lbl = svg.querySelectorAll('text[font-size="3.3"]')[1];
-        if (lbl) { lbl.setAttribute('x', '128.6'); lbl.setAttribute('text-anchor', 'middle'); lbl.setAttribute('y', '41.4');
-          var tm = lbl.nextElementSibling; if (tm) { tm.setAttribute('x', '128.6'); tm.setAttribute('text-anchor', 'middle'); tm.setAttribute('y', '44.8'); } }
+        var lbl = svg.querySelectorAll('text[font-size="' + LS + '"]')[1];
+        if (lbl) { var ly = 41.4 + DROP; lbl.setAttribute('x', '128.6'); lbl.setAttribute('text-anchor', 'middle'); lbl.setAttribute('y', ly.toFixed(1));
+          var tm = lbl.nextElementSibling; if (tm) { tm.setAttribute('x', '128.6'); tm.setAttribute('text-anchor', 'middle'); tm.setAttribute('y', (ly + GAP).toFixed(1)); } }
         // a label running past the right edge goes onto two lines
-        svg.querySelectorAll('text[font-size="3.3"]').forEach(function (t) {
+        svg.querySelectorAll('text[font-size="' + LS + '"]').forEach(function (t) {
           var b = t.getBBox(); if (b.x + b.width <= 173.5 || t.textContent.indexOf(' ') < 0) return;
           var w = t.textContent.split(' '), last = w.pop(), y = parseFloat(t.getAttribute('y')), dy = 3.4;
           t.textContent = w.join(' ');
           var t2 = t.cloneNode(false); t2.textContent = last; t2.setAttribute('y', (y + dy).toFixed(1)); t.parentNode.insertBefore(t2, t.nextSibling);
-          var nx = t2.nextElementSibling; if (nx && nx.getAttribute('font-size') === '2.9') nx.setAttribute('y', (parseFloat(nx.getAttribute('y')) + dy).toFixed(1));
+          var nx = t2.nextElementSibling; if (nx && nx.getAttribute('font-size') === TS) nx.setAttribute('y', (parseFloat(nx.getAttribute('y')) + dy).toFixed(1));
           // still too wide: set the whole label flush to the right edge
           var group = [t, t2, nx], right = Math.max(t.getBBox().x + t.getBBox().width, t2.getBBox().x + t2.getBBox().width);
           if (right > 173.5) group.forEach(function (e) { if (e && e.tagName === 'text') { e.setAttribute('x', '173.2'); e.setAttribute('text-anchor', 'end'); } });
