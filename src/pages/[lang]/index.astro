@@ -190,6 +190,10 @@ const ld = {
     (function () {
       var nb = document.getElementById('neighbourhood'); if (!nb) return;
       var canvas = nb.querySelector('.nb-canvas'), tip = nb.querySelector('.nb-tip');
+      // On a phone the map is wider than the screen: open it centred on the house
+      var fig = nb.querySelector('.nb-map');
+      function centre() { if (fig.scrollWidth > fig.clientWidth + 4) fig.scrollLeft = canvas.offsetWidth * 72 / 174 - fig.clientWidth / 2; }
+      centre(); addEventListener('load', centre);
       var tn = tip.querySelector('.nb-tip-n'), td = tip.querySelector('.nb-tip-d');
       var rows = {}; nb.querySelectorAll('.k[data-place]').forEach(function (r) { rows[r.dataset.place] = r; });
       var pins = {}; nb.querySelectorAll('.pin').forEach(function (p) { pins[p.dataset.place] = p; });
