@@ -850,3 +850,4 @@ body { font-variant-emoji: text }
   .nb .pin.is-on .pin-dot.big { transform: scale(1.7) }
   .nb-map { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22px, #000 100%); mask-image: linear-gradient(90deg, transparent 0, #000 22px, #000 100%) }
 }
+.nav .enq, .nav a { white-space: nowrap }

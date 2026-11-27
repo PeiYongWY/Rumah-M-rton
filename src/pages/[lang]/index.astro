@@ -200,7 +200,7 @@ const ld = {
           var f = t.getAttribute('font-size');
           if (f === '2.4') { t.setAttribute('font-size', '3.3'); var nx = t.nextElementSibling;
             if (nx && nx.tagName === 'text' && nx.getAttribute('font-size') === '2.2') { nx.setAttribute('font-size', '2.9'); nx.setAttribute('y', (parseFloat(t.getAttribute('y')) + 3.5).toFixed(1)); } }
-          if (f === '4') t.setAttribute('font-size', '4.6');
+          if (f === '4') { t.setAttribute('font-size', '4.6'); var hb = t.getBBox(); if (hb.x < 35) t.setAttribute('font-size', (4.6 * (hb.x + hb.width - 35) / hb.width).toFixed(2)); }
         });
         svg.querySelectorAll('.pin-dot').forEach(function (g) { g.classList.add('big'); });
         // Buda Castle: label under its icon, clear of places 13 and 14
