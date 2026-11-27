@@ -190,9 +190,45 @@ const ld = {
     (function () {
       var nb = document.getElementById('neighbourhood'); if (!nb) return;
       var canvas = nb.querySelector('.nb-canvas'), tip = nb.querySelector('.nb-tip');
-      // On a phone the map is wider than the screen: open it centred on the house
-      var fig = nb.querySelector('.nb-map');
-      function centre() { if (fig.scrollWidth > fig.clientWidth + 4) fig.scrollLeft = canvas.offsetWidth * 72 / 174 - fig.clientWidth / 2; }
+      // Phones: the map is shown a little wider than the screen, opened on its right part so the house
+      // and every landmark are in view (Normafa and the woodland are a swipe away); labels are set larger.
+      var fig = nb.querySelector('.nb-map'), svg = nb.querySelector('.nb-map-svg');
+      var phone = matchMedia('(max-width: 700px)').matches;
+      if (phone && svg) {
+        // Chinese characters fill the whole em, so they are set a little smaller and sit lower under the icons
+        var zh = /^zh/.test(document.documentElement.lang), LS = zh ? '2.85' : '3.3', TS = zh ? '2.5' : '2.9', GAP = zh ? 3.3 : 3.5, DROP = zh ? 0.9 : 0.8;
+        svg.querySelectorAll('text').forEach(function (t) {
+          var f = t.getAttribute('font-size');
+          if (t.textContent.indexOf('↑') >= 0) { t.setAttribute('x', '37'); t.setAttribute('text-anchor', 'start'); return; }   // north arrow: bottom-left, away from the labels
+          if (f === '2.4' && t.previousElementSibling && t.previousElementSibling.tagName === 'text' && t.previousElementSibling.getAttribute('font-size') === LS && t.previousElementSibling.getAttribute('x') === t.getAttribute('x')) {
+            // second line of a two-line name: keep it just under the first
+            t.setAttribute('font-size', LS); t.setAttribute('y', (parseFloat(t.previousElementSibling.getAttribute('y')) + parseFloat(LS) * 1.08).toFixed(1));
+            var n2 = t.nextElementSibling; if (n2 && n2.getAttribute('font-size') === '2.2') { n2.setAttribute('font-size', TS); n2.setAttribute('y', (parseFloat(t.getAttribute('y')) + GAP).toFixed(1)); }
+            return;
+          }
+          if (f === '2.4') { t.setAttribute('font-size', LS); if (t.getAttribute('text-anchor') === 'middle') t.setAttribute('y', (parseFloat(t.getAttribute('y')) + DROP).toFixed(1));
+            var nx = t.nextElementSibling;
+            if (nx && nx.tagName === 'text' && nx.getAttribute('font-size') === '2.2') { nx.setAttribute('font-size', TS); nx.setAttribute('y', (parseFloat(t.getAttribute('y')) + GAP).toFixed(1)); } }
+          if (f === '4') { t.setAttribute('font-size', '4.6'); var hb = t.getBBox(); if (hb.x < 35) t.setAttribute('font-size', (4.6 * (hb.x + hb.width - 35) / hb.width).toFixed(2)); }
+        });
+        svg.querySelectorAll('.pin-dot').forEach(function (g) { g.classList.add('big'); });
+        // Buda Castle: label under its icon, clear of places 13 and 14
+        var lbl = svg.querySelectorAll('text[font-size="' + LS + '"]')[1];
+        if (lbl) { var ly = 41.4 + DROP; lbl.setAttribute('x', '128.6'); lbl.setAttribute('text-anchor', 'middle'); lbl.setAttribute('y', ly.toFixed(1));
+          var tm = lbl.nextElementSibling; if (tm) { tm.setAttribute('x', '128.6'); tm.setAttribute('text-anchor', 'middle'); tm.setAttribute('y', (ly + GAP).toFixed(1)); } }
+        // a label running past the right edge goes onto two lines
+        svg.querySelectorAll('text[font-size="' + LS + '"]').forEach(function (t) {
+          var b = t.getBBox(); if (b.x + b.width <= 173.5 || t.textContent.indexOf(' ') < 0) return;
+          var w = t.textContent.split(' '), last = w.pop(), y = parseFloat(t.getAttribute('y')), dy = 3.4;
+          t.textContent = w.join(' ');
+          var t2 = t.cloneNode(false); t2.textContent = last; t2.setAttribute('y', (y + dy).toFixed(1)); t.parentNode.insertBefore(t2, t.nextSibling);
+          var nx = t2.nextElementSibling; if (nx && nx.getAttribute('font-size') === TS) nx.setAttribute('y', (parseFloat(nx.getAttribute('y')) + dy).toFixed(1));
+          // still too wide: set the whole label flush to the right edge
+          var group = [t, t2, nx], right = Math.max(t.getBBox().x + t.getBBox().width, t2.getBBox().x + t2.getBBox().width);
+          if (right > 173.5) group.forEach(function (e) { if (e && e.tagName === 'text') { e.setAttribute('x', '173.2'); e.setAttribute('text-anchor', 'end'); } });
+        });
+      }
+      function centre() { if (fig.scrollWidth > fig.clientWidth + 4) fig.scrollLeft = fig.scrollWidth - fig.clientWidth; }
       centre(); addEventListener('load', centre);
       var tn = tip.querySelector('.nb-tip-n'), td = tip.querySelector('.nb-tip-d');
       var rows = {}; nb.querySelectorAll('.k[data-place]').forEach(function (r) { rows[r.dataset.place] = r; });
