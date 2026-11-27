@@ -858,3 +858,5 @@ body { font-variant-emoji: text }
 /* residence facts: quiet notes under the total area and beside the price */
 .facts .fnote { display: block; font-size: 12px; color: var(--taupe); margin-top: 2px }
 .facts .fppm { font-size: 13px; color: var(--taupe); white-space: nowrap }
+@media (max-width: 600px) { .facts .fppm { display: block; margin-top: 2px } .facts .fdot { display: none } }
+.facts .fprice { white-space: nowrap }

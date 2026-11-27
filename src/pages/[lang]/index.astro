@@ -124,13 +124,13 @@ const ld = {
             <figure class="plate rise"><Img name={u.image} alt={u.alt} sizes="(max-width: 860px) 100vw, 66vw" /></figure>
             <div class="info rise">
               <h3 id={`${u.id}-h`}>{u.name}</h3>
-              <p class="unit-sub">{u.floor}. {u.beds && <>{u.beds}. </>}{tx.residences.available}.</p>
+              <p class="unit-sub">{lang === "zh" ? [u.floor, u.beds, tx.residences.available].filter(Boolean).join("，") + "。" : [u.floor, u.beds, tx.residences.available].filter(Boolean).join(". ") + "."}</p>
               <dl class="facts">
                 <div><dt>{tx.residences.interior}</dt><dd>{u.interior}</dd></div>
                 <div><dt>{tx.residences.outdoor}</dt><dd>{u.outdoor}</dd></div>
                 {u.total && <div><dt>{(tx.residences as any).total}</dt><dd>{u.total}{u.totalNote && <span class="fnote">{u.totalNote}</span>}</dd></div>}
-                {u.price && <div><dt>{(tx.residences as any).price}</dt><dd>{u.price}{u.ppm && <span class="fppm"> · {u.ppm}</span>}</dd></div>}
                 {u.garden && <div><dt>{(tx.residences as any).garden}</dt><dd>{u.garden}</dd></div>}
+                {u.price && <div><dt>{(tx.residences as any).price}</dt><dd><span class="fprice">{u.price}</span>{u.ppm && <span class="fppm"><span class="fdot"> · </span>{u.ppm}</span>}</dd></div>}
               </dl>
               <ul class="unit-links">
                 {u.floorPlan && <li><a class="tlink" href={fresh((plans as any)[u.track]?.plans[0].pdf || u.floorPlan)} data-plan={u.track} data-track="floor_plan_click" data-item={u.track}>{tx.residences.floorPlan}<Fragment set:html={RA} /></a></li>}
