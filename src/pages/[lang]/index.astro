@@ -196,9 +196,16 @@ const ld = {
       var phone = matchMedia('(max-width: 700px)').matches;
       if (phone && svg) {
         // Chinese characters fill the whole em, so they are set a little smaller and sit lower under the icons
-        var zh = /^zh/.test(document.documentElement.lang), LS = zh ? '2.85' : '3.3', TS = zh ? '2.5' : '2.9', GAP = zh ? 3.3 : 3.5, DROP = zh ? 0.9 : 0;
+        var zh = /^zh/.test(document.documentElement.lang), LS = zh ? '2.85' : '3.3', TS = zh ? '2.5' : '2.9', GAP = zh ? 3.3 : 3.5, DROP = zh ? 0.9 : 0.8;
         svg.querySelectorAll('text').forEach(function (t) {
           var f = t.getAttribute('font-size');
+          if (t.textContent.indexOf('↑') >= 0) { t.setAttribute('x', '37'); t.setAttribute('text-anchor', 'start'); return; }   // north arrow: bottom-left, away from the labels
+          if (f === '2.4' && t.previousElementSibling && t.previousElementSibling.tagName === 'text' && t.previousElementSibling.getAttribute('font-size') === LS && t.previousElementSibling.getAttribute('x') === t.getAttribute('x')) {
+            // second line of a two-line name: keep it just under the first
+            t.setAttribute('font-size', LS); t.setAttribute('y', (parseFloat(t.previousElementSibling.getAttribute('y')) + parseFloat(LS) * 1.08).toFixed(1));
+            var n2 = t.nextElementSibling; if (n2 && n2.getAttribute('font-size') === '2.2') { n2.setAttribute('font-size', TS); n2.setAttribute('y', (parseFloat(t.getAttribute('y')) + GAP).toFixed(1)); }
+            return;
+          }
           if (f === '2.4') { t.setAttribute('font-size', LS); if (t.getAttribute('text-anchor') === 'middle') t.setAttribute('y', (parseFloat(t.getAttribute('y')) + DROP).toFixed(1));
             var nx = t.nextElementSibling;
             if (nx && nx.tagName === 'text' && nx.getAttribute('font-size') === '2.2') { nx.setAttribute('font-size', TS); nx.setAttribute('y', (parseFloat(t.getAttribute('y')) + GAP).toFixed(1)); } }
