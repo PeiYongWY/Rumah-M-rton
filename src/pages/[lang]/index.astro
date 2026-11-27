@@ -203,6 +203,10 @@ const ld = {
           if (f === '4') t.setAttribute('font-size', '4.6');
         });
         svg.querySelectorAll('.pin-dot').forEach(function (g) { g.classList.add('big'); });
+        // Buda Castle: label under its icon, clear of places 13 and 14
+        var lbl = svg.querySelectorAll('text[font-size="3.3"]')[1];
+        if (lbl) { lbl.setAttribute('x', '128.6'); lbl.setAttribute('text-anchor', 'middle'); lbl.setAttribute('y', '41.4');
+          var tm = lbl.nextElementSibling; if (tm) { tm.setAttribute('x', '128.6'); tm.setAttribute('text-anchor', 'middle'); tm.setAttribute('y', '44.8'); } }
         // a label running past the right edge goes onto two lines
         svg.querySelectorAll('text[font-size="3.3"]').forEach(function (t) {
           var b = t.getBBox(); if (b.x + b.width <= 173.5 || t.textContent.indexOf(' ') < 0) return;
@@ -210,6 +214,9 @@ const ld = {
           t.textContent = w.join(' ');
           var t2 = t.cloneNode(false); t2.textContent = last; t2.setAttribute('y', (y + dy).toFixed(1)); t.parentNode.insertBefore(t2, t.nextSibling);
           var nx = t2.nextElementSibling; if (nx && nx.getAttribute('font-size') === '2.9') nx.setAttribute('y', (parseFloat(nx.getAttribute('y')) + dy).toFixed(1));
+          // still too wide: set the whole label flush to the right edge
+          var group = [t, t2, nx], right = Math.max(t.getBBox().x + t.getBBox().width, t2.getBBox().x + t2.getBBox().width);
+          if (right > 173.5) group.forEach(function (e) { if (e && e.tagName === 'text') { e.setAttribute('x', '173.2'); e.setAttribute('text-anchor', 'end'); } });
         });
       }
       function centre() { if (fig.scrollWidth > fig.clientWidth + 4) fig.scrollLeft = fig.scrollWidth - fig.clientWidth; }
