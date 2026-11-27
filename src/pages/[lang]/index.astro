@@ -129,6 +129,7 @@ const ld = {
                 <div><dt>{tx.residences.interior}</dt><dd>{u.interior}</dd></div>
                 <div><dt>{tx.residences.outdoor}</dt><dd>{u.outdoor}</dd></div>
                 <div><dt>{tx.residences.bedrooms}</dt><dd>{u.bedrooms}</dd></div>
+                {u.weighted && <div><dt>{(tx.residences as any).weighted}</dt><dd>{u.weighted}</dd></div>}
                 {u.price && <div><dt>{(tx.residences as any).price}</dt><dd>{u.price}</dd></div>}
               </dl>
               <ul class="unit-links">

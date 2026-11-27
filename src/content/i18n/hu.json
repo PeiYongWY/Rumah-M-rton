@@ -69,6 +69,7 @@
     "interior": "Belső alapterület",
     "outdoor": "Kültér",
     "bedrooms": "Hálószobák",
+    "weighted": "Súlyozott alapterület",
     "price": "Irányár",
     "available": "Eladó",
     "sold": "Elkelt",
@@ -83,10 +84,11 @@
         "floor": "Földszint",
         "alt": "A kertes rezidencia terasza, nappalija és kültéri konyhája a kert felé nyitva",
         "interior": "86 m²",
-        "outdoor": "61 m² terasz · 232 m² privát kert",
-        "bedrooms": "2 + dolgozószoba",
+        "outdoor": "61 m² terasz\n232 m² privát kert",
+        "bedrooms": "2 + dolgozószoba (akár 3 hálószoba)",
         "interest": "Garden Residence",
-        "price": "399 millió Ft"
+        "price": "399 millió Ft",
+        "weighted": "116,6 m²\n3,42 millió Ft/m²"
       },
       {
         "name": "Első emeleti rezidencia",
@@ -98,10 +100,11 @@
         "floor": "Legfelső szint",
         "alt": "A penthouse nappalija széles ablakkal Budapestre és a Citadellára",
         "interior": "100 m²",
-        "outdoor": "21 m² erkély · 39 m² tetőterasz",
+        "outdoor": "21 m² erkély\n39 m² tetőterasz",
         "bedrooms": "3",
         "interest": "Penthouse",
-        "price": "559 millió Ft"
+        "price": "559 millió Ft",
+        "weighted": "129,9 m²\n4,30 millió Ft/m²"
       }
     ],
     "brochure": "Lakásismertető letöltése"

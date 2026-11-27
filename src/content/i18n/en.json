@@ -71,6 +71,7 @@
     "interior": "Interior",
     "outdoor": "Outdoor",
     "bedrooms": "Bedrooms",
+    "weighted": "Weighted area",
     "price": "Asking price",
     "available": "Available",
     "sold": "Sold",
@@ -85,10 +86,11 @@
         "floor": "Ground floor",
         "alt": "The Garden Residence terrace, living room and outdoor kitchen opening to the garden",
         "interior": "86 m²",
-        "outdoor": "61 m² terraces · 232 m² private garden",
-        "bedrooms": "2 and a study",
+        "outdoor": "61 m² terraces\n232 m² private garden",
+        "bedrooms": "2 and a study (potentially 3 bedrooms)",
         "interest": "Garden Residence",
-        "price": "399 million HUF"
+        "price": "399 million HUF",
+        "weighted": "116.6 m²\n3.42 million HUF per m²"
       },
       {
         "name": "First Floor Residence",
@@ -100,10 +102,11 @@
         "floor": "Top floor",
         "alt": "The Penthouse living room with a wide window over Budapest towards the Citadella",
         "interior": "100 m²",
-        "outdoor": "21 m² balconies · 39 m² rooftop terrace",
+        "outdoor": "21 m² balconies\n39 m² rooftop terrace",
         "bedrooms": "3",
         "interest": "Penthouse",
-        "price": "559 million HUF"
+        "price": "559 million HUF",
+        "weighted": "129.9 m²\n4.30 million HUF per m²"
       }
     ],
     "brochure": "Download residence brochure"
